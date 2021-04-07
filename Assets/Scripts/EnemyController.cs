@@ -15,6 +15,12 @@ public class EnemyController : MonoBehaviour
 
     protected private Vector2 spawnPosition;
 
+    // Enemy boolean flags (tags)
+    [Header("Enemy Spawn Tags")]
+    [SerializeField] public bool spawnsHighSanity;
+    [SerializeField] public bool spawnsMediumSanity;
+    [SerializeField] public bool spawnsLowSanity;
+
 
     // Other classes variables
     public GameObject player;

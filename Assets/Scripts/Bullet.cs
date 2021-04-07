@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
         {
             other.GetComponent<PlayerController>().loseSanity(damagePoints);
         }
-        if (other.tag != "LowSanityEnemies")
+        if (!other.CompareTag("Enemy"))
             Destroy(gameObject);
     }
 }
