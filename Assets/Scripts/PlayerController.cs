@@ -257,7 +257,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if Collided with player
-        if (collision.collider.CompareTag("MediumSanityEnemies") || collision.collider.CompareTag("LowSanityEnemies"))
+        if (collision.collider.CompareTag("Enemy"))
         {
             EnemyController enemy = collision.collider.GetComponent<EnemyController>();
             // if player jumped on top "kill" enemy
