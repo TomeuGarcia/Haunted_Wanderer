@@ -298,6 +298,16 @@ public class PlayerController : MonoBehaviour
                 resetSanityLossLimiter();
             }
         }
+        else if (collision.collider.CompareTag("Spikes"))
+        {
+            //Hurt player 
+            loseSanity(10);
+
+            //Teleport before spikes
+            Vector3 middlePosition = collision.collider.transform.position;
+            float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
+            gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
+        }
     }
 
 }
