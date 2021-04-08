@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     //healthBar
     public HealthBar healthBar;
-    //public SanityClock hpGained;
+    public HPGained hpGained;
 
     //public int currentSanity2;
     //public int maxSanity2 = 100;
@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
         currentSanityState = SanityState.HIGH;
         currentSanity = maxSanity;
         healthBar.SetMaxSanity(maxSanity);
+        hpGained.SetSanityLimit(1);
 
 
 
@@ -106,10 +107,6 @@ public class PlayerController : MonoBehaviour
         {
             loseSanity(5);
         }
-        //if (Input.GetKeyDown(KeyCode.J))
-        //{
-            
-       // }
 
         healthBar.SetHealth(currentSanity);
 
@@ -284,6 +281,7 @@ public class PlayerController : MonoBehaviour
                 enemy.hurt();
                 // add +1 to sanityLossLimiter
                 addSanityLossLimiter();
+                hpGained.SetSanityLimit(30);
             }
             else
             {
