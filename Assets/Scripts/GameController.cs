@@ -11,6 +11,10 @@ public class GameController : MonoBehaviour
     // Player
     public PlayerController myPlayer;
 
+    //health controller
+    public HPGained hpGained;
+    public HealthBar healthBar;
+
     // Enemies
     private GameObject[] sceneEnemies;
     /*
