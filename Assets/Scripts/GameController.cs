@@ -11,6 +11,10 @@ public class GameController : MonoBehaviour
     // Player
     public PlayerController myPlayer;
 
+    //health controller
+    public HPGained hpGained;
+    public HealthBar healthBar;
+
     // Enemies
     private GameObject[] sceneEnemies;
     /*
@@ -119,7 +123,7 @@ public class GameController : MonoBehaviour
         }
 
         // player can't die from losing sanity over time (stays at 10%)
-        else if (myPlayer.getCurrentSanity() > (myPlayer.getMaxSanity() / 10))
+        else if (myPlayer.getCurrentSanity() > (myPlayer.getLimit()))
         {
             myPlayer.loseSanityViaTime();
             myPlayer.updateSanityState();
