@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
 
     //healthBar
     public HealthBar healthBar;
+    //public SanityClock hpGained;
+
+    //public int currentSanity2;
+    //public int maxSanity2 = 100;
 
     // Movement variables
     private const float moveSpeed = 6.0f;
@@ -62,9 +66,10 @@ public class PlayerController : MonoBehaviour
 
         // Sanity
         currentSanityState = SanityState.HIGH;
-        //currentSanity = maxSanity;
         currentSanity = maxSanity;
         healthBar.SetMaxSanity(maxSanity);
+
+
 
         sanityLossTimer = 0.0f;
         sanityLossLimiter = 1;
@@ -101,6 +106,10 @@ public class PlayerController : MonoBehaviour
         {
             loseSanity(5);
         }
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+            
+       // }
 
         healthBar.SetHealth(currentSanity);
 
