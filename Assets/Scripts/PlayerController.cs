@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private SanityState currentSanityState;
     public const int maxSanity = 100;
     private int currentSanity;
-    public int limit;
+    private int limit;
 
     private const float sanityLossCooldown = 2.0f;
     private float sanityLossTimer;
@@ -70,7 +70,8 @@ public class PlayerController : MonoBehaviour
         currentSanityState = SanityState.HIGH;
         currentSanity = maxSanity;
         healthBar.SetMaxSanity(maxSanity);
-        hpGained.sanityLimit(1);
+        //hpGained.sanityLimit(1);
+        limit = 10;
 
 
 
@@ -140,6 +141,9 @@ public class PlayerController : MonoBehaviour
 
     // Function that returns player's current Sanity (int)
     public int getCurrentSanity() { return currentSanity; }
+
+    //Function that returns the limit
+    public int getLimit() { return limit; }
 
     // Function that returns player's maxSanity (constant) (int)
     public int getMaxSanity() { return maxSanity; }
