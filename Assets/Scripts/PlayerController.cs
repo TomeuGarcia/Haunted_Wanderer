@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
     // Position variables
     private Vector2 spawnPosition;
 
+
+    //healthBar
+    public HealthBar healthBar;
+
     // Movement variables
     private const float moveSpeed = 6.0f;
     private const float moveSpeedHigh = moveSpeed;
@@ -58,7 +62,10 @@ public class PlayerController : MonoBehaviour
 
         // Sanity
         currentSanityState = SanityState.HIGH;
+        //currentSanity = maxSanity;
         currentSanity = maxSanity;
+        healthBar.SetMaxSanity(maxSanity);
+
         sanityLossTimer = 0.0f;
         sanityLossLimiter = 1;
 
@@ -94,6 +101,8 @@ public class PlayerController : MonoBehaviour
         {
             loseSanity(5);
         }
+
+        healthBar.SetHealth(currentSanity);
 
     }
 
