@@ -13,7 +13,7 @@ public class HPGained : MonoBehaviour
         slider.value = limit;
     }
 
-    public void SetSanityLimit(int limit)
+    public void sanityLimit(int limit)
     {
         slider.value = limit;
     }
