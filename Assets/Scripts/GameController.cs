@@ -60,9 +60,9 @@ public class GameController : MonoBehaviour
 
         // SET PLATFORMS
         scenePlatforms = GameObject.FindGameObjectsWithTag("Platform");
-        foreach (GameObject e in scenePlatforms)
+        foreach (GameObject p in scenePlatforms)
         {
-            //e.GetComponent<PlatformController>().setActiveState(false);
+            p.GetComponent<PlatformController>().setActiveState(false);
         }
 
         // FLAGS
@@ -120,10 +120,14 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsHighSanity)
-                    pc.setActiveState(true);
-                else
-                    pc.setActiveState(false);
+                if (pc.spawnsHighSanity && !pc.spawnsMediumSanity && !pc.spawnsLowSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(true);
+                }
+                else if (!pc.spawnsHighSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(false);
+                }
             }
             
         }
@@ -146,10 +150,14 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsMediumSanity)
-                    pc.setActiveState(true);
-                else 
-                    pc.setActiveState(false);
+                if (!pc.spawnsHighSanity && pc.spawnsMediumSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(true);
+                }
+                else if (!pc.spawnsMediumSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(false);
+                }
             }
 
 
@@ -171,10 +179,14 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsLowSanity)
-                    pc.setActiveState(true);
-                else
-                    pc.setActiveState(false);
+                if (!pc.spawnsLowSanity && !pc.spawnsMediumSanity && pc.spawnsLowSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(true);
+                }
+                else if (!pc.spawnsLowSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(false);
+                }
             }
 
         }
