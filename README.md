@@ -22,7 +22,7 @@ Executar el projecte Haunted_Wanderer des de UnitHub
 
 Com jugar
 =========
-Un cop descarregat i obert al Unity, trobeu dins de la carpeta, la carpeta scenes. Feu doble clic sobre SampleScene.
+Un cop descarregat i obert al Unity, trobeu dins de la carpeta Assets --> Scenes. Feu doble clic sobre SampleScene.
 
 Dins el projecte de Unity Haunted_Wanderer apretar el botó "Play" per jugar.
 
