@@ -52,11 +52,11 @@ public class TextBoxManager : MonoBehaviour
     void Update()
     {
 
+
         if (!isActive)
         {
             return;
         }
-
         
 
         theText.text = textLines[currentLine];
