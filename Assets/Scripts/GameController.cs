@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
         scenePlatforms = GameObject.FindGameObjectsWithTag("Platform");
         foreach (GameObject e in scenePlatforms)
         {
-            //e.GetComponent<PlatformController>().platformIsActive = false;
+            //e.GetComponent<PlatformController>().setActiveState(false);
         }
 
         // FLAGS
