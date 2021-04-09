@@ -8,3 +8,4 @@ Golden Apples allow you to recover sanity.
 The platforming also changes depending on your sanity.
 You will never lose sanity automatically below the clock.
 We plan on adding an inventory, to store apples and have weapons.
+You reached the end of test level 1

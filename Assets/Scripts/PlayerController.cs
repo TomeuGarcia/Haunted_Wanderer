@@ -260,21 +260,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("MediumSanityPlatforms") || collision.collider.CompareTag("LowSanityPlatforms"))
-        {
-            //collision.collider.bounds.Contains(transform.position)
-            if (collision.collider.bounds.Intersects(c2.bounds))
-            {
-                Debug.Log("intersection collision");
-
-                rb2.MovePosition((Vector2)transform.position + (collision.collider.bounds.size * Vector2.up));
-            }
-        }
-    }
-    */
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -309,5 +294,6 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
         }
     }
+
 
 }
