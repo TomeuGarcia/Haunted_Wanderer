@@ -12,7 +12,7 @@ https://github.com/TomeuGarcia/Haunted_Wanderer
 
 Descarga mitjançant GitKraken
 =============================
-Clonar el repositori remot Haunted_Wanderer de GitHub a la carpeta convenient i fer un pull de la última branca Develop. 
+Clonar el repositori remot Haunted_Wanderer de GitHub a la carpeta convenient i fer un pull de la branca de nom: develop. 
 Obrir UnityHub i afegir com a nou projecte la carpeta Haunted_Wanderer desada al repositori local.
 Executar el projecte Haunted_Wanderer des de UnitHub
 
