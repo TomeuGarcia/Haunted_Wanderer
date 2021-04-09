@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
         // Sanity
         currentSanityState = SanityState.HIGH;
-        currentSanity = maxSanity/2;
+        currentSanity = maxSanity;
         healthBar.SetMaxSanity(maxSanity);
         //hpGained.sanityLimit(1);
         limit = 10;
