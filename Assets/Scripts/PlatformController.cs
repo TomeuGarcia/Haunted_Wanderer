@@ -20,7 +20,7 @@ public class PlatformController : MonoBehaviour
     [SerializeField] public bool spawnsMediumSanity;
     [SerializeField] public bool spawnsLowSanity;
 
-    public bool platformIsActive;
+    //public bool platformIsActive;
 
 
     // Components
@@ -64,7 +64,7 @@ public class PlatformController : MonoBehaviour
     {
         if (isActive)
         {
-            platformIsActive = true;
+            //platformIsActive = true;
 
             gameObject.SetActive(true);
             if (isSpontaneous)
@@ -79,7 +79,7 @@ public class PlatformController : MonoBehaviour
         }
         else
         {
-            platformIsActive = false;
+            //platformIsActive = false;
 
             if (isSpontaneous)
             {

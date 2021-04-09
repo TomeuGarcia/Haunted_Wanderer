@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
         scenePlatforms = GameObject.FindGameObjectsWithTag("Platform");
         foreach (GameObject e in scenePlatforms)
         {
-            e.GetComponent<PlatformController>().platformIsActive = false;
+            //e.GetComponent<PlatformController>().platformIsActive = false;
         }
 
         // FLAGS
@@ -120,7 +120,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsHighSanity && !pc.platformIsActive)
+                if (pc.spawnsHighSanity)
                     pc.setActiveState(true);
                 else
                     pc.setActiveState(false);
@@ -146,7 +146,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsMediumSanity && !pc.platformIsActive)
+                if (pc.spawnsMediumSanity)
                     pc.setActiveState(true);
                 else 
                     pc.setActiveState(false);
@@ -171,7 +171,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsLowSanity && !pc.platformIsActive)
+                if (pc.spawnsLowSanity)
                     pc.setActiveState(true);
                 else
                     pc.setActiveState(false);
