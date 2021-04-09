@@ -62,12 +62,12 @@ public class GameController : MonoBehaviour
         scenePlatforms = GameObject.FindGameObjectsWithTag("Platform");
         foreach (GameObject e in scenePlatforms)
         {
-            e.GetComponent<PlatformController>().setActiveState(true);
+            e.GetComponent<PlatformController>().platformIsActive = false;
         }
 
         // FLAGS
-        // 1 = SanityState changed to HIGH
-        playerSanityState = 1;
+        // 0 = NONE
+        playerSanityState = 0;
     }
 
     void Update()
@@ -111,7 +111,7 @@ public class GameController : MonoBehaviour
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
                 if (ec.spawnsHighSanity)
-                    ec.setActiveState(true);
+                    ec.setActiveState(true);    
                 else
                     ec.setActiveState(false);
             }
@@ -120,7 +120,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsHighSanity)
+                if (pc.spawnsHighSanity && !pc.platformIsActive)
                     pc.setActiveState(true);
                 else
                     pc.setActiveState(false);
@@ -146,7 +146,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsMediumSanity)
+                if (pc.spawnsMediumSanity && !pc.platformIsActive)
                     pc.setActiveState(true);
                 else 
                     pc.setActiveState(false);
@@ -171,7 +171,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsLowSanity)
+                if (pc.spawnsLowSanity && !pc.platformIsActive)
                     pc.setActiveState(true);
                 else
                     pc.setActiveState(false);
