@@ -39,3 +39,4 @@ Els dos errors de la línea 65 i 153 de GameController no sabem perquè passa. H
 A més a més hi hauria d'haver una imatge que acompanya el text, com a textBox però no es puja al GitKraken i tampoc entenem perquè. Hem fet coses similars
 abans (barra de vida per exemple) i no hem tingut cap problema però això fa el que vol. També tenim fet el sistema d'inventari i un parell de coses més
 però per problemes de gitKraken no ens deixa utilitzarho ni penjarho.
+Si no us deixa jugar, a console deseleccioneu "Error Pause" i podreu.
