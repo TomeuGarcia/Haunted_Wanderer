@@ -20,6 +20,8 @@ public class PlatformController : MonoBehaviour
     [SerializeField] public bool spawnsMediumSanity;
     [SerializeField] public bool spawnsLowSanity;
 
+    //public bool platformIsActive;
+
 
     // Components
     private SpriteRenderer sr;
@@ -62,6 +64,8 @@ public class PlatformController : MonoBehaviour
     {
         if (isActive)
         {
+            //platformIsActive = true;
+
             gameObject.SetActive(true);
             if (isSpontaneous)
             {
@@ -75,6 +79,8 @@ public class PlatformController : MonoBehaviour
         }
         else
         {
+            //platformIsActive = false;
+
             if (isSpontaneous)
             {
                 startFadingOut();

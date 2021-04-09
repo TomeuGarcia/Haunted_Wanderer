@@ -18,7 +18,7 @@ public class Slime : EnemyController
         healthPoints = 1;
         moveSpeed = 3.0f;
         jumpSpeed = 5.0f;
-        sightDistance = 8.0f;
+        sightDistance = 12.0f;
         moveTimer = 0.0f;
 
         rb2 = GetComponent<Rigidbody2D>();
