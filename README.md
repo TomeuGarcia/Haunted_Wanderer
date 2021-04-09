@@ -5,6 +5,10 @@ Treball assignatura Projectes I (2020-2021)
 
 --- README ---
 
+URL repositori GitHUb
+=====================
+https://github.com/TomeuGarcia/Haunted_Wanderer
+
 
 Descarga mitjançant GitKraken
 =============================
@@ -22,9 +26,9 @@ Executar el projecte Haunted_Wanderer des de UnitHub
 
 Com jugar
 =========
-Un cop descarregat i obert al Unity, trobeu dins de la carpeta Assets --> Scenes. Feu doble clic sobre SampleScene.
+UDins el projecte de Unity Haunted_Wanderer, trobeu dins de la carpeta Assets --> Scenes. Feu doble clic sobre SampleScene.
 
-Dins el projecte de Unity Haunted_Wanderer apretar el botó "Play" per jugar.
+Apretar el botó "Play" per jugar.
 
 Controls
 ========
