@@ -3949,7 +3949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1162e8e85e5f841bac061f6f572d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSpontaneous: 1
+  isSpontaneous: 0
   activePosition: {x: 0, y: 0}
   spawnsHighSanity: 1
   spawnsMediumSanity: 1
@@ -7316,8 +7316,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayer: {fileID: 1457571770}
-  hpGained: {fileID: 0}
-  healthBar: {fileID: 0}
+  hpGained: {fileID: 297777309}
+  healthBar: {fileID: 1507503391}
 --- !u!4 &1486938431
 Transform:
   m_ObjectHideFlags: 0
