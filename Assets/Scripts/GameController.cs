@@ -146,7 +146,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsLowSanity)
+                if (ec.spawnsHighSanity)
                     ec.setActiveState(true);
                 else
                     ec.setActiveState(false);
@@ -156,7 +156,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsLowSanity)
+                if (pc.spawnsHighSanity)
                     pc.setActiveState(true);
                 else
                     pc.setActiveState(false);
@@ -226,7 +226,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsMediumSanity)
+                if (pc.spawnsLowSanity)
                     pc.setActiveState(true);
                 else 
                     pc.setActiveState(false);
