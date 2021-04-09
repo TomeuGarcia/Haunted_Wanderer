@@ -8,6 +8,15 @@ public class PlayerController : MonoBehaviour
     // Position variables
     private Vector2 spawnPosition;
 
+
+    //healthBar
+    public HealthBar healthBar;
+    public HPGained hpGained;
+    
+
+    //public int currentSanity2;
+    //public int maxSanity2 = 100;
+
     // Movement variables
     private const float moveSpeed = 6.0f;
     private const float moveSpeedHigh = moveSpeed;
@@ -35,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private SanityState currentSanityState;
     public const int maxSanity = 100;
     private int currentSanity;
+    private int limit;
 
     private const float sanityLossCooldown = 2.0f;
     private float sanityLossTimer;
@@ -59,6 +69,12 @@ public class PlayerController : MonoBehaviour
         // Sanity
         currentSanityState = SanityState.HIGH;
         currentSanity = maxSanity;
+        healthBar.SetMaxSanity(maxSanity);
+        //hpGained.sanityLimit(1);
+        limit = 10;
+
+
+
         sanityLossTimer = 0.0f;
         sanityLossLimiter = 1;
 
@@ -95,6 +111,9 @@ public class PlayerController : MonoBehaviour
             loseSanity(5);
         }
 
+        healthBar.SetHealth(currentSanity);
+        hpGained.sanityLimit(limit);
+
     }
 
     private void FixedUpdate()
@@ -122,6 +141,9 @@ public class PlayerController : MonoBehaviour
 
     // Function that returns player's current Sanity (int)
     public int getCurrentSanity() { return currentSanity; }
+
+    //Function that returns the limit
+    public int getLimit() { return limit; }
 
     // Function that returns player's maxSanity (constant) (int)
     public int getMaxSanity() { return maxSanity; }
@@ -266,6 +288,7 @@ public class PlayerController : MonoBehaviour
                 enemy.hurt();
                 // add +1 to sanityLossLimiter
                 addSanityLossLimiter();
+                limit += 5;
             }
             else
             {
@@ -274,6 +297,16 @@ public class PlayerController : MonoBehaviour
                 // reset player's sanityLossLimiter
                 resetSanityLossLimiter();
             }
+        }
+        else if (collision.collider.CompareTag("Spikes"))
+        {
+            //Hurt player 
+            loseSanity(10);
+
+            //Teleport before spikes
+            Vector3 middlePosition = collision.collider.transform.position;
+            float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
+            gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
         }
     }
 
