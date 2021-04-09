@@ -28,30 +28,12 @@ public class ActivateTextAtLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(waitForPress && Input.GetKeyDown(KeyCode.E))
-        {
-            theTextBox.ReloadScript(theText);
-            theTextBox.currentLine = startLine;
-            theTextBox.endAtLine = endLine;
-            theTextBox.enableTextBox();
-
-
-            if (destroyWhenActivated)
-            {
-                Destroy(gameObject);
-            }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.name == "Player")
         {
-            if (requireButtonPress)
-            {
-                waitForPress = true;
-                return;
-            }
             theTextBox.ReloadScript(theText);
             theTextBox.currentLine = startLine;
             theTextBox.endAtLine = endLine;
@@ -64,6 +46,27 @@ public class ActivateTextAtLine : MonoBehaviour
             }
         }
     }
+
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            theTextBox.disableTextBox();
+        }
+    }
+
+    /*
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.name == "Player")
+        {
+            theTextBox.disableTextBox();
+        }
+    }
+    */
+
+    /*
     private void OnTriggerEnter2D(Collider other)
     {
         if(other.name == "Player")
@@ -71,6 +74,6 @@ public class ActivateTextAtLine : MonoBehaviour
             waitForPress = false;
         }
     }
-
+    */
 
 }
