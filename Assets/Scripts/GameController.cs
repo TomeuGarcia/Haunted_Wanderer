@@ -146,7 +146,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsLowSanity)
+                if (pc.spawnsMediumSanity)
                     pc.setActiveState(true);
                 else 
                     pc.setActiveState(false);

@@ -3851,9 +3851,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSpontaneous: 1
   activePosition: {x: 0, y: 0}
-  spawnsHighSanity: 0
+  spawnsHighSanity: 1
   spawnsMediumSanity: 1
-  spawnsLowSanity: 1
+  spawnsLowSanity: 0
 --- !u!4 &838437375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6608204486404972477, guid: e1408297d8a2b0c4c967d87c977d5221,
@@ -5884,7 +5884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307828079}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 2.8, z: 10}
+  m_LocalPosition: {x: -2.5, y: 3, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1486938431}
@@ -6788,9 +6788,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSpontaneous: 1
   activePosition: {x: 0, y: 0}
-  spawnsHighSanity: 0
+  spawnsHighSanity: 1
   spawnsMediumSanity: 1
-  spawnsLowSanity: 1
+  spawnsLowSanity: 0
 --- !u!212 &1448622895
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9099,12 +9099,12 @@ PrefabInstance:
     - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
         type: 3}
       propertyPath: spawnsHighSanity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
         type: 3}
       propertyPath: spawnsLowSanity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8824430244756146003, guid: f72c859f9e536674e91e2efc9cdffc64,
         type: 3}
