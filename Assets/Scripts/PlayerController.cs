@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private float fallMultiplier = 5.0f;
     private float jumpDelay = 0.25f;
     private float jumpTimer = 0.0f;
+    public bool jumpRight = false;
 
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
@@ -118,7 +119,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (onGround && direction.x > 0)
+            jumpRight = true;
+        else if (onGround && direction.x < 0)
+            jumpRight = false;
+
         move(direction.x);
+
         if (jumpTimer > Time.time && onGround)
         {
             jump();
@@ -210,12 +217,20 @@ public class PlayerController : MonoBehaviour
     // Function that moves the player
     private void move(float horizontal)
     {
+        if ((jumpRight && horizontal < 0) || (!jumpRight && horizontal > 0))
+            rb2.velocity = new Vector2(currentMoveSpeed * horizontal * 0.5f, rb2.velocity.y);
+        else
+            rb2.velocity = new Vector2(currentMoveSpeed * horizontal, rb2.velocity.y);
+
+
+        /*
         rb2.AddForce(Vector2.right * horizontal * currentMoveSpeed);
 
         if (Mathf.Abs(rb2.velocity.x) > currentMoveSpeed)
         {
             rb2.velocity = new Vector2(Mathf.Sign(rb2.velocity.x) * currentMoveSpeed, rb2.velocity.y);
         }
+        */
     }
 
     // Functions that lets player jump
