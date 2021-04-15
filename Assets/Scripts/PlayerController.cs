@@ -8,6 +8,15 @@ public class PlayerController : MonoBehaviour
     // Position variables
     private Vector2 spawnPosition;
 
+
+    //healthBar
+    public HealthBar healthBar;
+    public HPGained hpGained;
+    
+
+    //public int currentSanity2;
+    //public int maxSanity2 = 100;
+
     // Movement variables
     private const float moveSpeed = 6.0f;
     private const float moveSpeedHigh = moveSpeed;
@@ -29,12 +38,14 @@ public class PlayerController : MonoBehaviour
     private float fallMultiplier = 5.0f;
     private float jumpDelay = 0.25f;
     private float jumpTimer = 0.0f;
+    public bool jumpRight = false;
 
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
     private SanityState currentSanityState;
     public const int maxSanity = 100;
     private int currentSanity;
+    private int limit;
 
     private const float sanityLossCooldown = 2.0f;
     private float sanityLossTimer;
@@ -58,7 +69,13 @@ public class PlayerController : MonoBehaviour
 
         // Sanity
         currentSanityState = SanityState.HIGH;
-        currentSanity = maxSanity;
+        currentSanity = maxSanity/2;
+        healthBar.SetMaxSanity(maxSanity);
+        //hpGained.sanityLimit(1);
+        limit = 10;
+
+
+
         sanityLossTimer = 0.0f;
         sanityLossLimiter = 1;
 
@@ -95,11 +112,20 @@ public class PlayerController : MonoBehaviour
             loseSanity(5);
         }
 
+        healthBar.SetHealth(currentSanity);
+        hpGained.sanityLimit(limit);
+
     }
 
     private void FixedUpdate()
     {
+        if (onGround && direction.x > 0)
+            jumpRight = true;
+        else if (onGround && direction.x < 0)
+            jumpRight = false;
+
         move(direction.x);
+
         if (jumpTimer > Time.time && onGround)
         {
             jump();
@@ -122,6 +148,9 @@ public class PlayerController : MonoBehaviour
 
     // Function that returns player's current Sanity (int)
     public int getCurrentSanity() { return currentSanity; }
+
+    //Function that returns the limit
+    public int getLimit() { return limit; }
 
     // Function that returns player's maxSanity (constant) (int)
     public int getMaxSanity() { return maxSanity; }
@@ -188,12 +217,20 @@ public class PlayerController : MonoBehaviour
     // Function that moves the player
     private void move(float horizontal)
     {
+        if ((jumpRight && horizontal < 0) || (!jumpRight && horizontal > 0))
+            rb2.velocity = new Vector2(currentMoveSpeed * horizontal * 0.5f, rb2.velocity.y);
+        else
+            rb2.velocity = new Vector2(currentMoveSpeed * horizontal, rb2.velocity.y);
+
+
+        /*
         rb2.AddForce(Vector2.right * horizontal * currentMoveSpeed);
 
         if (Mathf.Abs(rb2.velocity.x) > currentMoveSpeed)
         {
             rb2.velocity = new Vector2(Mathf.Sign(rb2.velocity.x) * currentMoveSpeed, rb2.velocity.y);
         }
+        */
     }
 
     // Functions that lets player jump
@@ -238,21 +275,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("MediumSanityPlatforms") || collision.collider.CompareTag("LowSanityPlatforms"))
-        {
-            //collision.collider.bounds.Contains(transform.position)
-            if (collision.collider.bounds.Intersects(c2.bounds))
-            {
-                Debug.Log("intersection collision");
-
-                rb2.MovePosition((Vector2)transform.position + (collision.collider.bounds.size * Vector2.up));
-            }
-        }
-    }
-    */
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -266,6 +288,7 @@ public class PlayerController : MonoBehaviour
                 enemy.hurt();
                 // add +1 to sanityLossLimiter
                 addSanityLossLimiter();
+                limit += 5;
             }
             else
             {
@@ -275,6 +298,17 @@ public class PlayerController : MonoBehaviour
                 resetSanityLossLimiter();
             }
         }
+        else if (collision.collider.CompareTag("Spikes"))
+        {
+            //Hurt player 
+            loseSanity(10);
+
+            //Teleport before spikes
+            Vector3 middlePosition = collision.collider.transform.position;
+            float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
+            gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
+        }
     }
+
 
 }
