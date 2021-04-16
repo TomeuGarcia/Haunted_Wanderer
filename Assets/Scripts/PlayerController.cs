@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     // Movement variables
     private const float moveSpeed = 6.0f;
     private const float moveSpeedHigh = moveSpeed;
-    private const float moveSpeedMedium = moveSpeed * 1.2f;
-    private const float moveSpeedLow = moveSpeed * 1.4f;
+    private const float moveSpeedMedium = moveSpeed * 1.35f;
+    private const float moveSpeedLow = moveSpeed * 1.7f;
     private float currentMoveSpeed;
     // Movement physics variables
     private Vector2 direction;
@@ -30,15 +30,19 @@ public class PlayerController : MonoBehaviour
     // Jump (movement) variables
     private const float jumpSpeed = 10.0f;
     private float currentJumpSpeed;
+    private bool onWall = false;
+    private const float wallLenght = 0.6f;
+    private Vector3 wallColliderOffset = new Vector3(0.0f, 0.5f, 0.0f);
+
     // Jump (movement) physics variables
     private bool onGround = false;
     private const float groundLenght = 0.6f;
-    private Vector3 colliderOffset = new Vector3(0.45f, 0.0f, 0.0f);
+    private Vector3 groundColliderOffset = new Vector3(0.45f, 0.0f, 0.0f);
     private float gravity = 1.0f;
     private float fallMultiplier = 5.0f;
     private float jumpDelay = 0.25f;
     private float jumpTimer = 0.0f;
-    public bool jumpRight = false;
+    public int jumpDirection = 0; // jumped left direction = -1 ; jumped no direction = 0 ; jumped right direction = 1
 
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
@@ -49,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     private const float sanityLossCooldown = 2.0f;
     private float sanityLossTimer;
-    public int sanityLossLimiter; // Can only equal 1,2,3,4,5 --- 1 = 10% , 2 = 20% , ... , 5 = 50%
+    public int sanityLossLimiter; // Can only equal 1,2,3,4,5 -> 1 = 10% , 2 = 20% , ... , 5 = 50%
 
 
     // Component variables
@@ -87,9 +91,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Check if player is touching groundLayer (mask)
-        onGround = Physics2D.Raycast(transform.position + colliderOffset, Vector2.down, groundLenght, groundLayer) ||
-                   Physics2D.Raycast(transform.position - colliderOffset, Vector2.down, groundLenght, groundLayer);
+        // Check if player is touching groundLayer (mask) - walls and floor
+        onWall = Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
+                 Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
+                 Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.left, wallLenght, groundLayer) ||
+                 Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.left, wallLenght, groundLayer);
+
+        onGround = Physics2D.Raycast(transform.position + groundColliderOffset, Vector2.down, groundLenght, groundLayer) ||
+                   Physics2D.Raycast(transform.position - groundColliderOffset, Vector2.down, groundLenght, groundLayer);
+
         // Start jump timer when Space key is pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -120,9 +130,11 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (onGround && direction.x > 0)
-            jumpRight = true;
+            jumpDirection = 1;
+        else if (onGround && direction.x == 0)
+            jumpDirection = 0;
         else if (onGround && direction.x < 0)
-            jumpRight = false;
+            jumpDirection = -1;
 
         move(direction.x);
 
@@ -217,11 +229,26 @@ public class PlayerController : MonoBehaviour
     // Function that moves the player
     private void move(float horizontal)
     {
-        if ((jumpRight && horizontal < 0) || (!jumpRight && horizontal > 0))
-            rb2.velocity = new Vector2(currentMoveSpeed * horizontal * 0.5f, rb2.velocity.y);
-        else
+        // Player on top of ground and wants to move
+        if (onGround && horizontal != 0)
+        {
             rb2.velocity = new Vector2(currentMoveSpeed * horizontal, rb2.velocity.y);
+        }
 
+        // Player in the air
+        if (!onGround)
+        {
+            // Player slides down if contact with wall
+            if (onWall)
+            {
+                rb2.velocity = new Vector2(0.0f, rb2.velocity.y);
+            }
+            // Player can correct jump if direction is inverted in contrast to jump direction
+            else if ((jumpDirection == 1 && horizontal < 0) || (jumpDirection == -1 && horizontal > 0) || (jumpDirection == 0 && horizontal != 0))
+            {
+                rb2.velocity = new Vector2(currentMoveSpeed * horizontal * 0.5f, rb2.velocity.y);
+            }
+        }
 
         /*
         rb2.AddForce(Vector2.right * horizontal * currentMoveSpeed);
@@ -236,7 +263,9 @@ public class PlayerController : MonoBehaviour
     // Functions that lets player jump
     private void jump()
     {
-        rb2.velocity = new Vector2(rb2.velocity.x, 0);
+        // Apply progressive jump force
+        // makes velocity force on x axis weaker
+        rb2.velocity = new Vector2(rb2.velocity.x * 0.75f, 0);
         rb2.AddForce(Vector2.up * currentJumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0.0f;
     }
