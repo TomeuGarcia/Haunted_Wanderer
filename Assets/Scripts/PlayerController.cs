@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private float fallMultiplier = 5.0f;
     private float jumpDelay = 0.25f;
     private float jumpTimer = 0.0f;
-    public bool jumpRight = false;
+    public int jumpDirection = 0; // jumped left direction = -1 ; jumped no direction = 0 ; jumped right direction = 1
 
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
@@ -130,9 +130,11 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (onGround && direction.x > 0)
-            jumpRight = true;
+            jumpDirection = 1;
+        else if (onGround && direction.x == 0)
+            jumpDirection = 0;
         else if (onGround && direction.x < 0)
-            jumpRight = false;
+            jumpDirection = -1;
 
         move(direction.x);
 
@@ -242,7 +244,7 @@ public class PlayerController : MonoBehaviour
                 rb2.velocity = new Vector2(0.0f, rb2.velocity.y);
             }
             // Player can correct jump if direction is inverted in contrast to jump direction
-            else if (!onGround && ((jumpRight && horizontal < 0) || (!jumpRight && horizontal > 0)))
+            else if ((jumpDirection == 1 && horizontal < 0) || (jumpDirection == -1 && horizontal > 0) || (jumpDirection == 0 && horizontal != 0))
             {
                 rb2.velocity = new Vector2(currentMoveSpeed * horizontal * 0.5f, rb2.velocity.y);
             }
