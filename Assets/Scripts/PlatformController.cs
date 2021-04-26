@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     // Variables
-    public bool isSpontaneous = false;
 
     private float moveSpeed = 12.0f;
     private bool isMoving;
@@ -16,9 +15,10 @@ public class PlatformController : MonoBehaviour
 
     // Enemy boolean flags (tags)
     [Header("Platform Spawn Tags")]
-    [SerializeField] public bool spawnsHighSanity;
-    [SerializeField] public bool spawnsMediumSanity;
-    [SerializeField] public bool spawnsLowSanity;
+    [SerializeField] public bool isSpontaneous = false;
+    [SerializeField] public bool spawnsHighSanity = false;
+    [SerializeField] public bool spawnsMediumSanity = false;
+    [SerializeField] public bool spawnsLowSanity = false;
 
     //public bool platformIsActive;
 
@@ -84,7 +84,6 @@ public class PlatformController : MonoBehaviour
             if (isSpontaneous)
             {
                 startFadingOut();
-                gameObject.SetActive(false);
             }
             else
             {
@@ -123,6 +122,7 @@ public class PlatformController : MonoBehaviour
             sr.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
+        gameObject.SetActive(false);
     }
     void startFadingOut()
     {

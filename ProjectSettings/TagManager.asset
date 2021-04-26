@@ -8,6 +8,8 @@ TagManager:
   - Platform
   - MediumSanityEnemies
   - Spikes
+  - LowSanityEnemies
+  - EndOfLevel
   layers:
   - Default
   - TransparentFX
