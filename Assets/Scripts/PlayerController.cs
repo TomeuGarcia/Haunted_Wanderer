@@ -265,7 +265,8 @@ public class PlayerController : MonoBehaviour
     {
         // Apply progressive jump force
         // makes velocity force on x axis weaker
-        rb2.velocity = new Vector2(rb2.velocity.x * 0.75f, 0);
+        //rb2.velocity = new Vector2(rb2.velocity.x * 0.75f, 0);
+        rb2.velocity = new Vector2(rb2.velocity.x, 0);
         rb2.AddForce(Vector2.up * currentJumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0.0f;
     }

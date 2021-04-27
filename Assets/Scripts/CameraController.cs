@@ -78,11 +78,15 @@ public class CameraController : MonoBehaviour
         {
             moveVertically = true;
         }
-        if (moveVertically && !onGround) {
+        if (moveVertically) {
             newPosition.y = follow.y;
             if (transform.position.y == follow.y) {
                 moveVertically = false;
             }
+        }
+
+        if (onGround) {
+            Debug.Log("onGround");
         }
 
         // Move Camera at required speed
