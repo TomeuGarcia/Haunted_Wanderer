@@ -22,9 +22,10 @@ public class CameraController : MonoBehaviour
 
     private bool onGround;
     private float groundLength;
-    private bool moveVertically;
+    public bool moveVertically;
+    public bool moveHorizontally;
 
-    private float speed = 10.0f;
+    private float speed = 6.0f;
 
     // Components
     private Rigidbody2D rb2;
@@ -35,8 +36,9 @@ public class CameraController : MonoBehaviour
         threshold = calculateThreshold();
         rb2 = followObject.GetComponent<Rigidbody2D>();
 
-        groundLength = Camera.main.orthographicSize;
+        groundLength = Camera.main.orthographicSize * 0.8f;
         moveVertically = false;
+        moveHorizontally = false;
     }
 
 
@@ -61,29 +63,36 @@ public class CameraController : MonoBehaviour
         */
 
         // Variable that keeps track of the distance from the followObject to the center of the Camera on the X axis
-        xDiff = Mathf.Abs(transform.position.x - follow.x);
+        xDiff = transform.position.x - follow.x;
         // Variable that keeps track of the distance from the followObject to the center of the Camera on the Y axis
-        yDiff = Mathf.Abs(transform.position.y - follow.y);
-        onGround = Physics2D.Raycast(transform.position, Vector2.down, groundLength, groundLayer);
+        yDiff = transform.position.y - follow.y;
+        onGround = Physics2D.Raycast(transform.position, Vector2.down, transform.position.y - groundLength, groundLayer);
 
 
 
         // Update Camera's position evaluating folowObject's position with camera threshold
         Vector3 newPosition = transform.position;
-        if (xDiff >= threshold.x / 8.0f)
+        if (Mathf.Abs(xDiff) >= threshold.x / 8.0f)
         {
             newPosition.x = follow.x;
         }
-        if (yDiff >= threshold.y / 2.0f && !moveVertically)
+
+        if (Mathf.Abs(yDiff) >= threshold.y / 2.0f && !moveVertically)
         {
             moveVertically = true;
         }
-        if (moveVertically) {
-            newPosition.y = follow.y;
-            if (transform.position.y == follow.y) {
+        if (moveVertically)
+        {
+            if (Mathf.Abs(yDiff) <= 0.1f || onGround)
+            {
                 moveVertically = false;
             }
+            else
+            {
+                newPosition.y = follow.y;
+            }
         }
+
 
         if (onGround) {
             Debug.Log("onGround");
