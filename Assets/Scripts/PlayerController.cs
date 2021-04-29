@@ -28,9 +28,9 @@ public class PlayerController : MonoBehaviour
     private float linearDrag = 4.0f;
 
     // Jump (movement) variables
+    private bool onWall = false;
     private const float jumpSpeed = 10.0f;
     private float currentJumpSpeed;
-    private bool onWall = false;
     private const float wallLenght = 0.6f;
     private Vector3 wallColliderOffset = new Vector3(0.0f, 0.5f, 0.0f);
 
@@ -239,12 +239,12 @@ public class PlayerController : MonoBehaviour
         if (!onGround)
         {
             // Player slides down if contact with wall
-            if (onWall)
-            {
-                rb2.velocity = new Vector2(0.0f, rb2.velocity.y);
-            }
+            //if (onWall)
+            //{
+            //    rb2.velocity = new Vector2(0.0f, rb2.velocity.y);
+            //}
             // Player can correct jump if direction is inverted in contrast to jump direction
-            else if ((jumpDirection == 1 && horizontal < 0) || (jumpDirection == -1 && horizontal > 0) || (jumpDirection == 0 && horizontal != 0))
+            if ((jumpDirection == 1 && horizontal < 0) || (jumpDirection == -1 && horizontal > 0) || (jumpDirection == 0 && horizontal != 0))
             {
                 rb2.velocity = new Vector2(currentMoveSpeed * horizontal * 0.5f, rb2.velocity.y);
             }
