@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     private float xDiff;
     private float yDiff;
 
-    private bool onGround;
+    private bool cameraOnGround;
     private float groundLength;
     public bool moveVertically;
     public bool moveHorizontally;
@@ -66,36 +66,41 @@ public class CameraController : MonoBehaviour
         xDiff = transform.position.x - follow.x;
         // Variable that keeps track of the distance from the followObject to the center of the Camera on the Y axis
         yDiff = transform.position.y - follow.y;
-        onGround = Physics2D.Raycast(transform.position, Vector2.down, transform.position.y - groundLength, groundLayer);
+        cameraOnGround = Physics2D.Raycast(transform.position, Vector2.down, groundLength, groundLayer);
 
 
 
         // Update Camera's position evaluating folowObject's position with camera threshold
         Vector3 newPosition = transform.position;
-        if (Mathf.Abs(xDiff) >= threshold.x / 8.0f)
+        if ((Mathf.Abs(xDiff) >= threshold.x / 8.0f) && !moveHorizontally)
+        {
+            moveHorizontally = true;
+        }
+        if (moveHorizontally)
         {
             newPosition.x = follow.x;
+            if (Mathf.Abs(follow.x) <= Mathf.Abs(transform.position.x) + 0.05f && Mathf.Abs(follow.x) >= Mathf.Abs(transform.position.x) - 0.05f)
+            {
+                moveHorizontally = false;
+            }
         }
 
-        if (Mathf.Abs(yDiff) >= threshold.y / 2.0f && !moveVertically)
+        if ((!(Mathf.Abs(yDiff) <= threshold.y / 2.0f || (cameraOnGround && follow.y < transform.position.y))) && !moveVertically)
         {
             moveVertically = true;
         }
         if (moveVertically)
         {
-            if (Mathf.Abs(yDiff) <= 0.1f || onGround)
+            newPosition.y = follow.y;
+            if ((Mathf.Abs(follow.y) <= Mathf.Abs(transform.position.y) + 0.05f && Mathf.Abs(follow.y) >= Mathf.Abs(transform.position.y) - 0.05f) || cameraOnGround)
             {
                 moveVertically = false;
-            }
-            else
-            {
-                newPosition.y = follow.y;
             }
         }
 
 
-        if (onGround) {
-            Debug.Log("onGround");
+        if (cameraOnGround) {
+            Debug.Log("cameraOnGround");
         }
 
         // Move Camera at required speed
