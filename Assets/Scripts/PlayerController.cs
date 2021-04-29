@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     // Jump (movement) physics variables
     private bool onGround = false;
-    private const float groundLenght = 0.6f;
+    private const float groundLength = 0.6f;
     private Vector3 groundColliderOffset = new Vector3(0.45f, 0.0f, 0.0f);
     private float gravity = 1.0f;
     private float fallMultiplier = 5.0f;
@@ -97,8 +97,8 @@ public class PlayerController : MonoBehaviour
                  Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.left, wallLenght, groundLayer) ||
                  Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.left, wallLenght, groundLayer);
 
-        onGround = Physics2D.Raycast(transform.position + groundColliderOffset, Vector2.down, groundLenght, groundLayer) ||
-                   Physics2D.Raycast(transform.position - groundColliderOffset, Vector2.down, groundLenght, groundLayer);
+        onGround = Physics2D.Raycast(transform.position + groundColliderOffset, Vector2.down, groundLength, groundLayer) ||
+                   Physics2D.Raycast(transform.position - groundColliderOffset, Vector2.down, groundLength, groundLayer);
 
         // Start jump timer when Space key is pressed
         if (Input.GetKeyDown(KeyCode.Space))
@@ -265,7 +265,8 @@ public class PlayerController : MonoBehaviour
     {
         // Apply progressive jump force
         // makes velocity force on x axis weaker
-        rb2.velocity = new Vector2(rb2.velocity.x * 0.75f, 0);
+        //rb2.velocity = new Vector2(rb2.velocity.x * 0.75f, 0);
+        rb2.velocity = new Vector2(rb2.velocity.x, 0);
         rb2.AddForce(Vector2.up * currentJumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0.0f;
     }
