@@ -92,10 +92,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Check if player is touching groundLayer (mask) - walls and floor
-        onWall = Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
-                 Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
-                 Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.left, wallLenght, groundLayer) ||
-                 Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.left, wallLenght, groundLayer);
+        //onWall = Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
+        //         Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
+        //         Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.left, wallLenght, groundLayer) ||
+        //         Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.left, wallLenght, groundLayer);
 
         onGround = Physics2D.Raycast(transform.position + groundColliderOffset, Vector2.down, groundLength, groundLayer) ||
                    Physics2D.Raycast(transform.position - groundColliderOffset, Vector2.down, groundLength, groundLayer);
