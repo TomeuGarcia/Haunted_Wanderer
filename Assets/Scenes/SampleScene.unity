@@ -4400,6 +4400,11 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 83151ecd2134f7b4fbdc854169e10352, type: 2}
+    - target: {fileID: 691108911244322178, guid: befccced808635c4bac144c8e0d1677c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 691108911244322188, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
       propertyPath: groundLayer.m_Bits
