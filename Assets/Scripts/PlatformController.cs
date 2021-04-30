@@ -14,11 +14,12 @@ public class PlatformController : MonoBehaviour
 
 
     // Enemy boolean flags (tags)
-    [Header("Platform Spawn Tags")]
+    [Header("Platform Appears")]
     [SerializeField] public bool isSpontaneous = false;
-    [SerializeField] public bool spawnsHighSanity = false;
-    [SerializeField] public bool spawnsMediumSanity = false;
-    [SerializeField] public bool spawnsLowSanity = false;
+    [Header("Platform Exists When")]
+    [SerializeField] public bool highSanity = false;
+    [SerializeField] public bool mediumSanity = false;
+    [SerializeField] public bool lowSanity = false;
 
     //public bool platformIsActive;
 

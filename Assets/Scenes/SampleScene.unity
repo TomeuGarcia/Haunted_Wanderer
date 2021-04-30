@@ -4403,7 +4403,7 @@ PrefabInstance:
     - target: {fileID: 691108911244322178, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 691108911244322188, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
@@ -4435,7 +4435,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6025754103944856774, guid: befccced808635c4bac144c8e0d1677c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: befccced808635c4bac144c8e0d1677c, type: 3}
 --- !u!1 &746476861
 GameObject:
