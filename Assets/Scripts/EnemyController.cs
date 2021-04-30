@@ -16,10 +16,12 @@ public class EnemyController : MonoBehaviour
     protected private Vector2 spawnPosition;
 
     // Enemy boolean flags (tags)
-    [Header("Enemy Spawn Tags")]
-    [SerializeField] public bool spawnsHighSanity;
-    [SerializeField] public bool spawnsMediumSanity;
-    [SerializeField] public bool spawnsLowSanity;
+    public bool canSpawn = true;
+
+    [Header("Enemy Exists When")]
+    [SerializeField] public bool highSanity;
+    [SerializeField] public bool mediumSanity;
+    [SerializeField] public bool lowSanity;
 
 
     // Other classes variables
@@ -63,10 +65,13 @@ public class EnemyController : MonoBehaviour
         if (isActive)
         {
             transform.position = spawnPosition;
+            canSpawn = false;
             gameObject.SetActive(true);
         }
         else
         {
+            // canSpawn should turn true after cooldown
+            canSpawn = true;
             gameObject.SetActive(false);
         }
     }
