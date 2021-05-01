@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     // Position variables
-    private Vector2 spawnPosition;
+    private Vector2 respawnPosition;
 
 
     //healthBar
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Position
-        spawnPosition = transform.position;
+        respawnPosition = transform.position;
 
         // Movement
         currentMoveSpeed = moveSpeedLow;
@@ -328,17 +328,37 @@ public class PlayerController : MonoBehaviour
                 resetSanityLossLimiter();
             }
         }
-        else if (collision.collider.CompareTag("Spikes"))
-        {
-            //Hurt player 
-            loseSanity(10);
 
-            //Teleport before spikes
-            Vector3 middlePosition = collision.collider.transform.position;
-            float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
-            gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
+        // Check if player collided with a Hazard
+        else if (collision.collider.CompareTag("Hazard"))
+        {
+            // Check if Hazard is Spikes
+            HazardController hc = GetComponent<HazardController>();
+            if (hc.isSpikes)
+            {
+                //Hurt player 
+                loseSanity(10);
+
+                //Teleport player to last checkpoint
+                transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
+
+                //Vector3 middlePosition = collision.collider.transform.position;
+                //float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
+                //gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
+            }
+
         }
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Load new respawn position if players enters checkpoint
+        if (collision.CompareTag("Checkpoint"))
+        {
+            Checkpoint cp = collision.GetComponent<Checkpoint>();
+            respawnPosition = new Vector2(cp.X, cp.Y);
+        }
+    }
 
 }

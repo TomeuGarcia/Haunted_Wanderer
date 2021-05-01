@@ -8,7 +8,8 @@ public class Checkpoint : MonoBehaviour
     [Header("Checkpoint respawn coords:")]
     [SerializeField] public float X;
     [SerializeField] public float Y;
-    [SerializeField] public float Z;
+    //[SerializeField] public float Z;
+
 
 
     //// Start is called before the first frame update
