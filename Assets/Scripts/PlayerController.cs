@@ -342,6 +342,7 @@ public class PlayerController : MonoBehaviour
 
                 //Teleport player to last checkpoint
                 transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
+                offCamera = true;
 
                 //Vector3 middlePosition = collision.collider.transform.position;
                 //float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
@@ -359,7 +360,6 @@ public class PlayerController : MonoBehaviour
         {
             Checkpoint cp = collision.GetComponent<Checkpoint>();
             respawnPosition = new Vector2(cp.X, cp.Y);
-            offCamera = true;
         }
     }
 
