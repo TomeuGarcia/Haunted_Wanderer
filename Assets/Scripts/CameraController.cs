@@ -28,12 +28,14 @@ public class CameraController : MonoBehaviour
     private float speed = 6.0f;
 
     // Components
+    private PlayerController pc;
     private Rigidbody2D rb2;
     public LayerMask groundLayer;
 
     void Start()
     {
         threshold = calculateThreshold();
+        pc = followObject.GetComponent<PlayerController>();
         rb2 = followObject.GetComponent<Rigidbody2D>();
 
         groundLength = Camera.main.orthographicSize * 0.8f;
@@ -45,6 +47,13 @@ public class CameraController : MonoBehaviour
     // Move Camera when followObject (Player) moves
     void FixedUpdate()
     {
+        if (pc.offCamera)
+        {
+            transform.position = new Vector2(follow.x, follow.y + groundLength);
+            pc.offCamera = false;
+        }
+
+
         // Variable that keeps track of followObject's position
         follow = followObject.transform.position;
 
@@ -57,10 +66,6 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        /*
-        if (transform.position.y > follow.y)
-            follow.y *= 0.05f;
-        */
 
         // Variable that keeps track of the distance from the followObject to the center of the Camera on the X axis
         xDiff = transform.position.x - follow.x;
@@ -99,9 +104,9 @@ public class CameraController : MonoBehaviour
         }
 
 
-        if (cameraOnGround) {
-            Debug.Log("cameraOnGround");
-        }
+        //if (cameraOnGround) {
+        //    Debug.Log("cameraOnGround");
+        //}
 
         // Move Camera at required speed
         float moveSpeed = rb2.velocity.magnitude > speed ? rb2.velocity.magnitude : speed;

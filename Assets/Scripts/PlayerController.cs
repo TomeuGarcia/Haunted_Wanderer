@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     // Position variables
     private Vector2 respawnPosition;
-
+    public bool offCamera;
 
     //healthBar
     public HealthBar healthBar;
@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         // Position
         respawnPosition = transform.position;
+        offCamera = false;
 
         // Movement
         currentMoveSpeed = moveSpeedLow;
@@ -358,6 +359,7 @@ public class PlayerController : MonoBehaviour
         {
             Checkpoint cp = collision.GetComponent<Checkpoint>();
             respawnPosition = new Vector2(cp.X, cp.Y);
+            offCamera = true;
         }
     }
 
