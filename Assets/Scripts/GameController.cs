@@ -17,20 +17,8 @@ public class GameController : MonoBehaviour
 
     // Enemies
     private GameObject[] sceneEnemies;
-    /*
-    public GameObject[] highSanityEnemies;
-    public GameObject[] mediumSanityEnemies;
-    public GameObject[] lowSanityEnemies;
-    */
-
     // Platforms
     private GameObject[] scenePlatforms;
-    /*
-    public GameObject[] highSanityPlatforms;
-    public GameObject[] mediumSanityPlatforms;
-    public GameObject[] lowSanityPlatforms;
-    */
-
     // Hazards
     private GameObject[] sceneHazards;
 
