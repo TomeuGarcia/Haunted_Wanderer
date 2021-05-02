@@ -60,14 +60,14 @@ public class GameController : MonoBehaviour
 
         // SET PLATFORMS
         scenePlatforms = GameObject.FindGameObjectsWithTag("Platform");
-        foreach (GameObject e in scenePlatforms)
+        foreach (GameObject p in scenePlatforms)
         {
-            e.GetComponent<PlatformController>().setActiveState(false);
+            p.GetComponent<PlatformController>().setActiveState(false);
         }
 
         // FLAGS
-        // 1 = SanityState changed to HIGH
-        playerSanityState = 1;
+        // 0 = NONE
+        playerSanityState = 0;
     }
 
     void Update()
@@ -110,8 +110,8 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsHighSanity)
-                    ec.setActiveState(true);
+                if (ec.canSpawn && ec.highSanity)
+                    ec.setActiveState(true);    
                 else
                     ec.setActiveState(false);
             }
@@ -120,10 +120,14 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsHighSanity)
-                    pc.setActiveState(true);
-                else
-                    pc.setActiveState(false);
+                if (pc.highSanity && !pc.mediumSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(true);
+                }
+                else if (!pc.highSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(false);
+                }
             }
             
         }
@@ -136,9 +140,9 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsMediumSanity)
+                if (ec.canSpawn && ec.mediumSanity && !ec.highSanity)
                     ec.setActiveState(true);
-                else if (ec.spawnsLowSanity)
+                else if (!ec.canSpawn && !ec.mediumSanity)
                     ec.setActiveState(false);
             }
 
@@ -146,10 +150,14 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsMediumSanity)
-                    pc.setActiveState(true);
-                else 
-                    pc.setActiveState(false);
+                if (!pc.highSanity && pc.mediumSanity && pc.lowSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(true);
+                }
+                else if (!pc.mediumSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(false);
+                }
             }
 
 
@@ -163,7 +171,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsLowSanity)
+                if (ec.lowSanity)
                     ec.setActiveState(true);
             }
 
@@ -171,10 +179,14 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsLowSanity)
-                    pc.setActiveState(true);
-                else
-                    pc.setActiveState(false);
+                if (!pc.lowSanity && !pc.mediumSanity && pc.lowSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(true);
+                }
+                else if (!pc.lowSanity)
+                {
+                    p.GetComponent<PlatformController>().setActiveState(false);
+                }
             }
 
         }

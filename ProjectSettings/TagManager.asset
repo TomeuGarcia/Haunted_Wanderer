@@ -8,6 +8,10 @@ TagManager:
   - Platform
   - MediumSanityEnemies
   - Spikes
+  - LowSanityEnemies
+  - EndOfLevel
+  - Checkpoint
+  - Hazard
   layers:
   - Default
   - TransparentFX
