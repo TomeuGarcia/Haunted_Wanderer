@@ -31,6 +31,9 @@ public class GameController : MonoBehaviour
     public GameObject[] lowSanityPlatforms;
     */
 
+    // Hazards
+    private GameObject[] sceneHazards;
+
     // Flags
     private int playerSanityState;
     // 1 = SanityState changed to HIGH
@@ -57,12 +60,18 @@ public class GameController : MonoBehaviour
             e.GetComponent<EnemyController>().setActiveState(false);
         }
 
-
         // SET PLATFORMS
         scenePlatforms = GameObject.FindGameObjectsWithTag("Platform");
         foreach (GameObject p in scenePlatforms)
         {
             p.GetComponent<PlatformController>().setActiveState(false);
+        }
+
+        // SET HAZARDS
+        sceneHazards = GameObject.FindGameObjectsWithTag("Hazard");
+        foreach (GameObject h in sceneHazards)
+        {
+            h.GetComponent<HazardController>().setActiveState(false);
         }
 
         // FLAGS
@@ -110,7 +119,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsHighSanity)
+                if (ec.canSpawn && ec.highSanity)
                     ec.setActiveState(true);    
                 else
                     ec.setActiveState(false);
@@ -120,16 +129,29 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsHighSanity)
+                if (pc.highSanity && !pc.mediumSanity)
                 {
                     p.GetComponent<PlatformController>().setActiveState(true);
                 }
-                else
+                else if (!pc.highSanity)
                 {
                     p.GetComponent<PlatformController>().setActiveState(false);
                 }
             }
-            
+
+            // HAZARDS
+            foreach (GameObject h in sceneHazards)
+            {
+                PlatformController hc = h.GetComponent<PlatformController>();
+                if (hc.highSanity && !hc.mediumSanity)
+                {
+                    h.GetComponent<PlatformController>().setActiveState(true);
+                }
+                else if (!hc.highSanity)
+                {
+                    h.GetComponent<PlatformController>().setActiveState(false);
+                }
+            }
         }
         // MEDIUM SANITY
         else if (playerSanityState != 2 && sanity == PlayerController.SanityState.MEDIUM)
@@ -140,9 +162,9 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsMediumSanity)
+                if (ec.canSpawn && ec.mediumSanity && !ec.highSanity)
                     ec.setActiveState(true);
-                else if (!ec.spawnsHighSanity && !ec.spawnsMediumSanity && ec.spawnsLowSanity)
+                else if (!ec.canSpawn && !ec.mediumSanity)
                     ec.setActiveState(false);
             }
 
@@ -150,17 +172,29 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (!pc.spawnsHighSanity && pc.spawnsMediumSanity)
+                if (!pc.highSanity && pc.mediumSanity && pc.lowSanity)
                 {
                     p.GetComponent<PlatformController>().setActiveState(true);
                 }
-                else if (!pc.spawnsMediumSanity)
+                else if (!pc.mediumSanity)
                 {
                     p.GetComponent<PlatformController>().setActiveState(false);
                 }
             }
 
-
+            // HAZARDS
+            foreach (GameObject h in sceneHazards)
+            {
+                PlatformController hc = h.GetComponent<PlatformController>();
+                if (!hc.highSanity && hc.mediumSanity && hc.lowSanity)
+                {
+                    h.GetComponent<PlatformController>().setActiveState(true);
+                }
+                else if (!hc.mediumSanity)
+                {
+                    h.GetComponent<PlatformController>().setActiveState(false);
+                }
+            }
         }
         // LOW SANITY
         else if (playerSanityState != 3 && sanity == PlayerController.SanityState.LOW)
@@ -171,7 +205,7 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsLowSanity)
+                if (ec.lowSanity)
                     ec.setActiveState(true);
             }
 
@@ -179,13 +213,27 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (!pc.spawnsLowSanity && !pc.spawnsMediumSanity && pc.spawnsLowSanity)
+                if (!pc.lowSanity && !pc.mediumSanity && pc.lowSanity)
                 {
                     p.GetComponent<PlatformController>().setActiveState(true);
                 }
-                else if (!pc.spawnsLowSanity)
+                else if (!pc.lowSanity)
                 {
                     p.GetComponent<PlatformController>().setActiveState(false);
+                }
+            }
+
+            // HAZARDS
+            foreach (GameObject h in sceneHazards)
+            {
+                PlatformController hc = h.GetComponent<PlatformController>();
+                if (!hc.lowSanity && !hc.mediumSanity && hc.lowSanity)
+                {
+                    h.GetComponent<PlatformController>().setActiveState(true);
+                }
+                else if (!hc.lowSanity)
+                {
+                    h.GetComponent<PlatformController>().setActiveState(false);
                 }
             }
 

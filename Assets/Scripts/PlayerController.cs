@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     // Position variables
-    private Vector2 spawnPosition;
-
+    private Vector2 respawnPosition;
+    public bool offCamera;
 
     //healthBar
     public HealthBar healthBar;
@@ -28,15 +28,15 @@ public class PlayerController : MonoBehaviour
     private float linearDrag = 4.0f;
 
     // Jump (movement) variables
+    private bool onWall = false;
     private const float jumpSpeed = 10.0f;
     private float currentJumpSpeed;
-    private bool onWall = false;
     private const float wallLenght = 0.6f;
     private Vector3 wallColliderOffset = new Vector3(0.0f, 0.5f, 0.0f);
 
     // Jump (movement) physics variables
     private bool onGround = false;
-    private const float groundLenght = 0.6f;
+    private const float groundLength = 0.6f;
     private Vector3 groundColliderOffset = new Vector3(0.45f, 0.0f, 0.0f);
     private float gravity = 1.0f;
     private float fallMultiplier = 5.0f;
@@ -65,7 +65,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Position
-        spawnPosition = transform.position;
+        respawnPosition = transform.position;
+        offCamera = false;
 
         // Movement
         currentMoveSpeed = moveSpeedLow;
@@ -92,13 +93,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Check if player is touching groundLayer (mask) - walls and floor
-        onWall = Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
-                 Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
-                 Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.left, wallLenght, groundLayer) ||
-                 Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.left, wallLenght, groundLayer);
+        //onWall = Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
+        //         Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
+        //         Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.left, wallLenght, groundLayer) ||
+        //         Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.left, wallLenght, groundLayer);
 
-        onGround = Physics2D.Raycast(transform.position + groundColliderOffset, Vector2.down, groundLenght, groundLayer) ||
-                   Physics2D.Raycast(transform.position - groundColliderOffset, Vector2.down, groundLenght, groundLayer);
+        onGround = Physics2D.Raycast(transform.position + groundColliderOffset, Vector2.down, groundLength, groundLayer) ||
+                   Physics2D.Raycast(transform.position - groundColliderOffset, Vector2.down, groundLength, groundLayer);
 
         // Start jump timer when Space key is pressed
         if (Input.GetKeyDown(KeyCode.Space))
@@ -239,12 +240,12 @@ public class PlayerController : MonoBehaviour
         if (!onGround)
         {
             // Player slides down if contact with wall
-            if (onWall)
-            {
-                rb2.velocity = new Vector2(0.0f, rb2.velocity.y);
-            }
+            //if (onWall)
+            //{
+            //    rb2.velocity = new Vector2(0.0f, rb2.velocity.y);
+            //}
             // Player can correct jump if direction is inverted in contrast to jump direction
-            else if ((jumpDirection == 1 && horizontal < 0) || (jumpDirection == -1 && horizontal > 0) || (jumpDirection == 0 && horizontal != 0))
+            if ((jumpDirection == 1 && horizontal < 0) || (jumpDirection == -1 && horizontal > 0) || (jumpDirection == 0 && horizontal != 0))
             {
                 rb2.velocity = new Vector2(currentMoveSpeed * horizontal * 0.5f, rb2.velocity.y);
             }
@@ -265,7 +266,8 @@ public class PlayerController : MonoBehaviour
     {
         // Apply progressive jump force
         // makes velocity force on x axis weaker
-        rb2.velocity = new Vector2(rb2.velocity.x * 0.75f, 0);
+        //rb2.velocity = new Vector2(rb2.velocity.x * 0.75f, 0);
+        rb2.velocity = new Vector2(rb2.velocity.x, 0);
         rb2.AddForce(Vector2.up * currentJumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0.0f;
     }
@@ -327,17 +329,38 @@ public class PlayerController : MonoBehaviour
                 resetSanityLossLimiter();
             }
         }
-        else if (collision.collider.CompareTag("Spikes"))
-        {
-            //Hurt player 
-            loseSanity(10);
 
-            //Teleport before spikes
-            Vector3 middlePosition = collision.collider.transform.position;
-            float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
-            gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
+        // Check if player collided with a Hazard
+        else if (collision.collider.CompareTag("Hazard"))
+        {
+            // Check if Hazard is Spikes
+            HazardController hc = GetComponent<HazardController>();
+            if (hc.isSpikes)
+            {
+                //Hurt player 
+                loseSanity(10);
+
+                //Teleport player to last checkpoint
+                transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
+                offCamera = true;
+
+                //Vector3 middlePosition = collision.collider.transform.position;
+                //float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
+                //gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
+            }
+
         }
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Load new respawn position if players enters checkpoint
+        if (collision.CompareTag("Checkpoint"))
+        {
+            Checkpoint cp = collision.GetComponent<Checkpoint>();
+            respawnPosition = new Vector2(cp.X, cp.Y);
+        }
+    }
 
 }
