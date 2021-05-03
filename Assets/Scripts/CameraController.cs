@@ -4,63 +4,116 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    // Attached Game Objects
     public GameObject followObject;
-    public GameObject leftsideLimit;
-    public GameObject rightsideLimit;
+    public GameObject lLimit;
+    public GameObject rLimit;
 
-    public Vector2 followOffset;
-    public float speed = 3.0f;
+    // Variables
+    private Vector2 follow;
     private Vector2 threshold;
-    private Rigidbody2D rb2;
-    private float yVariance;
+    public Vector2 followOffset;
 
-    // Start is called before the first frame update
+    private float lLimitDist;
+    private float rLimitDist;
+
+    private float xDiff;
+    private float yDiff;
+
+    private bool cameraOnGround;
+    private float groundLength;
+    public bool moveVertically;
+    public bool moveHorizontally;
+
+    private float speed = 6.0f;
+
+    // Components
+    private PlayerController pc;
+    private Rigidbody2D rb2;
+    public LayerMask groundLayer;
+
     void Start()
     {
         threshold = calculateThreshold();
+        pc = followObject.GetComponent<PlayerController>();
         rb2 = followObject.GetComponent<Rigidbody2D>();
+
+        groundLength = Camera.main.orthographicSize * 0.8f;
+        moveVertically = false;
+        moveHorizontally = false;
     }
+
 
     // Move Camera when followObject (Player) moves
     void FixedUpdate()
     {
+        if (pc.offCamera)
+        {
+            transform.position = new Vector3(follow.x, follow.y + groundLength, transform.position.z);
+            pc.offCamera = false;
+        }
+
+
+        // Variable that keeps track of followObject's position
+        follow = followObject.transform.position;
+
         // Calculate distance between camera-leftsideLimit and camera-rightsideLimit
-        float distanceLeftsideLimit = leftsideLimit.transform.position.x - followObject.transform.position.x;
-        float distanceRightsideLimit = rightsideLimit.transform.position.x - followObject.transform.position.x;
+        lLimitDist = Mathf.Abs(lLimit.transform.position.x - follow.x);
+        rLimitDist = Mathf.Abs(rLimit.transform.position.x - follow.x);
         // Don't move the camera if player is close to the limits
-        if (Mathf.Abs(distanceLeftsideLimit) <= threshold.x * 0.95f || distanceRightsideLimit <= threshold.x * 0.95f)
+        if (lLimitDist <= threshold.x * 0.95f || rLimitDist <= threshold.x * 0.95f)
         {
             return;
         }
 
-        // Variable that keeps track of followObject's position
-        Vector2 follow = followObject.transform.position;
-        if (transform.position.y > follow.y)
-            follow.y *= 0.05f;
 
         // Variable that keeps track of the distance from the followObject to the center of the Camera on the X axis
-        // (Vector2.right = (1,0,0))
-        float xDifference = Vector2.Distance(Vector2.right * transform.position.x, Vector2.right * follow.x);
-
+        xDiff = transform.position.x - follow.x;
         // Variable that keeps track of the distance from the followObject to the center of the Camera on the Y axis
-        // (Vector2.up = (0,1,0))
-        float yDifference = Vector2.Distance(Vector2.up * transform.position.y, Vector2.up * follow.y);
+        yDiff = transform.position.y - follow.y;
+        cameraOnGround = Physics2D.Raycast(transform.position, Vector2.down, groundLength, groundLayer);
+
 
 
         // Update Camera's position evaluating folowObject's position with camera threshold
         Vector3 newPosition = transform.position;
-        if (Mathf.Abs(xDifference) >= threshold.x / 8.0f)
+        if ((Mathf.Abs(xDiff) >= threshold.x / 8.0f) && !moveHorizontally)
+        {
+            moveHorizontally = true;
+        }
+        if (moveHorizontally)
         {
             newPosition.x = follow.x;
+            if (Mathf.Abs(follow.x) <= Mathf.Abs(transform.position.x) + 0.05f && Mathf.Abs(follow.x) >= Mathf.Abs(transform.position.x) - 0.05f)
+            {
+                moveHorizontally = false;
+            }
         }
-        if (Mathf.Abs(yDifference) >= threshold.y / 8.0f)
+
+        if ((!(Mathf.Abs(yDiff) <= threshold.y / 2.0f || (cameraOnGround && follow.y < transform.position.y))) && !moveVertically)
+        {
+            moveVertically = true;
+        }
+        if (moveVertically)
         {
             newPosition.y = follow.y;
+            if ((Mathf.Abs(follow.y) <= Mathf.Abs(transform.position.y) + 0.05f && Mathf.Abs(follow.y) >= Mathf.Abs(transform.position.y) - 0.05f) || cameraOnGround)
+            {
+                moveVertically = false;
+            }
         }
+
+
+        //if (cameraOnGround) {
+        //    Debug.Log("cameraOnGround");
+        //}
+
         // Move Camera at required speed
         float moveSpeed = rb2.velocity.magnitude > speed ? rb2.velocity.magnitude : speed;
         transform.position = Vector3.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
     }
+
+
 
     // Function that calculates and returns Camera's threshold 
     private Vector3 calculateThreshold()
@@ -72,12 +125,15 @@ public class CameraController : MonoBehaviour
         return t;
     }
 
+
     // Function that visualized Camera threshold in Editor
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Vector2 border = calculateThreshold();
         Gizmos.DrawWireCube(transform.position, new Vector3(border.x * 2, border.y * 2, 1));
+
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundLength));
     }
 
 }

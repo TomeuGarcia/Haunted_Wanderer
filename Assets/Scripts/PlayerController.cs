@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     // Position variables
-    private Vector2 spawnPosition;
-
+    private Vector2 respawnPosition;
+    public bool offCamera;
 
     //healthBar
     public HealthBar healthBar;
@@ -20,24 +20,29 @@ public class PlayerController : MonoBehaviour
     // Movement variables
     private const float moveSpeed = 6.0f;
     private const float moveSpeedHigh = moveSpeed;
-    private const float moveSpeedMedium = moveSpeed * 1.2f;
-    private const float moveSpeedLow = moveSpeed * 1.4f;
+    private const float moveSpeedMedium = moveSpeed * 1.35f;
+    private const float moveSpeedLow = moveSpeed * 1.7f;
     private float currentMoveSpeed;
     // Movement physics variables
     private Vector2 direction;
     private float linearDrag = 4.0f;
 
     // Jump (movement) variables
+    private bool onWall = false;
     private const float jumpSpeed = 10.0f;
     private float currentJumpSpeed;
+    private const float wallLenght = 0.6f;
+    private Vector3 wallColliderOffset = new Vector3(0.0f, 0.5f, 0.0f);
+
     // Jump (movement) physics variables
     private bool onGround = false;
-    private const float groundLenght = 0.6f;
-    private Vector3 colliderOffset = new Vector3(0.45f, 0.0f, 0.0f);
+    private const float groundLength = 0.6f;
+    private Vector3 groundColliderOffset = new Vector3(0.45f, 0.0f, 0.0f);
     private float gravity = 1.0f;
     private float fallMultiplier = 5.0f;
     private float jumpDelay = 0.25f;
     private float jumpTimer = 0.0f;
+    public int jumpDirection = 0; // jumped left direction = -1 ; jumped no direction = 0 ; jumped right direction = 1
 
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
@@ -48,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     private const float sanityLossCooldown = 2.0f;
     private float sanityLossTimer;
-    public int sanityLossLimiter; // Can only equal 1,2,3,4,5 --- 1 = 10% , 2 = 20% , ... , 5 = 50%
+    public int sanityLossLimiter; // Can only equal 1,2,3,4,5 -> 1 = 10% , 2 = 20% , ... , 5 = 50%
 
 
     // Component variables
@@ -60,7 +65,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Position
-        spawnPosition = transform.position;
+        respawnPosition = transform.position;
+        offCamera = false;
 
         // Movement
         currentMoveSpeed = moveSpeedLow;
@@ -68,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
         // Sanity
         currentSanityState = SanityState.HIGH;
-        currentSanity = maxSanity;
+        currentSanity = maxSanity/2;
         healthBar.SetMaxSanity(maxSanity);
         //hpGained.sanityLimit(1);
         limit = 10;
@@ -86,9 +92,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Check if player is touching groundLayer (mask)
-        onGround = Physics2D.Raycast(transform.position + colliderOffset, Vector2.down, groundLenght, groundLayer) ||
-                   Physics2D.Raycast(transform.position - colliderOffset, Vector2.down, groundLenght, groundLayer);
+        // Check if player is touching groundLayer (mask) - walls and floor
+        //onWall = Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
+        //         Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
+        //         Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.left, wallLenght, groundLayer) ||
+        //         Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.left, wallLenght, groundLayer);
+
+        onGround = Physics2D.Raycast(transform.position + groundColliderOffset, Vector2.down, groundLength, groundLayer) ||
+                   Physics2D.Raycast(transform.position - groundColliderOffset, Vector2.down, groundLength, groundLayer);
+
         // Start jump timer when Space key is pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -118,7 +130,15 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (onGround && direction.x > 0)
+            jumpDirection = 1;
+        else if (onGround && direction.x == 0)
+            jumpDirection = 0;
+        else if (onGround && direction.x < 0)
+            jumpDirection = -1;
+
         move(direction.x);
+
         if (jumpTimer > Time.time && onGround)
         {
             jump();
@@ -210,17 +230,43 @@ public class PlayerController : MonoBehaviour
     // Function that moves the player
     private void move(float horizontal)
     {
+        // Player on top of ground and wants to move
+        if (onGround && horizontal != 0)
+        {
+            rb2.velocity = new Vector2(currentMoveSpeed * horizontal, rb2.velocity.y);
+        }
+
+        // Player in the air
+        if (!onGround)
+        {
+            // Player slides down if contact with wall
+            //if (onWall)
+            //{
+            //    rb2.velocity = new Vector2(0.0f, rb2.velocity.y);
+            //}
+            // Player can correct jump if direction is inverted in contrast to jump direction
+            if ((jumpDirection == 1 && horizontal < 0) || (jumpDirection == -1 && horizontal > 0) || (jumpDirection == 0 && horizontal != 0))
+            {
+                rb2.velocity = new Vector2(currentMoveSpeed * horizontal * 0.5f, rb2.velocity.y);
+            }
+        }
+
+        /*
         rb2.AddForce(Vector2.right * horizontal * currentMoveSpeed);
 
         if (Mathf.Abs(rb2.velocity.x) > currentMoveSpeed)
         {
             rb2.velocity = new Vector2(Mathf.Sign(rb2.velocity.x) * currentMoveSpeed, rb2.velocity.y);
         }
+        */
     }
 
     // Functions that lets player jump
     private void jump()
     {
+        // Apply progressive jump force
+        // makes velocity force on x axis weaker
+        //rb2.velocity = new Vector2(rb2.velocity.x * 0.75f, 0);
         rb2.velocity = new Vector2(rb2.velocity.x, 0);
         rb2.AddForce(Vector2.up * currentJumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0.0f;
@@ -260,21 +306,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("MediumSanityPlatforms") || collision.collider.CompareTag("LowSanityPlatforms"))
-        {
-            //collision.collider.bounds.Contains(transform.position)
-            if (collision.collider.bounds.Intersects(c2.bounds))
-            {
-                Debug.Log("intersection collision");
-
-                rb2.MovePosition((Vector2)transform.position + (collision.collider.bounds.size * Vector2.up));
-            }
-        }
-    }
-    */
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -297,6 +328,38 @@ public class PlayerController : MonoBehaviour
                 // reset player's sanityLossLimiter
                 resetSanityLossLimiter();
             }
+        }
+
+        // Check if player collided with a Hazard
+        else if (collision.collider.CompareTag("Hazard"))
+        {
+            // Check if Hazard is Spikes
+            HazardController hc = GetComponent<HazardController>();
+            if (hc.isSpikes)
+            {
+                //Hurt player 
+                loseSanity(10);
+
+                //Teleport player to last checkpoint
+                transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
+                offCamera = true;
+
+                //Vector3 middlePosition = collision.collider.transform.position;
+                //float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
+                //gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
+            }
+
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Load new respawn position if players enters checkpoint
+        if (collision.CompareTag("Checkpoint"))
+        {
+            Checkpoint cp = collision.GetComponent<Checkpoint>();
+            respawnPosition = new Vector2(cp.X, cp.Y);
         }
     }
 

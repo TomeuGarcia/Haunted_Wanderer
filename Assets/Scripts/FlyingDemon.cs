@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlyingDemon : EnemyController
 {
     // Unicque FlyingDemonController variables
-    private const float movementDistance = 4f;
+    private const float movementDistance = 8f;
     private Vector2 waypointA;
     private Vector2 waypointB;
 
@@ -24,7 +24,7 @@ public class FlyingDemon : EnemyController
         damagePoints = 10;
         healthPoints = 1;
         moveSpeed = 5.0f;
-        sightDistance = 8.0f;
+        sightDistance = 12.0f;
         shootTimer = 0f;
 
         waypointA = new Vector2(spawnPosition.x - movementDistance, spawnPosition.y);
