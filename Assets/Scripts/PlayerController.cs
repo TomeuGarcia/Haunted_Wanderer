@@ -55,10 +55,15 @@ public class PlayerController : MonoBehaviour
     private float sanityLossTimer;
     public int sanityLossLimiter; // Can only equal 1,2,3,4,5 -> 1 = 10% , 2 = 20% , ... , 5 = 50%
 
+    // Heal sanity
+    public bool hasGApple;
+    private int healValue;
 
     // Component variables
     public Rigidbody2D rb2;
     public Collider2D c2;
+    private Renderer r;
+    private Color c;
     public LayerMask groundLayer;
 
 
@@ -79,14 +84,17 @@ public class PlayerController : MonoBehaviour
         //hpGained.sanityLimit(1);
         limit = 10;
 
-
-
         sanityLossTimer = 0.0f;
         sanityLossLimiter = 1;
+
+        hasGApple = false;
+        healValue = 0;
 
         // Components
         rb2 = GetComponent<Rigidbody2D>();
         c2 = GetComponent<Collider2D>();
+        r = GetComponent<Renderer>();
+        c = r.material.color;
     }
 
     // Update is called once per frame
@@ -110,6 +118,13 @@ public class PlayerController : MonoBehaviour
         // Get input for direction to move the player (Left: A , LeftArrow   Right: D , RightArrow)
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
+        // Use consumible and heal sanity
+        if (Input.GetKeyDown(KeyCode.Q) && hasGApple)
+        {
+            gainSanity(healValue);
+            hasGApple = false;
+            healValue = 0;
+        }
 
 
         // Cheat button: I -> gain 5 sanity
@@ -327,6 +342,9 @@ public class PlayerController : MonoBehaviour
                 loseSanity(enemy.damagePoints);
                 // reset player's sanityLossLimiter
                 resetSanityLossLimiter();
+
+                // Make player immune to enemies for 2 seconds
+                StartCoroutine("Invulnerable");
             }
         }
 
@@ -361,6 +379,31 @@ public class PlayerController : MonoBehaviour
             Checkpoint cp = collision.GetComponent<Checkpoint>();
             respawnPosition = new Vector2(cp.X, cp.Y);
         }
+
+        else if (collision.CompareTag("GoldenApple"))
+        {
+            GoldenApple ga = collision.GetComponent<GoldenApple>();
+            hasGApple = true;
+            healValue = ga.healingPoints;
+            Destroy(collision.gameObject);
+        }
     }
+
+
+    IEnumerator Invulnerable()
+    {
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), true);
+        Physics2D.IgnoreLayerCollision(11, 10, true);
+        c.a = 0.5f;
+        r.material.color = c;
+        yield return new WaitForSeconds(10.0f);
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
+        Physics2D.IgnoreLayerCollision(11, 10, false);
+        c.a = 1.0f;
+        r.material.color = c;
+    }
+
+
+
 
 }
