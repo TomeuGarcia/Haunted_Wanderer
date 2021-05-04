@@ -109,7 +109,7 @@ public class GameController : MonoBehaviour
                 EnemyController ec = e.GetComponent<EnemyController>();
                 if (ec.canSpawn && ec.highSanity)
                     ec.setActiveState(true);    
-                else
+                else if (!ec.highSanity)
                     ec.setActiveState(false);
             }
 
@@ -150,9 +150,9 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.canSpawn && ec.mediumSanity && !ec.highSanity)
+                if (ec.canSpawn && ec.mediumSanity)
                     ec.setActiveState(true);
-                else if (!ec.canSpawn && !ec.mediumSanity)
+                else if (!ec.mediumSanity)
                     ec.setActiveState(false);
             }
 
@@ -193,8 +193,10 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.lowSanity)
+                if (ec.canSpawn && ec.lowSanity)
                     ec.setActiveState(true);
+                else if (!ec.lowSanity)
+                    ec.setActiveState(false);
             }
 
             // PLATFORMS
