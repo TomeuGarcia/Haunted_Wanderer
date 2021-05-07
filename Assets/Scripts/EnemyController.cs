@@ -18,6 +18,11 @@ public class EnemyController : MonoBehaviour
     // Enemy boolean flags (tags)
     public bool canSpawn = true;
 
+    [Header("Enemy Spawns When")]
+    [SerializeField] public bool spawnsHighSanity;
+    [SerializeField] public bool spawnsMediumSanity;
+    [SerializeField] public bool spawnsLowSanity;
+
     [Header("Enemy Exists When")]
     [SerializeField] public bool highSanity;
     [SerializeField] public bool mediumSanity;

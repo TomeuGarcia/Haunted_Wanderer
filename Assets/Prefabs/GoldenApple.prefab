@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3073546297306593273}
   - component: {fileID: 3073546297306593272}
   m_Layer: 0
-  m_Name: GoldenApple 1
-  m_TagString: Untagged
+  m_Name: GoldenApple
+  m_TagString: GoldenApple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,3 +145,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc7c93321bdb1d246bc30252045e43af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healingPoints: 40

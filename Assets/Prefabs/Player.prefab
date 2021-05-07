@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 691108911244322179}
   - component: {fileID: 691108911244322188}
   - component: {fileID: 6025754103944856774}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be17672ca0f626a449920d558a255deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offCamera: 0
   healthBar: {fileID: 0}
   hpGained: {fileID: 0}
   jumpDirection: 0
