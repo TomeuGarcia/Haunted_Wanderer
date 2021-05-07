@@ -6,10 +6,14 @@ TagManager:
   tags:
   - Enemy
   - Platform
-  - MediumSanityEnemies
   - Spikes
-  - LowSanityEnemies
   - EndOfLevel
+  - Checkpoint
+  - Hazard
+  - GoldenApple
+  - LowSanityEnemies
+  - SanityLocker
+  - SanityUnlocker
   layers:
   - Default
   - TransparentFX
@@ -21,8 +25,8 @@ TagManager:
   - 
   - Ground
   - Background
-  - 
-  - 
+  - Enemies
+  - Player
   - 
   - 
   - 
