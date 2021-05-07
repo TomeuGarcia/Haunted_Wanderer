@@ -11,6 +11,9 @@ TagManager:
   - Checkpoint
   - Hazard
   - GoldenApple
+  - LowSanityEnemies
+  - SanityLocker
+  - SanityUnlocker
   layers:
   - Default
   - TransparentFX

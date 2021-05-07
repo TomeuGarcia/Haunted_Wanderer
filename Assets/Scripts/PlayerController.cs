@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
     private SanityState currentSanityState;
+    public bool canUpdateSanity;
     public const int maxSanity = 100;
     private int currentSanity;
     private int limit;
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour
 
         // Sanity
         currentSanityState = SanityState.HIGH;
+        canUpdateSanity = true;
         currentSanity = maxSanity/2;
         healthBar.SetMaxSanity(maxSanity);
         //hpGained.sanityLimit(1);
@@ -186,7 +188,12 @@ public class PlayerController : MonoBehaviour
 
     // MODIFY ATTRIBUTES methods
     // Function that updates player's SanityState
-    public void updateSanityState() { currentSanityState = getSanityState(); }
+    public void updateSanityState() { 
+        if (canUpdateSanity)
+        {
+            currentSanityState = getSanityState();
+        }
+    }
 
     // Function that updates player's movement velocity based on its sanityLevel
     public void updateMovementSpeed()
@@ -380,6 +387,18 @@ public class PlayerController : MonoBehaviour
             respawnPosition = new Vector2(cp.X, cp.Y);
         }
 
+        // Lock player's sanity state (can't be updated)
+        else if (collision.CompareTag("SanityLocker"))
+        {
+            canUpdateSanity = false;
+        }
+        // Unlock player's sanity state (can be updated)
+        else if (collision.CompareTag("SanityUnlocker"))
+        {
+            canUpdateSanity = true;
+        }
+
+        // Add Golden apple power up for player to use
         else if (collision.CompareTag("GoldenApple"))
         {
             GoldenApple ga = collision.GetComponent<GoldenApple>();
