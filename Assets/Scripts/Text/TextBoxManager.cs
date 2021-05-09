@@ -22,6 +22,10 @@ public class TextBoxManager : MonoBehaviour
 
     public bool StopPlayerMovement;
 
+    private bool isTyping = false;
+    private bool cancelTyping = false;
+    public float typeSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,17 +56,44 @@ public class TextBoxManager : MonoBehaviour
         {
             return;
         }
-        theText.text = textLines[currentLine];
+
+        //theText.text = textLines[currentLine];
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            currentLine += 1;
+            if (!isTyping)
+            {
+                currentLine += 1;
+                if (currentLine > endAtLine)
+                {
+                    DisableTextBox();
+                }
+                else
+                {
+                    StartCoroutine(TextScroll(textLines[currentLine]));
+                }
+            }
+            else if(isTyping && !cancelTyping)
+            {
+                cancelTyping = true;
+            }
         }
-
-        if(currentLine > endAtLine)
+    }
+    private IEnumerator TextScroll(string lineOfText)
+    {
+        int letter = 0;
+        theText.text = "";
+        isTyping = true;
+        cancelTyping = false;
+        while (isTyping && !cancelTyping && (letter < lineOfText.Length - 1))
         {
-            DisableTextBox();
+            theText.text += lineOfText[letter];
+            letter += 1;
+            yield return new WaitForSeconds(typeSpeed);
         }
-
+        theText.text = lineOfText;
+        isTyping = false;
+        cancelTyping = false;
     }
     public void EnableTextBox()
     {
@@ -72,6 +103,7 @@ public class TextBoxManager : MonoBehaviour
         {
             player.canMove = false;
         }
+        StartCoroutine(TextScroll(textLines[currentLine]));
     }
 
     public void DisableTextBox()
