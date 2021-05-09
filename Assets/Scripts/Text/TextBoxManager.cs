@@ -7,12 +7,11 @@ public class TextBoxManager : MonoBehaviour
 {
 
     public GameObject textBox;
-
     public Text theText;
+
 
     public TextAsset textFile;
     public string[] textLines;
-
 
     public int currentLine;
     public int endAtLine;
@@ -20,71 +19,67 @@ public class TextBoxManager : MonoBehaviour
     public PlayerController player;
 
     public bool isActive;
-    
 
+    public bool StopPlayerMovement;
 
     // Start is called before the first frame update
     void Start()
     {
-     
         player = FindObjectOfType<PlayerController>();
-
-        if (textFile != null)
+        
+        if(textFile != null)
         {
             textLines = (textFile.text.Split('\n'));
         }
-        if (endAtLine == 0)
+        if(endAtLine == 0)
         {
             endAtLine = textLines.Length - 1;
         }
-
         if (isActive)
         {
-            enableTextBox();
+            EnableTextBox();
         }
         else
         {
-            disableTextBox();
+            DisableTextBox();
         }
     }
 
-    //checks this every frame
+    // Update is called once per frame
     void Update()
     {
-
-
         if (!isActive)
         {
             return;
         }
-        
-
         theText.text = textLines[currentLine];
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             currentLine += 1;
         }
 
-        if (currentLine > endAtLine)
+        if(currentLine > endAtLine)
         {
-            disableTextBox();
+            DisableTextBox();
         }
-    }
 
-    //collider 
-    public void enableTextBox()
+    }
+    public void EnableTextBox()
     {
         textBox.SetActive(true);
         isActive = true;
+        if (StopPlayerMovement)
+        {
+            player.canMove = false;
+        }
     }
 
-
-    public void disableTextBox()
+    public void DisableTextBox()
     {
         textBox.SetActive(false);
         isActive = false;
+        player.canMove = true;
     }
-
 
     public void ReloadScript(TextAsset theText)
     {
@@ -94,5 +89,4 @@ public class TextBoxManager : MonoBehaviour
             textLines = (theText.text.Split('\n'));
         }
     }
-
 }

@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     //healthBar
     public HealthBar healthBar;
     public HPGained hpGained;
-    
+    //can move
+    public bool canMove;
 
     //public int currentSanity2;
     //public int maxSanity2 = 100;
@@ -102,6 +103,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canMove)
+        {
+            return;
+        }
         // Check if player is touching groundLayer (mask) - walls and floor
         //onWall = Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
         //         Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
