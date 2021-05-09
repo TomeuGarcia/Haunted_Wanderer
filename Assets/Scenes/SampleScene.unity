@@ -4365,6 +4365,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1457571769}
+    - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
+        type: 3}
+      propertyPath: spawnsHighSanity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8824430244756146003, guid: f72c859f9e536674e91e2efc9cdffc64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12972,7 +12977,7 @@ PrefabInstance:
     - target: {fileID: 6608204486404972465, guid: e1408297d8a2b0c4c967d87c977d5221,
         type: 3}
       propertyPath: spawnsLowSanity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6608204486404972465, guid: e1408297d8a2b0c4c967d87c977d5221,
         type: 3}
