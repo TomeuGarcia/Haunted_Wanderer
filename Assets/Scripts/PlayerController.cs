@@ -12,12 +12,6 @@ public class PlayerController : MonoBehaviour
     //healthBar
     public HealthBar healthBar;
     public HPGained hpGained;
-<<<<<<< Updated upstream
-=======
-
-    //for text movement
-    public bool canMove;
->>>>>>> Stashed changes
     
 
     //public int currentSanity2;
@@ -108,14 +102,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream
-=======
-        if (!canMove)
-        {
-            return;
-        }
-
->>>>>>> Stashed changes
         // Check if player is touching groundLayer (mask) - walls and floor
         //onWall = Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
         //         Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
