@@ -94,7 +94,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -125,7 +125,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -144,6 +144,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePoints: 0
+  canSpawn: 1
+  spawnsHighSanity: 0
+  spawnsMediumSanity: 0
+  spawnsLowSanity: 0
+  highSanity: 0
+  mediumSanity: 0
+  lowSanity: 0
   player: {fileID: 0}
   bulletPrefab: {fileID: 9136370441424090003, guid: e12bab90c72ffbf4b80016e54a69cd72,
     type: 3}
