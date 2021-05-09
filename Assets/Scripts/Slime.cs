@@ -28,15 +28,21 @@ public class Slime : EnemyController
         rb2 = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        if (!onGround && Physics2D.Raycast(transform.position, Vector2.down, groundLength, groundLayer))
+            rb2.velocity = new Vector2(0, 0);
+
         onGround = Physics2D.Raycast(transform.position, Vector2.down, groundLength, groundLayer);
-    }
-
-
-    void FixedUpdate()
-    {
-        move();
+        if (onGround)
+        {
+            rb2.gravityScale = 0;
+            move();
+        }
+        else
+        {
+            rb2.gravityScale = 1;
+        }
     }
 
 
