@@ -330,33 +330,8 @@ public class PlayerController : MonoBehaviour
 
 
     private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Check if Collided with player
-        if (collision.collider.CompareTag("Enemy"))
-        {
-            EnemyController enemy = collision.collider.GetComponent<EnemyController>();
-            // if player jumped on top "kill" enemy
-            if (collision.contacts[0].normal.y > 0.5)
-            {
-                enemy.hurt();
-                // add +1 to sanityLossLimiter
-                addSanityLossLimiter();
-                limit += 5;
-            }
-            else
-            {
-                // hurt player
-                loseSanity(enemy.damagePoints);
-                // reset player's sanityLossLimiter
-                resetSanityLossLimiter();
-
-                // Make player immune to enemies for 2 seconds
-                StartCoroutine("Invulnerable");
-            }
-        }
-
-        // Check if player collided with a Hazard
-        else if (collision.collider.CompareTag("Hazard"))
+    {   // Check if player collided with a Hazard
+        if (collision.collider.CompareTag("Hazard"))
         {
             // Check if Hazard is Spikes
             HazardController hc = GetComponent<HazardController>();
@@ -405,6 +380,31 @@ public class PlayerController : MonoBehaviour
             hasGApple = true;
             healValue = ga.healingPoints;
             Destroy(collision.gameObject);
+        }
+
+        // Check if Collided with player
+        else if (collision.CompareTag("Enemy"))
+        {
+            EnemyController enemy = collision.GetComponent<EnemyController>();
+            // if player jumped on top "kill" enemy
+            if (transform.position.y > collision.transform.position.y + groundLength)
+            //if (collision.contacts[0].normal.y > 0.5)
+            {
+                enemy.hurt();
+                // add +1 to sanityLossLimiter
+                addSanityLossLimiter();
+                limit += 5;
+            }
+            else
+            {
+                // hurt player
+                loseSanity(enemy.damagePoints);
+                // reset player's sanityLossLimiter
+                resetSanityLossLimiter();
+
+                // Make player immune to enemies for 2 seconds
+                StartCoroutine("Invulnerable");
+            }
         }
     }
 
