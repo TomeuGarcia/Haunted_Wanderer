@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     // Heal sanity
     public bool hasGApple;
     private int healValue;
+    private bool isImmune = false;
 
     // Component variables
     public Rigidbody2D rb2;
@@ -398,7 +399,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Check if Collided with player
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") && !isImmune)
         {
             EnemyController enemy = collision.GetComponent<EnemyController>();
             // if player jumped on top "kill" enemy
@@ -425,13 +426,11 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Invulnerable()
     {
-        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), true);
-        Physics2D.IgnoreLayerCollision(11, 10, true);
+        isImmune = true;
         c.a = 0.5f;
         r.material.color = c;
-        yield return new WaitForSeconds(10.0f);
-        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
-        Physics2D.IgnoreLayerCollision(11, 10, false);
+        yield return new WaitForSeconds(2.0f);
+        isImmune = false;
         c.a = 1.0f;
         r.material.color = c;
     }
