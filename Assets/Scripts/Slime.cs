@@ -9,7 +9,7 @@ public class Slime : EnemyController
     private float moveTimer;
 
     private bool onGround = false;
-    private const float groundLength = 0.6f;
+    private const float groundLength = 1.6f;
 
     private bool onWall = false;
     private const float wallLength = 0.6f;
@@ -18,6 +18,8 @@ public class Slime : EnemyController
     private Rigidbody2D rb2;
     public LayerMask groundLayer;
 
+    //Animiator
+    public Animator animator;
 
     void Start()
     {
