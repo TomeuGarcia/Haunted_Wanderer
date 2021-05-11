@@ -1,103 +1,31 @@
 fileFormatVersion: 2
-guid: 3be06748a5db90a4fa20c78427905e30
+guid: 027b1a1aaeb9bf047ac383d6a7db4e92
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2676476849908578203
-    second: Hero_Walk_S1_0
+      213: 7230335818528874466
+    second: Hero_IDL_S2_0
   - first:
-      213: -2357114765005458857
-    second: Hero_Walk_S1_1
+      213: -706925460870214481
+    second: Hero_IDL_S2_1
   - first:
-      213: 4345653556925027252
-    second: Hero_Walk_S1_2
+      213: -6790998405661020122
+    second: Hero_IDL_S2_2
   - first:
-      213: -4453528319263310909
-    second: Hero_Walk_S1_3
+      213: 1975185983686047205
+    second: Hero_IDL_S2_3
   - first:
-      213: -2966331857432351714
-    second: Hero_Walk_S1_4
+      213: 4673523879725259354
+    second: Hero_IDL_S2_4
   - first:
-      213: 8173782032445562099
-    second: Hero_Walk_S1_5
+      213: 2915293812015284040
+    second: Hero_IDL_S2_5
   - first:
-      213: -5865596989678673988
-    second: Hero_Walk_S1_6
+      213: -3627466064986400531
+    second: Hero_IDL_S2_6
   - first:
-      213: 3957191783847393572
-    second: Hero_Walk_S1_7
-  - first:
-      213: -4023741193831434306
-    second: Hero_Walk_S1_8
-  - first:
-      213: 3251348623417613099
-    second: Hero_Walk_S1_9
-  - first:
-      213: -3301109903827419879
-    second: Hero_Walk_S1_10
-  - first:
-      213: -248817923257513491
-    second: Hero_Walk_S1_11
-  - first:
-      213: 4930766378354920298
-    second: Hero_Walk_S1_12
-  - first:
-      213: 3345249806406187881
-    second: Hero_Walk_S1_13
-  - first:
-      213: -7644992548327676890
-    second: Hero_Walk_S1_14
-  - first:
-      213: -2354994160301641528
-    second: Hero_Walk_S1_15
-  - first:
-      213: 7932158421205414501
-    second: Hero_Walk_S1_16
-  - first:
-      213: -4345584493561794038
-    second: Hero_Walk_S1_17
-  - first:
-      213: 5171625873866939116
-    second: Hero_Walk_S1_18
-  - first:
-      213: 29831918644977779
-    second: Hero_Walk_S1_19
-  - first:
-      213: -4362227439097110193
-    second: Hero_Walk_S1_20
-  - first:
-      213: -7698065044498073627
-    second: Hero_Walk_S1_21
-  - first:
-      213: -4038747576885885591
-    second: Hero_Walk_S1_22
-  - first:
-      213: 6458469582780680465
-    second: Hero_Walk_S1_23
-  - first:
-      213: -4694550586479794581
-    second: Hero_Walk_S1_24
-  - first:
-      213: 5905499628325669063
-    second: Hero_Walk_S1_25
-  - first:
-      213: 6119373001551816988
-    second: Hero_Walk_S1_26
-  - first:
-      213: -3503717438430904759
-    second: Hero_Walk_S1_27
-  - first:
-      213: 9136166653322770274
-    second: Hero_Walk_S1_28
-  - first:
-      213: -1070559866372146778
-    second: Hero_Walk_S1_29
-  - first:
-      213: 1567819945646467804
-    second: Hero_Walk_S1_30
-  - first:
-      213: -2607157448119476059
-    second: Hero_Walk_S1_31
+      213: -690116607662821032
+    second: Hero_IDL_S2_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -183,13 +111,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hero_Walk_S1_0
+      name: Hero_IDL_S2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 264
+        y: 512
         width: 256
-        height: 248
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +125,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b977b50b381c42520800000000000000
-      internalID: 2676476849908578203
+      spriteID: 2ef52367e10575460800000000000000
+      internalID: 7230335818528874466
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Walk_S1_1
+      name: Hero_IDL_S2_1
       rect:
         serializedVersion: 2
         x: 256
-        y: 264
+        y: 512
         width: 256
-        height: 248
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +146,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75275091c98d94fd0800000000000000
-      internalID: -2357114765005458857
+      spriteID: facc62ee90f7036f0800000000000000
+      internalID: -706925460870214481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Walk_S1_2
+      name: Hero_IDL_S2_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 620b4582ee681c1a0800000000000000
+      internalID: -6790998405661020122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_IDL_S2_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
+        y: 256
         width: 256
-        height: 248
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,20 +188,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b3dd61c2ecde4c30800000000000000
-      internalID: 4345653556925027252
+      spriteID: 5e5ffeaef25496b10800000000000000
+      internalID: 1975185983686047205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Walk_S1_3
+      name: Hero_IDL_S2_4
       rect:
         serializedVersion: 2
         x: 256
-        y: 8
+        y: 256
         width: 256
-        height: 248
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,8 +209,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cbfa25e693e132c0800000000000000
-      internalID: -4453528319263310909
+      spriteID: a5a545c0531bbd040800000000000000
+      internalID: 4673523879725259354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_IDL_S2_5
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84fb011b644357820800000000000000
+      internalID: 2915293812015284040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_IDL_S2_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de893b145d6a8adc0800000000000000
+      internalID: -3627466064986400531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_IDL_S2_7
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 851f8aa0a963c66f0800000000000000
+      internalID: -690116607662821032
       vertices: []
       indices: 
       edges: []

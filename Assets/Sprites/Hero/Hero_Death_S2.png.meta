@@ -1,145 +1,172 @@
 fileFormatVersion: 2
-guid: aef3f6523469f014e985acac4a178adc
+guid: 5bf6c0948c877724faeeed5c50bc015f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3381483806880262526
-    second: Hero_Death_S1_0
+      213: 6154323038648580233
+    second: Hero_Death_S2_0
   - first:
-      213: 7630288216914960906
-    second: Hero_Death_S1_1
+      213: -798944292789286783
+    second: Hero_Death_S2_1
   - first:
-      213: -4408574523854633962
-    second: Hero_Death_S1_2
+      213: -4362284141073065311
+    second: Hero_Death_S2_2
   - first:
-      213: 3840746935969246532
-    second: Hero_Death_S1_3
+      213: 1814227555904111317
+    second: Hero_Death_S2_3
   - first:
-      213: -6076797392983807818
-    second: Hero_Death_S1_4
+      213: -7669569655609654748
+    second: Hero_Death_S2_4
   - first:
-      213: -1225786488396223670
-    second: Hero_Death_S1_5
+      213: 8487214438661172668
+    second: Hero_Death_S2_5
   - first:
-      213: 627375583683613539
-    second: Hero_Death_S1_6
+      213: 6782289810039369009
+    second: Hero_Death_S2_6
   - first:
-      213: 7046452863116893107
-    second: Hero_Death_S1_7
+      213: 1538369496614697611
+    second: Hero_Death_S2_7
   - first:
-      213: 4376107003987468521
-    second: Hero_Death_S1_8
+      213: 5596133817833706513
+    second: Hero_Death_S2_8
   - first:
-      213: -5370684054230945729
-    second: Hero_Death_S1_9
+      213: 2945179444748342610
+    second: Hero_Death_S2_9
   - first:
-      213: 3520272649416787355
-    second: Hero_Death_S1_10
+      213: -4341065342910160909
+    second: Hero_Death_S2_10
   - first:
-      213: -3840650650129995023
-    second: Hero_Death_S1_11
+      213: -9054393316635607140
+    second: Hero_Death_S2_11
   - first:
-      213: -5223008141682014940
-    second: Hero_Death_S1_12
+      213: -3580297241095617549
+    second: Hero_Death_S2_12
   - first:
-      213: 5915670624250652206
-    second: Hero_Death_S1_13
+      213: 5622637534233432793
+    second: Hero_Death_S2_13
   - first:
-      213: -5273679499114861191
-    second: Hero_Death_S1_14
+      213: -2128117456311305856
+    second: Hero_Death_S2_14
   - first:
-      213: -4502719128123080574
-    second: Hero_Death_S1_15
+      213: -2771176678858360707
+    second: Hero_Death_S2_15
   - first:
-      213: 1913082872293077744
-    second: Hero_Death_S1_16
+      213: 277689645864613236
+    second: Hero_Death_S2_16
   - first:
-      213: -3598997532851744072
-    second: Hero_Death_S1_17
+      213: -6796122429370641666
+    second: Hero_Death_S2_17
   - first:
-      213: -8175231172144678637
-    second: Hero_Death_S1_18
+      213: -6696969247892172819
+    second: Hero_Death_S2_18
   - first:
-      213: 3892727734241937089
-    second: Hero_Death_S1_19
+      213: 8845050579418767284
+    second: Hero_Death_S2_19
   - first:
-      213: 2305842952619685330
-    second: Hero_Death_S1_20
+      213: 2522656085467398468
+    second: Hero_Death_S2_20
   - first:
-      213: -1988382028773643318
-    second: Hero_Death_S1_21
+      213: -4018111024514665854
+    second: Hero_Death_S2_21
   - first:
-      213: -7477222893458827423
-    second: Hero_Death_S1_22
+      213: 3159480887639649579
+    second: Hero_Death_S2_22
   - first:
-      213: 222870188078728334
-    second: Hero_Death_S1_23
+      213: -3391783613665457724
+    second: Hero_Death_S2_23
   - first:
-      213: -8770428065037959241
-    second: Hero_Death_S1_24
+      213: 4676065155042339458
+    second: Hero_Death_S2_24
   - first:
-      213: 2118912528535969678
-    second: Hero_Death_S1_25
+      213: -7580589420683023141
+    second: Hero_Death_S2_25
   - first:
-      213: -2254914527823521989
-    second: Hero_Death_S1_26
+      213: -3603845686015404502
+    second: Hero_Death_S2_26
   - first:
-      213: 2538100740609444770
-    second: Hero_Death_S1_27
+      213: 8704053469248776918
+    second: Hero_Death_S2_27
   - first:
-      213: -5762802188759594353
-    second: Hero_Death_S1_28
+      213: 5917043691174737962
+    second: Hero_Death_S2_28
   - first:
-      213: 3867028374658455788
-    second: Hero_Death_S1_29
+      213: 1161803659598765923
+    second: Hero_Death_S2_29
   - first:
-      213: -4128006886596556499
-    second: Hero_Death_S1_30
+      213: -3555691096627144729
+    second: Hero_Death_S2_30
   - first:
-      213: -7128564549631428905
-    second: Hero_Death_S1_31
+      213: 2751168028537614799
+    second: Hero_Death_S2_31
   - first:
-      213: 8437867018980114009
-    second: Hero_Death_S1_32
+      213: 4461521061713438363
+    second: Hero_Death_S2_32
   - first:
-      213: -1327822950937312066
-    second: Hero_Death_S1_33
+      213: -3886477082287934218
+    second: Hero_Death_S2_33
   - first:
-      213: -277387637170277140
-    second: Hero_Death_S1_34
+      213: -3810368306763423090
+    second: Hero_Death_S2_34
   - first:
-      213: 4293953153287680320
-    second: Hero_Death_S1_35
+      213: 198742933119255792
+    second: Hero_Death_S2_35
   - first:
-      213: -3571760075057931505
-    second: Hero_Death_S1_36
+      213: -3143905436710868401
+    second: Hero_Death_S2_36
   - first:
-      213: 2120458870516706907
-    second: Hero_Death_S1_37
+      213: -4929325690082136224
+    second: Hero_Death_S2_37
   - first:
-      213: -9073314495630223868
-    second: Hero_Death_S1_38
+      213: -1119638862122942960
+    second: Hero_Death_S2_38
   - first:
-      213: 2944375518028722744
-    second: Hero_Death_S1_39
+      213: -6542191450811084124
+    second: Hero_Death_S2_39
   - first:
-      213: -8492934880363242162
-    second: Hero_Death_S1_40
+      213: -2423762690434090598
+    second: Hero_Death_S2_40
   - first:
-      213: -4562843091327993208
-    second: Hero_Death_S1_41
+      213: -4992267930323983508
+    second: Hero_Death_S2_41
   - first:
-      213: -4547676103666469315
-    second: Hero_Death_S1_42
+      213: -1554396111181185122
+    second: Hero_Death_S2_42
   - first:
-      213: 5933062597456335765
-    second: Hero_Death_S1_43
+      213: -8035639750296376464
+    second: Hero_Death_S2_43
   - first:
-      213: 8563340126470683089
-    second: Hero_Death_S1_44
+      213: 2793838382640768687
+    second: Hero_Death_S2_44
   - first:
-      213: 5780888767255031839
-    second: Hero_Death_S1_45
+      213: 9156643979017832675
+    second: Hero_Death_S2_45
+  - first:
+      213: -1947230675417723853
+    second: Hero_Death_S2_46
+  - first:
+      213: 6818774804266994033
+    second: Hero_Death_S2_47
+  - first:
+      213: -7354867635152875530
+    second: Hero_Death_S2_48
+  - first:
+      213: -2216921180428268515
+    second: Hero_Death_S2_49
+  - first:
+      213: -5970218923724633218
+    second: Hero_Death_S2_50
+  - first:
+      213: 7467482666542565273
+    second: Hero_Death_S2_51
+  - first:
+      213: 7079419815761117361
+    second: Hero_Death_S2_52
+  - first:
+      213: 3374499013696444472
+    second: Hero_Death_S2_53
+  - first:
+      213: -2854602970262014952
+    second: Hero_Death_S2_54
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -225,127 +252,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hero_Death_S1_0
+      name: Hero_Death_S2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 264
+        y: 256
         width: 256
-        height: 248
+        height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7965d24b917dee20800000000000000
-      internalID: 3381483806880262526
+      spriteID: 988b6a7523c886550800000000000000
+      internalID: 6154323038648580233
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Death_S1_1
+      name: Hero_Death_S2_1
       rect:
         serializedVersion: 2
         x: 256
-        y: 264
+        y: 256
         width: 256
-        height: 248
+        height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a02a01fc4ba34e960800000000000000
-      internalID: 7630288216914960906
+      spriteID: 18808f0166499e4f0800000000000000
+      internalID: -798944292789286783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Death_S1_2
+      name: Hero_Death_S2_2
       rect:
         serializedVersion: 2
         x: 512
-        y: 264
+        y: 256
         width: 256
-        height: 248
+        height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 614cec304d891d2c0800000000000000
-      internalID: -4408574523854633962
+      spriteID: 1aa1502afad0673c0800000000000000
+      internalID: -4362284141073065311
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Death_S1_3
+      name: Hero_Death_S2_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
+        y: 0
         width: 256
-        height: 248
+        height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44ded963df21d4530800000000000000
-      internalID: 3840746935969246532
+      spriteID: 5d2c363995e6d2910800000000000000
+      internalID: 1814227555904111317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Death_S1_4
+      name: Hero_Death_S2_4
       rect:
         serializedVersion: 2
         x: 256
-        y: 8
+        y: 0
         width: 256
-        height: 249
+        height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b82e23a7f0eaaba0800000000000000
-      internalID: -6076797392983807818
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hero_Death_S1_5
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 8
-        width: 256
-        height: 248
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a4b6baceea12dfee0800000000000000
-      internalID: -1225786488396223670
+      spriteID: 42285498807309590800000000000000
+      internalID: -7669569655609654748
       vertices: []
       indices: 
       edges: []
