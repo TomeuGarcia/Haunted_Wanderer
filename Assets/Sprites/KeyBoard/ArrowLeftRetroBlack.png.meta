@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: aa6b273f87cc9574cbe7ac75fcf02019
+guid: 9fc2caf5331881c4596d2c2428eaee70
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5454685694569873063
-    second: DModernBlack_0
+      213: -1615867437073700417
+    second: ArrowLeftRetroBlack_0
   - first:
-      213: -5966497046076418633
-    second: DModernBlack_1
+      213: 3323055956243290952
+    second: ArrowLeftRetroBlack_1
   - first:
-      213: 5687046946737700240
-    second: DModernBlack_2
+      213: -695066178924841206
+    second: ArrowLeftRetroBlack_2
   - first:
-      213: -6680490020221061390
-    second: DModernBlack_3
+      213: -7465510674485144724
+    second: ArrowLeftRetroBlack_3
+  - first:
+      213: 2704689149022471292
+    second: ArrowLeftRetroBlack_4
+  - first:
+      213: 7781767190312078029
+    second: ArrowLeftRetroBlack_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -99,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DModernBlack_0
+      name: ArrowLeftRetroBlack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95102cdc2401d44b0800000000000000
-      internalID: -5454685694569873063
+      spriteID: fb9e91190294399e0800000000000000
+      internalID: -1615867437073700417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DModernBlack_1
+      name: ArrowLeftRetroBlack_1
       rect:
         serializedVersion: 2
         x: 16
@@ -134,14 +140,56 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b592376c8eb23da0800000000000000
-      internalID: -5966497046076418633
+      spriteID: 84b90a039cddd1e20800000000000000
+      internalID: 3323055956243290952
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DModernBlack_2
+      name: ArrowLeftRetroBlack_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a07fbcd2ef0aa56f0800000000000000
+      internalID: -695066178924841206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowLeftRetroBlack_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c631d64789d256890800000000000000
+      internalID: -7465510674485144724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowLeftRetroBlack_4
       rect:
         serializedVersion: 2
         x: 0
@@ -155,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09d354911137cee40800000000000000
-      internalID: 5687046946737700240
+      spriteID: c748653737cf88520800000000000000
+      internalID: 2704689149022471292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DModernBlack_3
+      name: ArrowLeftRetroBlack_5
       rect:
         serializedVersion: 2
         x: 16
@@ -176,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f67e2ba8b12a43a0800000000000000
-      internalID: -6680490020221061390
+      spriteID: dca475fa7046efb60800000000000000
+      internalID: 7781767190312078029
       vertices: []
       indices: 
       edges: []

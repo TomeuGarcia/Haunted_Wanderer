@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: 73d5b96915c4d8a4fb95beb2149cc806
+guid: 32c18f93600e203459ebb392f3a3e9ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2980235842429019997
-    second: ArrowDownModernBlack_0
+      213: -9086115132839579771
+    second: ArrowRightRetroBlack_0
   - first:
-      213: 1441191536542337430
-    second: ArrowDownModernBlack_1
+      213: -5980563503791321041
+    second: ArrowRightRetroBlack_1
   - first:
-      213: 4656255207393126488
-    second: ArrowDownModernBlack_2
+      213: -1445817019773916340
+    second: ArrowRightRetroBlack_2
   - first:
-      213: 1114823812385679952
-    second: ArrowDownModernBlack_3
+      213: -8802506989719535915
+    second: ArrowRightRetroBlack_3
+  - first:
+      213: -136297039554075251
+    second: ArrowRightRetroBlack_4
+  - first:
+      213: -6615562149625768848
+    second: ArrowRightRetroBlack_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -99,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ArrowDownModernBlack_0
+      name: ArrowRightRetroBlack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d576ede65bceb5920800000000000000
-      internalID: 2980235842429019997
+      spriteID: 58fabce4d62a7e180800000000000000
+      internalID: -9086115132839579771
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArrowDownModernBlack_1
+      name: ArrowRightRetroBlack_1
       rect:
         serializedVersion: 2
         x: 16
@@ -134,14 +140,56 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 699c7e41114200410800000000000000
-      internalID: 1441191536542337430
+      spriteID: f205adffd25c00da0800000000000000
+      internalID: -5980563503791321041
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArrowDownModernBlack_2
+      name: ArrowRightRetroBlack_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4b692ea41d6febe0800000000000000
+      internalID: -1445817019773916340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowRightRetroBlack_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5debfd0d78637d580800000000000000
+      internalID: -8802506989719535915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowRightRetroBlack_4
       rect:
         serializedVersion: 2
         x: 0
@@ -155,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 858ea34f0775e9040800000000000000
-      internalID: 4656255207393126488
+      spriteID: d85217d8096cb1ef0800000000000000
+      internalID: -136297039554075251
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArrowDownModernBlack_3
+      name: ArrowRightRetroBlack_5
       rect:
         serializedVersion: 2
         x: 16
@@ -176,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05a256cc956a87f00800000000000000
-      internalID: 1114823812385679952
+      spriteID: 0745902964dc034a0800000000000000
+      internalID: -6615562149625768848
       vertices: []
       indices: 
       edges: []
