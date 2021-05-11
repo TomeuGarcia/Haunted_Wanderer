@@ -153,7 +153,15 @@ public class PlayerController : MonoBehaviour
         {
             loseSanity(5);
         }
-
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+                limit += 5;
+        }
+        // Cheat button: O -> lose 5 sanity
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+                limit -=5;
+        }
         healthBar.SetHealth(currentSanity);
         hpGained.sanityLimit(limit);
 
