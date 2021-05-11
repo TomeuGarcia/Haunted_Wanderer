@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: 3be06748a5db90a4fa20c78427905e30
+guid: 6a435a8aa6efa2544aa1978640067391
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2676476849908578203
-    second: Hero_Walk_S1_0
+      213: -2333426152169352491
+    second: Hero_Death_S3_0
   - first:
-      213: -2357114765005458857
-    second: Hero_Walk_S1_1
+      213: 5980288670818547246
+    second: Hero_Death_S3_1
   - first:
-      213: 4345653556925027252
-    second: Hero_Walk_S1_2
+      213: -5049463616199145874
+    second: Hero_Death_S3_2
   - first:
-      213: -4453528319263310909
-    second: Hero_Walk_S1_3
+      213: 1338556064237025216
+    second: Hero_Death_S3_3
+  - first:
+      213: 3119625290709412391
+    second: Hero_Death_S3_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -99,7 +102,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hero_Walk_S1_0
+      name: Hero_Death_S3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -107,20 +110,20 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b977b50b381c42520800000000000000
-      internalID: 2676476849908578203
+      spriteID: 5d2d65217410e9fd0800000000000000
+      internalID: -2333426152169352491
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Walk_S1_1
+      name: Hero_Death_S3_1
       rect:
         serializedVersion: 2
         x: 256
@@ -128,20 +131,41 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75275091c98d94fd0800000000000000
-      internalID: -2357114765005458857
+      spriteID: e26be667cd04ef250800000000000000
+      internalID: 5980288670818547246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Walk_S1_2
+      name: Hero_Death_S3_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e66c0322893bce9b0800000000000000
+      internalID: -5049463616199145874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_Death_S3_3
       rect:
         serializedVersion: 2
         x: 0
@@ -149,35 +173,35 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b3dd61c2ecde4c30800000000000000
-      internalID: 4345653556925027252
+      spriteID: 0c7fac006a1839210800000000000000
+      internalID: 1338556064237025216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Walk_S1_3
+      name: Hero_Death_S3_4
       rect:
         serializedVersion: 2
         x: 256
-        y: 0
+        y: 8
         width: 256
-        height: 256
+        height: 248
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cbfa25e693e132c0800000000000000
-      internalID: -4453528319263310909
+      spriteID: 72a2f056ca22b4b20800000000000000
+      internalID: 3119625290709412391
       vertices: []
       indices: 
       edges: []
