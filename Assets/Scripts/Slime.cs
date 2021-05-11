@@ -67,6 +67,7 @@ public class Slime : EnemyController
             moveTimer += Time.deltaTime;
             if (moveTimer >= moveCooldown && onGround)
             {
+                animator.SetBool("IsJumping",true);
                 // Move to the right if player is located to the right of the Slmie
                 if (vectorEnemyPlayer.x > 0)
                 {
@@ -82,5 +83,9 @@ public class Slime : EnemyController
         }
     }
 
+    void OnLanding()
+    {
+        animator.SetBool("IsJumping",false);
+    }
 
 }
