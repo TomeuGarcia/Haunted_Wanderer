@@ -153,10 +153,11 @@ MonoBehaviour:
   highSanity: 0
   mediumSanity: 0
   lowSanity: 0
-  player: {fileID: 0}
+  player: {fileID: 691108911244322189, guid: befccced808635c4bac144c8e0d1677c, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  animator: {fileID: 440058502094572884}
 --- !u!95 &440058502094572884
 Animator:
   serializedVersion: 3
