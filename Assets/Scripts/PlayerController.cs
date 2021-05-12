@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         // Sanity
         currentSanityState = SanityState.HIGH;
         canUpdateSanity = true;
-        currentSanity = maxSanity/2;
+        currentSanity = (int)(maxSanity*0.9);
         healthBar.SetMaxSanity(maxSanity);
         //hpGained.sanityLimit(1);
         limit = 10;
@@ -177,6 +177,14 @@ public class PlayerController : MonoBehaviour
         healthBar.SetHealth(currentSanity);
         hpGained.sanityLimit(limit);
 
+
+        //Change animation between IDL / WALK / RUN 
+        animator.SetFloat("Speed", Mathf.Abs(direction.x));
+
+        if (currentSanity == 0)
+        {
+            animator.SetInteger("Died", 3);
+        }
     }
 
     private void FixedUpdate()
@@ -197,20 +205,14 @@ public class PlayerController : MonoBehaviour
         modifyPhysics();
 
         //Function to change the direction the sprite is loocking
-        /*
-        if (!facingRight && moveInput > 0)
+        if ((!facingRight && direction.x > 0) || (facingRight && direction.x < 0))
         {
             Flip();
         }
-        else if (facingRight && moveInput < 0)
-        {
-            Flip();
-        }
-        */
+
     }
 
     //Function to change the direction the sprite is loocking
-    /*
     void Flip()
     {
         facingRight = !facingRight;
@@ -218,7 +220,6 @@ public class PlayerController : MonoBehaviour
         Scaler.x *= -1;
         transform.localScale = Scaler;
     }
-    */
 
     // GETTER methods
     // Function that returns player's current SanityState
@@ -259,17 +260,20 @@ public class PlayerController : MonoBehaviour
             case SanityState.LOW:
                 currentMoveSpeed = moveSpeedLow;
                 // test color red
-                GetComponent<SpriteRenderer>().color = Color.red;
+                //GetComponent<SpriteRenderer>().color = Color.red;
+                animator.SetInteger("Died", 2);
                 break;
             case SanityState.MEDIUM:
                 currentMoveSpeed = moveSpeedMedium;
                 // test color yellow
-                GetComponent<SpriteRenderer>().color = Color.yellow;
+                //GetComponent<SpriteRenderer>().color = Color.yellow;
+                animator.SetInteger("Died", 1);
                 break;
             case SanityState.HIGH:
                 currentMoveSpeed = moveSpeedHigh;
                 // test color white
-                GetComponent<SpriteRenderer>().color = Color.white;
+                //GetComponent<SpriteRenderer>().color = Color.white;
+                animator.SetInteger("Died", 0);
                 break;
         }
     }

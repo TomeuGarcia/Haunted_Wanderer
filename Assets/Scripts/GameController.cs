@@ -79,7 +79,7 @@ public class GameController : MonoBehaviour
     {
         if (myPlayer.getCurrentSanity() == 0)
         {
-            reactivateScene();
+            StartCoroutine(waitReactiveScene());
             return;
         }
 
@@ -239,5 +239,10 @@ public class GameController : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
-
+    IEnumerator waitReactiveScene()
+    {
+ 
+        yield return new WaitForSeconds(0.9f);
+        reactivateScene();
+    }
 }
