@@ -391,7 +391,7 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.CompareTag("Hazard"))
         {
             // Check if Hazard is Spikes
-            HazardController hc = GetComponent<HazardController>();
+            HazardController hc = collision.collider.GetComponent<HazardController>();
             if (hc.isSpikes)
             {
                 //Hurt player 
@@ -405,6 +405,7 @@ public class PlayerController : MonoBehaviour
                 //float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
                 //gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
             }
+
         }
 
 
@@ -447,7 +448,7 @@ public class PlayerController : MonoBehaviour
         {
             EnemyController enemy = collision.GetComponent<EnemyController>();
             // if player jumped on top "kill" enemy
-            if (transform.position.y > collision.transform.position.y + groundLength)
+            if (transform.position.y > collision.transform.position.y && (transform.position.x < collision.transform.position.x + 0.4 && transform.position.x > collision.transform.position.x - 0.4))
             {
                 enemy.hurt();
                 // add +1 to sanityLossLimiter

@@ -121,8 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41770710f79d4c748ae06fea4043a858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePosition: {x: 0, y: 0}
-  isSpontaneous: 1
+  isActive: 0
   highSanity: 0
   mediumSanity: 0
   lowSanity: 0

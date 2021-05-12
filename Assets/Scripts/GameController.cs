@@ -117,13 +117,13 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.highSanity && !pc.mediumSanity)
+                if (!pc.isActive && pc.highSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(true);
+                    pc.setActiveState(true);
                 }
                 else if (!pc.highSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(false);
+                    pc.setActiveState(false);
                 }
             }
 
@@ -131,13 +131,13 @@ public class GameController : MonoBehaviour
             foreach (GameObject h in sceneHazards)
             {
                 PlatformController hc = h.GetComponent<PlatformController>();
-                if (hc.highSanity && !hc.mediumSanity)
+                if (!hc.isActive && hc.highSanity)
                 {
-                    h.GetComponent<PlatformController>().setActiveState(true);
+                    hc.setActiveState(true);
                 }
                 else if (!hc.highSanity)
                 {
-                    h.GetComponent<PlatformController>().setActiveState(false);
+                    hc.setActiveState(false);
                 }
             }
         }
@@ -160,13 +160,13 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (!pc.highSanity && pc.mediumSanity && pc.lowSanity)
+                if (!pc.isActive && pc.mediumSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(true);
+                    pc.setActiveState(true);
                 }
                 else if (!pc.mediumSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(false);
+                    pc.setActiveState(false);
                 }
             }
 
@@ -174,13 +174,13 @@ public class GameController : MonoBehaviour
             foreach (GameObject h in sceneHazards)
             {
                 PlatformController hc = h.GetComponent<PlatformController>();
-                if (!hc.highSanity && hc.mediumSanity && hc.lowSanity)
+                if (!hc.isActive && hc.mediumSanity)
                 {
-                    h.GetComponent<PlatformController>().setActiveState(true);
+                    hc.setActiveState(true);
                 }
                 else if (!hc.mediumSanity)
                 {
-                    h.GetComponent<PlatformController>().setActiveState(false);
+                    hc.setActiveState(false);
                 }
             }
         }
@@ -203,13 +203,13 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (!pc.lowSanity && !pc.mediumSanity && pc.lowSanity)
+                if (!pc.isActive && pc.lowSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(true);
+                    pc.setActiveState(true);
                 }
                 else if (!pc.lowSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(false);
+                    pc.setActiveState(false);
                 }
             }
 
@@ -217,13 +217,13 @@ public class GameController : MonoBehaviour
             foreach (GameObject h in sceneHazards)
             {
                 PlatformController hc = h.GetComponent<PlatformController>();
-                if (!hc.lowSanity && !hc.mediumSanity && hc.lowSanity)
+                if (!hc.isActive && hc.lowSanity)
                 {
-                    h.GetComponent<PlatformController>().setActiveState(true);
+                    hc.setActiveState(true);
                 }
                 else if (!hc.lowSanity)
                 {
-                    h.GetComponent<PlatformController>().setActiveState(false);
+                    hc.setActiveState(false);
                 }
             }
 

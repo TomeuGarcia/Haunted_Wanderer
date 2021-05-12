@@ -1695,6 +1695,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!1001 &178502973
@@ -1784,6 +1789,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 945596511}
     m_Modifications:
+    - target: {fileID: -6523720622721484382, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: highSanity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6523720622721484382, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: mediumSanity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6523720622721484382, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: lowSanity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1628058605089082300, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
         type: 3}
       propertyPath: m_Size.x
@@ -1868,6 +1888,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -2675,6 +2700,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!1001 &324450993
@@ -3146,6 +3176,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!4 &357112730 stripped
@@ -3510,6 +3545,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!4 &395137586 stripped
@@ -3590,6 +3630,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!1001 &400329040
@@ -3668,6 +3713,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -3843,6 +3893,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -4341,6 +4396,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!1001 &548465017
@@ -4415,6 +4475,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!1001 &564926671
@@ -4488,6 +4553,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -4824,6 +4894,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!1 &643843906
@@ -5144,6 +5219,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -6137,6 +6217,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!4 &746525451 stripped
@@ -6221,6 +6306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -6775,6 +6865,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -7352,6 +7447,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -8030,6 +8130,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -12179,6 +12284,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!4 &1416431927 stripped
@@ -13274,6 +13384,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!1001 &1576606522
@@ -13288,6 +13403,26 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1384394671}
+    - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
+        type: 3}
+      propertyPath: spawnsHighSanity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
+        type: 3}
+      propertyPath: highSanity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
+        type: 3}
+      propertyPath: mediumSanity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
+        type: 3}
+      propertyPath: lowSanity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8824430244756146003, guid: f72c859f9e536674e91e2efc9cdffc64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13915,6 +14050,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
 --- !u!4 &1633741778 stripped
@@ -14168,6 +14308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -14935,6 +15080,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -15707,18 +15857,23 @@ PrefabInstance:
     - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
         type: 3}
       propertyPath: mediumSanity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
         type: 3}
       propertyPath: lowSanity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1384394671}
+    - target: {fileID: 8824430244756146002, guid: f72c859f9e536674e91e2efc9cdffc64,
+        type: 3}
+      propertyPath: spawnsHighSanity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8824430244756146003, guid: f72c859f9e536674e91e2efc9cdffc64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16347,8 +16502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1162e8e85e5f841bac061f6f572d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePosition: {x: 0, y: 0}
-  isSpontaneous: 0
+  isActive: 0
   highSanity: 0
   mediumSanity: 0
   lowSanity: 0
@@ -16652,6 +16806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
@@ -17990,6 +18149,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikes (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441335900708294309, guid: 35c7252bad2e3d5418b1ee154cf7ad76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hazard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c7252bad2e3d5418b1ee154cf7ad76, type: 3}
