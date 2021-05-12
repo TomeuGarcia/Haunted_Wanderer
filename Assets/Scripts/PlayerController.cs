@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private const float moveSpeedMedium = moveSpeed * 1.35f;
     private const float moveSpeedLow = moveSpeed * 1.7f;
     private float currentMoveSpeed;
+    private bool facingRight = true;
     // Movement physics variables
     private Vector2 direction;
     private float linearDrag = 4.0f;
@@ -68,6 +69,9 @@ public class PlayerController : MonoBehaviour
     private Renderer r;
     private Color c;
     public LayerMask groundLayer;
+
+    //Animations
+    public Animator animator;
 
 
     void Start()
@@ -183,8 +187,30 @@ public class PlayerController : MonoBehaviour
             jump();
         }
         modifyPhysics();
+
+        //Function to change the direction the sprite is loocking
+        /*
+        if (!facingRight && moveInput > 0)
+        {
+            Flip();
+        }
+        else if (facingRight && moveInput < 0)
+        {
+            Flip();
+        }
+        */
     }
 
+    //Function to change the direction the sprite is loocking
+    /*
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 Scaler = transform.localScale;
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
+    }
+    */
 
     // GETTER methods
     // Function that returns player's current SanityState

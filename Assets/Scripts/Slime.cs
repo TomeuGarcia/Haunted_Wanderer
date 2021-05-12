@@ -48,9 +48,8 @@ public class Slime : EnemyController
         if (onGround)
         {
             rb2.gravityScale = 0;
-            animator.SetBool("IsJumping", true);
             move();
-            animator.SetBool("IsJumping", false);
+
         }
         else
         {
@@ -65,6 +64,7 @@ public class Slime : EnemyController
         // Move if player is within range of sightDistance
         if (Mathf.Abs(vectorEnemyPlayer.magnitude) < sightDistance)
         {
+            animator.SetBool("IsJumping", true);
             // Slime moves (jumps) once every moveCooldown (1.5 seconds)
             moveTimer += Time.deltaTime;
             if (moveTimer >= moveCooldown && onGround)
