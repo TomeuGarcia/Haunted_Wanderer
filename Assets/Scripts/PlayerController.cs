@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     // Jump (movement) physics variables
     private bool onGround = false;
-    private const float groundLength = 0.6f;
+    private const float groundLength = 1.4f;
     private Vector3 groundColliderOffset = new Vector3(0.45f, 0.0f, 0.0f);
     private float gravity = 1.0f;
     private float fallMultiplier = 5.0f;
