@@ -1,0 +1,344 @@
+fileFormatVersion: 2
+guid: 9cb7836488ef2ef41971a11097c20243
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8922061894962405040
+    second: Bullety_IDL_0
+  - first:
+      213: -8100381309724958607
+    second: Bullety_IDL_1
+  - first:
+      213: 5944104437286630663
+    second: Bullety_IDL_2
+  - first:
+      213: 1470155238766946198
+    second: Bullety_IDL_3
+  - first:
+      213: 181205996490943971
+    second: Bullety_IDL_4
+  - first:
+      213: 9023292080815701727
+    second: Bullety_IDL_5
+  - first:
+      213: -6876669591457324643
+    second: Bullety_IDL_6
+  - first:
+      213: 7201155844600443597
+    second: Bullety_IDL_7
+  - first:
+      213: 8585247858580846313
+    second: Bullety_IDL_8
+  - first:
+      213: -4700833896791870226
+    second: Bullety_IDL_9
+  - first:
+      213: 1318495040305238511
+    second: Bullety_IDL_10
+  - first:
+      213: 8355101736555463428
+    second: Bullety_IDL_11
+  - first:
+      213: 6049524199745039698
+    second: Bullety_IDL_12
+  - first:
+      213: 7407687341153892317
+    second: Bullety_IDL_13
+  - first:
+      213: 633384210603478446
+    second: Bullety_IDL_14
+  - first:
+      213: 6181154665805552143
+    second: Bullety_IDL_15
+  - first:
+      213: 6563318133068812783
+    second: Bullety_IDL_16
+  - first:
+      213: -5632932474653306312
+    second: Bullety_IDL_17
+  - first:
+      213: -2682306097272142750
+    second: Bullety_IDL_18
+  - first:
+      213: -5690217455066671553
+    second: Bullety_IDL_19
+  - first:
+      213: -8347584159146646505
+    second: Bullety_IDL_20
+  - first:
+      213: -5662613463062454415
+    second: Bullety_IDL_21
+  - first:
+      213: -1717715896543341346
+    second: Bullety_IDL_22
+  - first:
+      213: 1467923737226181689
+    second: Bullety_IDL_23
+  - first:
+      213: -4518528519509162368
+    second: Bullety_IDL_24
+  - first:
+      213: -7000496941091472372
+    second: Bullety_IDL_25
+  - first:
+      213: -6674827656875425566
+    second: Bullety_IDL_26
+  - first:
+      213: 6735825351220688645
+    second: Bullety_IDL_27
+  - first:
+      213: 825451447271836512
+    second: Bullety_IDL_28
+  - first:
+      213: 3510828295733184925
+    second: Bullety_IDL_29
+  - first:
+      213: 1336953750680839778
+    second: Bullety_IDL_30
+  - first:
+      213: 7704742024812238646
+    second: Bullety_IDL_31
+  - first:
+      213: 5406341360925350819
+    second: Bullety_IDL_32
+  - first:
+      213: 8464492100649118205
+    second: Bullety_IDL_33
+  - first:
+      213: 7380232352176747277
+    second: Bullety_IDL_34
+  - first:
+      213: -205470022865480032
+    second: Bullety_IDL_35
+  - first:
+      213: -4209475767615844506
+    second: Bullety_IDL_36
+  - first:
+      213: 6432247492612020078
+    second: Bullety_IDL_37
+  - first:
+      213: 7964802515623309061
+    second: Bullety_IDL_38
+  - first:
+      213: -4329654033185295689
+    second: Bullety_IDL_39
+  - first:
+      213: -7357022968889708556
+    second: Bullety_IDL_40
+  - first:
+      213: 1791940539753046469
+    second: Bullety_IDL_41
+  - first:
+      213: -7809909768783813372
+    second: Bullety_IDL_42
+  - first:
+      213: 6506368799026021499
+    second: Bullety_IDL_43
+  - first:
+      213: -2464874749903208264
+    second: Bullety_IDL_44
+  - first:
+      213: 4120422187004188309
+    second: Bullety_IDL_45
+  - first:
+      213: 4158017234007828016
+    second: Bullety_IDL_46
+  - first:
+      213: -2233448878585211011
+    second: Bullety_IDL_47
+  - first:
+      213: 543248718711045821
+    second: Bullety_IDL_48
+  - first:
+      213: -6817286896244025238
+    second: Bullety_IDL_49
+  - first:
+      213: -5002077793313810526
+    second: Bullety_IDL_50
+  - first:
+      213: 1497891672325097955
+    second: Bullety_IDL_51
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 150
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bullety_IDL_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 800
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051a7b64af77e2480800000000000000
+      internalID: -8922061894962405040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bullety_IDL_1
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 800
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17061a0dd1aa59f80800000000000000
+      internalID: -8100381309724958607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bullety_IDL_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 705fa441e73bd7250800000000000000
+      internalID: 5944104437286630663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bullety_IDL_3
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6972263866a076410800000000000000
+      internalID: 1470155238766946198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

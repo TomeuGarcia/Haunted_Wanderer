@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6608204486404972479}
   - component: {fileID: 6608204486404972464}
   - component: {fileID: 6608204486404972465}
+  - component: {fileID: 7801419998166337385}
   m_Layer: 0
   m_Name: FlyingDemon
   m_TagString: LowSanityEnemies
@@ -73,8 +74,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 26f8ee903ef5bab449e92a3e9af0801a, type: 3}
-  m_Color: {r: 0.1548594, g: 0.1782211, b: 0.3773585, a: 1}
+  m_Sprite: {fileID: 5600129053969639368, guid: 5cb195a236db72d49bfce9a32af7852b,
+    type: 3}
+  m_Color: {r: 0.4666667, g: 0.4666667, b: 0.4666667, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -94,21 +96,21 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.12659979, y: 1.0632999}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 5.3333335, y: 4.666667}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.2531996, y: 0.8734002}
   m_EdgeRadius: 0
 --- !u!50 &6608204486404972464
 Rigidbody2D:
@@ -125,7 +127,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -144,6 +146,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePoints: 0
+  canSpawn: 1
+  spawnsHighSanity: 0
+  spawnsMediumSanity: 0
+  spawnsLowSanity: 0
+  highSanity: 0
+  mediumSanity: 0
+  lowSanity: 0
   player: {fileID: 0}
   bulletPrefab: {fileID: 9136370441424090003, guid: e12bab90c72ffbf4b80016e54a69cd72,
     type: 3}
+--- !u!95 &7801419998166337385
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6608204486404972466}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9896fe39e011c3f43a384a12ade952cc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -17,20 +17,8 @@ public class GameController : MonoBehaviour
 
     // Enemies
     private GameObject[] sceneEnemies;
-    /*
-    public GameObject[] highSanityEnemies;
-    public GameObject[] mediumSanityEnemies;
-    public GameObject[] lowSanityEnemies;
-    */
-
     // Platforms
     private GameObject[] scenePlatforms;
-    /*
-    public GameObject[] highSanityPlatforms;
-    public GameObject[] mediumSanityPlatforms;
-    public GameObject[] lowSanityPlatforms;
-    */
-
     // Hazards
     private GameObject[] sceneHazards;
 
@@ -119,9 +107,9 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.canSpawn && ec.highSanity)
+                if (ec.canSpawn && ec.spawnsHighSanity)
                     ec.setActiveState(true);    
-                else
+                else if (!ec.highSanity)
                     ec.setActiveState(false);
             }
 
@@ -162,9 +150,9 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.canSpawn && ec.mediumSanity && !ec.highSanity)
+                if (ec.canSpawn && ec.spawnsMediumSanity)
                     ec.setActiveState(true);
-                else if (!ec.canSpawn && !ec.mediumSanity)
+                else if (!ec.mediumSanity)
                     ec.setActiveState(false);
             }
 
@@ -205,8 +193,10 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.lowSanity)
+                if (ec.canSpawn && ec.spawnsLowSanity)
                     ec.setActiveState(true);
+                else if (!ec.lowSanity)
+                    ec.setActiveState(false);
             }
 
             // PLATFORMS
