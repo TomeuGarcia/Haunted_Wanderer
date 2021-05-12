@@ -125,6 +125,7 @@ public class PlatformController : MonoBehaviour
         }
         gameObject.SetActive(false);
     }
+
     void startFadingOut()
     {
         StartCoroutine(fadeOut());

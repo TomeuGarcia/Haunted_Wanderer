@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     private int currentSanity;
     private int limit;
 
-    private const float sanityLossCooldown = 2.0f;
+    private const float sanityLossCooldown = 1.0f;
     private float sanityLossTimer;
     public int sanityLossLimiter; // Can only equal 1,2,3,4,5 -> 1 = 10% , 2 = 20% , ... , 5 = 50%
 
