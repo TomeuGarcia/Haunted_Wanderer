@@ -69,6 +69,10 @@ public class PlayerController : MonoBehaviour
     private Renderer r;
     private Color c;
     public LayerMask groundLayer;
+    public GameObject goldenAppleSprite1;
+    public GameObject goldenAppleSprite2;
+
+
 
     //Animations
     public Animator animator;
@@ -97,6 +101,8 @@ public class PlayerController : MonoBehaviour
 
         hasGApple = false;
         healValue = 0;
+        goldenAppleSprite1.SetActive(true);
+        goldenAppleSprite2.SetActive(false);
 
         // Components
         rb2 = GetComponent<Rigidbody2D>();
@@ -144,6 +150,8 @@ public class PlayerController : MonoBehaviour
             gainSanity(healValue);
             hasGApple = false;
             healValue = 0;
+            goldenAppleSprite1.SetActive(true);
+            goldenAppleSprite2.SetActive(false);
         }
 
 
@@ -430,6 +438,8 @@ public class PlayerController : MonoBehaviour
             hasGApple = true;
             healValue = ga.healingPoints;
             Destroy(collision.gameObject);
+            goldenAppleSprite1.SetActive(false);
+            goldenAppleSprite2.SetActive(true);
         }
 
         // Check if Collided with player
