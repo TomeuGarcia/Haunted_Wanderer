@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
     private int healValue;
     private bool isImmune = false;
 
+
     // Component variables
     public Rigidbody2D rb2;
     public Collider2D c2;

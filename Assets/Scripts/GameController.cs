@@ -89,7 +89,8 @@ public class GameController : MonoBehaviour
             myPlayer.loseSanityViaTime();
             myPlayer.updateSanityState();
             myPlayer.updateMovementSpeed();
-            updateScenary();
+            if (myPlayer.canUpdateSanity)
+                updateScenary();
         }
     }
 
@@ -98,6 +99,7 @@ public class GameController : MonoBehaviour
     private void updateScenary()
     {
         PlayerController.SanityState sanity = myPlayer.getSanityState();
+
         // HIGH SANITY
         if (playerSanityState != 1 && sanity == PlayerController.SanityState.HIGH)
         {
@@ -245,4 +247,9 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
         reactivateScene();
     }
+
+
+
 }
+
+
