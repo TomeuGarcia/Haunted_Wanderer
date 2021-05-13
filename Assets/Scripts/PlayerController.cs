@@ -438,7 +438,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Add Golden apple power up for player to use
-        else if (collision.CompareTag("GoldenApple"))
+        else if (collision.CompareTag("GoldenApple") && !hasGApple)
         {
             GoldenApple ga = collision.GetComponent<GoldenApple>();
             hasGApple = true;
