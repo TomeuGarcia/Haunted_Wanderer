@@ -134,6 +134,8 @@ MonoBehaviour:
     m_Bits: 256
   goldenAppleSprite1: {fileID: 0}
   goldenAppleSprite2: {fileID: 0}
+  dashSpeed: 100
+  startDashTime: 0
   animator: {fileID: 0}
 --- !u!70 &6025754103944856774
 CapsuleCollider2D:

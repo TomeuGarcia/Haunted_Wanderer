@@ -73,7 +73,10 @@ public class PlayerController : MonoBehaviour
     public GameObject goldenAppleSprite1;
     public GameObject goldenAppleSprite2;
 
-
+    //Dash
+    public float dashSpeed;
+    //private float dashTime;
+    public float startDashTime;
 
     //Animations
     public Animator animator;
@@ -110,6 +113,9 @@ public class PlayerController : MonoBehaviour
         c2 = GetComponent<Collider2D>();
         r = GetComponent<Renderer>();
         c = r.material.color;
+
+        //Dash
+        //dashTime = startDashTime;
     }
 
     // Update is called once per frame
@@ -211,6 +217,22 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
+        //Dash
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (!facingRight)
+            {
+                rb2.velocity = new Vector2(0, rb2.velocity.y);
+                //rb2.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 10, transform.position.y, transform.position.z), Time.deltaTime*100);
+            }
+            else
+            {
+                rb2.velocity = new Vector2(0, rb2.velocity.y);
+                //rb2.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Time.deltaTime*100);
+            }
+        }
     }
 
     //Function to change the direction the sprite is loocking
