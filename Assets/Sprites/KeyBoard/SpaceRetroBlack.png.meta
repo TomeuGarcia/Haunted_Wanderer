@@ -1,0 +1,320 @@
+fileFormatVersion: 2
+guid: d6dd12de8f2f30b459e436686b0dc7b3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4257003397971441829
+    second: SpaceRetroBlack_0
+  - first:
+      213: -7692952805057928310
+    second: SpaceRetroBlack_1
+  - first:
+      213: 6169024686352451529
+    second: SpaceRetroBlack_2
+  - first:
+      213: 2424411464359864410
+    second: SpaceRetroBlack_3
+  - first:
+      213: -327696023707078939
+    second: SpaceRetroBlack_4
+  - first:
+      213: 6302785741238034926
+    second: SpaceRetroBlack_5
+  - first:
+      213: -5181032861535809180
+    second: SpaceRetroBlack_6
+  - first:
+      213: -1705582997268892240
+    second: SpaceRetroBlack_7
+  - first:
+      213: -7938192425184865786
+    second: SpaceRetroBlack_8
+  - first:
+      213: 3935937880141917780
+    second: SpaceRetroBlack_9
+  - first:
+      213: 2100779323615942095
+    second: SpaceRetroBlack_10
+  - first:
+      213: 1316516015567156854
+    second: SpaceRetroBlack_11
+  - first:
+      213: -7118530684808228143
+    second: SpaceRetroBlack_12
+  - first:
+      213: -3835312053719550577
+    second: SpaceRetroBlack_13
+  - first:
+      213: 2218059849387184370
+    second: SpaceRetroBlack_14
+  - first:
+      213: -8551543049134032572
+    second: SpaceRetroBlack_15
+  - first:
+      213: 332832755452209649
+    second: SpaceRetroBlack_16
+  - first:
+      213: -428561448028325726
+    second: SpaceRetroBlack_17
+  - first:
+      213: -761197218004320458
+    second: SpaceRetroBlack_18
+  - first:
+      213: -5632375835500913898
+    second: SpaceRetroBlack_19
+  - first:
+      213: 578626485712999367
+    second: SpaceRetroBlack_20
+  - first:
+      213: -326626598913153444
+    second: SpaceRetroBlack_21
+  - first:
+      213: 7869362110869354864
+    second: SpaceRetroBlack_22
+  - first:
+      213: -5365186305929378496
+    second: SpaceRetroBlack_23
+  - first:
+      213: -4737328218015049681
+    second: SpaceRetroBlack_24
+  - first:
+      213: -7756893014595424400
+    second: SpaceRetroBlack_25
+  - first:
+      213: -8611509410341270343
+    second: SpaceRetroBlack_26
+  - first:
+      213: 6500926227486568218
+    second: SpaceRetroBlack_27
+  - first:
+      213: -5317377147886255054
+    second: SpaceRetroBlack_28
+  - first:
+      213: 8293819187695912638
+    second: SpaceRetroBlack_29
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 15
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SpaceRetroBlack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a8f7bf290ae31b30800000000000000
+      internalID: 4257003397971441829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpaceRetroBlack_1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a836dacce242d3590800000000000000
+      internalID: -7692952805057928310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpaceRetroBlack_2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 16
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c747a07447cc9550800000000000000
+      internalID: 6169024686352451529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpaceRetroBlack_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a58ed8ab16d35a120800000000000000
+      internalID: 2424411464359864410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpaceRetroBlack_4
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eea1a0e33ac37bf0800000000000000
+      internalID: -327696023707078939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpaceRetroBlack_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee1e3e1fc3ef77750800000000000000
+      internalID: 6302785741238034926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

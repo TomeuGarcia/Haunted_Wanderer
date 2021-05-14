@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     //healthBar
     public HealthBar healthBar;
     public HPGained hpGained;
-    
+    //can move
+    public bool canMove;
 
     //public int currentSanity2;
     //public int maxSanity2 = 100;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private const float moveSpeedMedium = moveSpeed * 1.35f;
     private const float moveSpeedLow = moveSpeed * 1.7f;
     private float currentMoveSpeed;
+    private bool facingRight = true;
     // Movement physics variables
     private Vector2 direction;
     private float linearDrag = 4.0f;
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     // Jump (movement) physics variables
     private bool onGround = false;
-    private const float groundLength = 0.6f;
+    private const float groundLength = 1.4f;
     private Vector3 groundColliderOffset = new Vector3(0.45f, 0.0f, 0.0f);
     private float gravity = 1.0f;
     private float fallMultiplier = 5.0f;
@@ -47,19 +49,37 @@ public class PlayerController : MonoBehaviour
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
     private SanityState currentSanityState;
+    public bool canUpdateSanity;
     public const int maxSanity = 100;
     private int currentSanity;
     private int limit;
 
-    private const float sanityLossCooldown = 2.0f;
+    private const float sanityLossCooldown = 1.0f;
     private float sanityLossTimer;
     public int sanityLossLimiter; // Can only equal 1,2,3,4,5 -> 1 = 10% , 2 = 20% , ... , 5 = 50%
+
+    // Heal sanity
+    public bool hasGApple;
+    private int healValue;
+    private bool isImmune = false;
 
 
     // Component variables
     public Rigidbody2D rb2;
     public Collider2D c2;
+    private Renderer r;
+    private Color c;
     public LayerMask groundLayer;
+    public GameObject goldenAppleSprite1;
+    public GameObject goldenAppleSprite2;
+
+    //Dash
+    public float dashSpeed;
+    //private float dashTime;
+    public float startDashTime;
+
+    //Animations
+    public Animator animator;
 
 
     void Start()
@@ -74,24 +94,45 @@ public class PlayerController : MonoBehaviour
 
         // Sanity
         currentSanityState = SanityState.HIGH;
-        currentSanity = maxSanity/2;
+        canUpdateSanity = true;
+        currentSanity = (int)(maxSanity*0.9);
         healthBar.SetMaxSanity(maxSanity);
         //hpGained.sanityLimit(1);
         limit = 10;
 
-
-
         sanityLossTimer = 0.0f;
         sanityLossLimiter = 1;
+
+        hasGApple = false;
+        healValue = 0;
+        goldenAppleSprite1.SetActive(true);
+        goldenAppleSprite2.SetActive(false);
 
         // Components
         rb2 = GetComponent<Rigidbody2D>();
         c2 = GetComponent<Collider2D>();
+        r = GetComponent<Renderer>();
+        c = r.material.color;
+
+        //Dash
+        //dashTime = startDashTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+        if (!canMove)
+        {
+            return;
+        }
         // Check if player is touching groundLayer (mask) - walls and floor
         //onWall = Physics2D.Raycast(transform.position + wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
         //         Physics2D.Raycast(transform.position - wallColliderOffset, Vector2.right, wallLenght, groundLayer) ||
@@ -110,6 +151,15 @@ public class PlayerController : MonoBehaviour
         // Get input for direction to move the player (Left: A , LeftArrow   Right: D , RightArrow)
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
+        // Use consumible and heal sanity
+        if (Input.GetKeyDown(KeyCode.Q) && hasGApple)
+        {
+            gainSanity(healValue);
+            hasGApple = false;
+            healValue = 0;
+            goldenAppleSprite1.SetActive(true);
+            goldenAppleSprite2.SetActive(false);
+        }
 
 
         // Cheat button: I -> gain 5 sanity
@@ -122,10 +172,26 @@ public class PlayerController : MonoBehaviour
         {
             loseSanity(5);
         }
-
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+                limit += 5;
+        }
+        // Cheat button: O -> lose 5 sanity
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+                limit -=5;
+        }
         healthBar.SetHealth(currentSanity);
         hpGained.sanityLimit(limit);
 
+
+        //Change animation between IDL / WALK / RUN 
+        animator.SetFloat("Speed", Mathf.Abs(direction.x));
+
+        if (currentSanity == 0)
+        {
+            animator.SetInteger("Died", 3);
+        }
     }
 
     private void FixedUpdate()
@@ -144,8 +210,39 @@ public class PlayerController : MonoBehaviour
             jump();
         }
         modifyPhysics();
+
+        //Function to change the direction the sprite is loocking
+        if ((!facingRight && direction.x > 0) || (facingRight && direction.x < 0))
+        {
+            Flip();
+        }
+
+        //Dash
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (!facingRight)
+            {
+                rb2.velocity = new Vector2(0, rb2.velocity.y);
+                //rb2.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 10, transform.position.y, transform.position.z), Time.deltaTime*100);
+            }
+            else
+            {
+                rb2.velocity = new Vector2(0, rb2.velocity.y);
+                //rb2.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Time.deltaTime*100);
+            }
+        }
     }
 
+    //Function to change the direction the sprite is loocking
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 Scaler = transform.localScale;
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
+    }
 
     // GETTER methods
     // Function that returns player's current SanityState
@@ -171,7 +268,12 @@ public class PlayerController : MonoBehaviour
 
     // MODIFY ATTRIBUTES methods
     // Function that updates player's SanityState
-    public void updateSanityState() { currentSanityState = getSanityState(); }
+    public void updateSanityState() { 
+        if (canUpdateSanity)
+        {
+            currentSanityState = getSanityState();
+        }
+    }
 
     // Function that updates player's movement velocity based on its sanityLevel
     public void updateMovementSpeed()
@@ -181,17 +283,20 @@ public class PlayerController : MonoBehaviour
             case SanityState.LOW:
                 currentMoveSpeed = moveSpeedLow;
                 // test color red
-                GetComponent<SpriteRenderer>().color = Color.red;
+                //GetComponent<SpriteRenderer>().color = Color.red;
+                animator.SetInteger("Died", 2);
                 break;
             case SanityState.MEDIUM:
                 currentMoveSpeed = moveSpeedMedium;
                 // test color yellow
-                GetComponent<SpriteRenderer>().color = Color.yellow;
+                //GetComponent<SpriteRenderer>().color = Color.yellow;
+                animator.SetInteger("Died", 1);
                 break;
             case SanityState.HIGH:
                 currentMoveSpeed = moveSpeedHigh;
                 // test color white
-                GetComponent<SpriteRenderer>().color = Color.white;
+                //GetComponent<SpriteRenderer>().color = Color.white;
+                animator.SetInteger("Died", 0);
                 break;
         }
     }
@@ -309,12 +414,68 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if Collided with player
-        if (collision.collider.CompareTag("Enemy"))
+        // Check if player collided with a Hazard
+        if (collision.collider.CompareTag("Hazard"))
         {
-            EnemyController enemy = collision.collider.GetComponent<EnemyController>();
+            // Check if Hazard is Spikes
+            HazardController hc = collision.collider.GetComponent<HazardController>();
+            if (hc.isSpikes)
+            {
+                //Hurt player 
+                loseSanity(10);
+
+                //Teleport player to last checkpoint
+                transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
+                offCamera = true;
+
+                //Vector3 middlePosition = collision.collider.transform.position;
+                //float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
+                //gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
+            }
+
+        }
+
+
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Load new respawn position if players enters checkpoint
+        if (collision.CompareTag("Checkpoint"))
+        {
+            Checkpoint cp = collision.GetComponent<Checkpoint>();
+            respawnPosition = new Vector2(cp.X, cp.Y);
+        }
+
+        // Lock player's sanity state (can't be updated)
+        else if (collision.CompareTag("SanityLocker"))
+        {
+            canUpdateSanity = false;
+        }
+        // Unlock player's sanity state (can be updated)
+        else if (collision.CompareTag("SanityUnlocker"))
+        {
+            canUpdateSanity = true;
+        }
+
+        // Add Golden apple power up for player to use
+        else if (collision.CompareTag("GoldenApple") && !hasGApple)
+        {
+            GoldenApple ga = collision.GetComponent<GoldenApple>();
+            hasGApple = true;
+            healValue = ga.healingPoints;
+            Destroy(collision.gameObject);
+            goldenAppleSprite1.SetActive(false);
+            goldenAppleSprite2.SetActive(true);
+        }
+
+        // Check if Collided with player
+        if (collision.CompareTag("Enemy") && !isImmune)
+        {
+            EnemyController enemy = collision.GetComponent<EnemyController>();
             // if player jumped on top "kill" enemy
-            if (collision.contacts[0].normal.y > 0.5)
+            if (transform.position.y > collision.transform.position.y && (transform.position.x < collision.transform.position.x + 0.4 && transform.position.x > collision.transform.position.x - 0.4))
             {
                 enemy.hurt();
                 // add +1 to sanityLossLimiter
@@ -327,40 +488,26 @@ public class PlayerController : MonoBehaviour
                 loseSanity(enemy.damagePoints);
                 // reset player's sanityLossLimiter
                 resetSanityLossLimiter();
+
+                // Make player immune to enemies for 2 seconds
+                StartCoroutine("Invulnerable");
             }
-        }
-
-        // Check if player collided with a Hazard
-        else if (collision.collider.CompareTag("Hazard"))
-        {
-            // Check if Hazard is Spikes
-            HazardController hc = GetComponent<HazardController>();
-            if (hc.isSpikes)
-            {
-                //Hurt player 
-                loseSanity(10);
-
-                //Teleport player to last checkpoint
-                transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
-
-                //Vector3 middlePosition = collision.collider.transform.position;
-                //float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
-                //gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
-            }
-
         }
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator Invulnerable()
     {
-        // Load new respawn position if players enters checkpoint
-        if (collision.CompareTag("Checkpoint"))
-        {
-            Checkpoint cp = collision.GetComponent<Checkpoint>();
-            respawnPosition = new Vector2(cp.X, cp.Y);
-            offCamera = true;
-        }
+        isImmune = true;
+        c.a = 0.5f;
+        r.material.color = c;
+        yield return new WaitForSeconds(2.0f);
+        isImmune = false;
+        c.a = 1.0f;
+        r.material.color = c;
     }
+
+
+
 
 }

@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour
     {
         if (pc.offCamera)
         {
-            transform.position = new Vector2(follow.x, follow.y + groundLength);
+            transform.position = new Vector3(follow.x, follow.y + groundLength, transform.position.z);
             pc.offCamera = false;
         }
 

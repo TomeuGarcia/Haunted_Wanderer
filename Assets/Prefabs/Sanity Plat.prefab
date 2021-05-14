@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activePosition: {x: 0, y: 0}
-  isSpontaneous: 0
-  spawnsHighSanity: 0
-  spawnsMediumSanity: 0
-  spawnsLowSanity: 0
+  isSpontaneous: 1
+  highSanity: 0
+  mediumSanity: 0
+  lowSanity: 0
 --- !u!1001 &8451514729962309446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27,17 +27,22 @@ PrefabInstance:
     - target: {fileID: 2886983842611363940, guid: e3b6adbcbac9c7e4d99704b9c0482bcf,
         type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 0.9398113
       objectReference: {fileID: 0}
     - target: {fileID: 2886983842611363940, guid: e3b6adbcbac9c7e4d99704b9c0482bcf,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.2830189
+      value: 0.8632076
       objectReference: {fileID: 0}
     - target: {fileID: 2886983842611363940, guid: e3b6adbcbac9c7e4d99704b9c0482bcf,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.121915825
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886983842611363940, guid: e3b6adbcbac9c7e4d99704b9c0482bcf,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2886983842611363941, guid: e3b6adbcbac9c7e4d99704b9c0482bcf,
         type: 3}
@@ -97,7 +102,7 @@ PrefabInstance:
     - target: {fileID: 2886983842611363942, guid: e3b6adbcbac9c7e4d99704b9c0482bcf,
         type: 3}
       propertyPath: m_Name
-      value: Platform
+      value: Sanity Plat
       objectReference: {fileID: 0}
     - target: {fileID: 2886983842611363942, guid: e3b6adbcbac9c7e4d99704b9c0482bcf,
         type: 3}
