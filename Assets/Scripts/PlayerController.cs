@@ -192,6 +192,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetInteger("Died", 3);
         }
+
     }
 
     private void FixedUpdate()
