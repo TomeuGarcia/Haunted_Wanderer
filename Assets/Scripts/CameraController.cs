@@ -27,6 +27,9 @@ public class CameraController : MonoBehaviour
 
     private float speed = 6.0f;
 
+    private const float offCamTime = 0.1f;
+    private float offCamTimer = 0f;
+
     // Components
     private PlayerController pc;
     private Rigidbody2D rb2;
@@ -47,10 +50,19 @@ public class CameraController : MonoBehaviour
     // Move Camera when followObject (Player) moves
     void FixedUpdate()
     {
+        // set camera position equal to player's position if it went out off view range
         if (pc.offCamera)
         {
             transform.position = new Vector3(follow.x, follow.y + groundLength, transform.position.z);
-            pc.offCamera = false;
+            if (offCamTimer < offCamTime)
+            {
+                offCamTimer += Time.deltaTime;
+                if (offCamTimer >= offCamTime)
+                {
+                    offCamTimer = 0f;
+                    pc.offCamera = false;
+                }
+            }
         }
 
 
@@ -75,7 +87,7 @@ public class CameraController : MonoBehaviour
 
 
 
-        // Update Camera's position evaluating folowObject's position with camera threshold
+        // Update Camera's position evaluating followObject's position with camera threshold
         Vector3 newPosition = transform.position;
         if ((Mathf.Abs(xDiff) >= threshold.x / 8.0f) && !moveHorizontally)
         {
@@ -90,6 +102,8 @@ public class CameraController : MonoBehaviour
             }
         }
 
+
+        // Move camera
         if ((!(Mathf.Abs(yDiff) <= threshold.y / 2.0f || (cameraOnGround && follow.y < transform.position.y))) && !moveVertically)
         {
             moveVertically = true;
@@ -101,6 +115,20 @@ public class CameraController : MonoBehaviour
             {
                 moveVertically = false;
             }
+        }
+
+
+
+        // camera follows object if there is no floor
+        if (!cameraOnGround)
+        {
+            newPosition.y = follow.y;
+        }
+        // 
+        if (cameraOnGround && Physics2D.Raycast(transform.position, Vector2.down, groundLength - 0.1f, groundLayer))
+        {
+            newPosition.y = newPosition.y + 0.1f;
+            transform.position = Vector3.MoveTowards(transform.position, newPosition, 100 * Time.deltaTime);
         }
 
 
