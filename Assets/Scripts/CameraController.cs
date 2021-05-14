@@ -69,6 +69,9 @@ public class CameraController : MonoBehaviour
         // Variable that keeps track of followObject's position
         follow = followObject.transform.position;
 
+        // Variable that makes the camera pass through the hole level
+        //follow = new Vector3(transform.position.x +5, transform.position.y, transform.position.z);
+
         // Calculate distance between camera-leftsideLimit and camera-rightsideLimit
         lLimitDist = Mathf.Abs(lLimit.transform.position.x - follow.x);
         rLimitDist = Mathf.Abs(rLimit.transform.position.x - follow.x);
