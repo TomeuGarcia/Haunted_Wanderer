@@ -5,92 +5,45 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     // Variables
-
-    private float moveSpeed = 12.0f;
-    private bool isMoving;
-    private Vector2 notActivePosition;
-    public Vector2 activePosition;
-    private Vector2 positionToMove;
+    //private Vector2 notActivePosition;
+    //public Vector2 activePosition;
+    //private Vector2 positionToMove;
 
 
-    // Enemy boolean flags (tags)
-    [Header("Platform Appears")]
-    [SerializeField] public bool isSpontaneous = false;
+    // Platform boolean flags (tags)
+    public bool isActive;
     [Header("Platform Exists When")]
     [SerializeField] public bool highSanity = false;
     [SerializeField] public bool mediumSanity = false;
     [SerializeField] public bool lowSanity = false;
 
-    //public bool platformIsActive;
-
-
     // Components
-    private SpriteRenderer sr;
+    //private SpriteRenderer sr;
 
 
     private void Start()
     {
-        isMoving = false;
-        if (isSpontaneous)
-        {
-            sr = GetComponent<SpriteRenderer>();
-            Color c = sr.material.color;
-            // a -> alpha (transparency: 0=transparent , 1=visible)
-            c.a = 1.0f;
-            sr.material.color = c;
-        }
-        else
-        {
-            notActivePosition = transform.position;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (isMoving)
-        {
-            movePlatform(positionToMove);
-            if ((Vector2)transform.position == positionToMove)
-            {
-                isMoving = false;
-                if (positionToMove == notActivePosition)
-                    gameObject.SetActive(false);
-            }
-        }
+        //sr = GetComponent<SpriteRenderer>();
+        //Color c = sr.material.color;
+        //// a -> alpha (transparency: 0=transparent , 1=visible)
+        //c.a = 1.0f;
+        //sr.material.color = c;
     }
 
 
     // OTHER methods
-    public void setActiveState(bool isActive)
+    public void setActiveState(bool active)
     {
-        if (isActive)
+        if (active)
         {
-            //platformIsActive = true;
-
+            isActive = true;
             gameObject.SetActive(true);
-            if (isSpontaneous)
-            {
-                startFadingIn();
-            }
-            else
-            {
-                isMoving = true;
-                positionToMove = activePosition;
-            }
+            startFadingIn();
         }
         else
         {
-            //platformIsActive = false;
-
-            if (isSpontaneous)
-            {
-                startFadingOut();
-            }
-            else
-            {
-                isMoving = true;
-                positionToMove = notActivePosition;
-            }
+            isActive = false;
+            startFadingOut();
             //gameObject.SetActive(false);
         }
     }
@@ -102,43 +55,39 @@ public class PlatformController : MonoBehaviour
     {
         for (float f = 0.05f; f <= 1.0f; f += 0.05f)
         {
-            Color c = sr.material.color;
-            c.a = f;
-            sr.material.color = c;
+            //Color c = sr.material.color;
+            //c.a = f;
+            //sr.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
     }
     void startFadingIn()
     {
-        StartCoroutine(fadeIn());
+        //StartCoroutine(fadeIn());
+        gameObject.SetActive(true);
     }
+
 
     // Fade out
     IEnumerator fadeOut()
     {
         for (float f = 1.0f; f >= -0.05f; f += -0.05f)
         {
-            Color c = sr.material.color;
-            c.a = f;
-            sr.material.color = c;
+            //Color c = sr.material.color;
+            //c.a = f;
+            //sr.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
         gameObject.SetActive(false);
     }
+
     void startFadingOut()
     {
-        StartCoroutine(fadeOut());
+        //StartCoroutine(fadeOut());
+        gameObject.SetActive(false);
     }
 
 
-    // Move platforms (methods called when isSpontaneous == false)
-    private void movePlatform(Vector2 positionToMove)
-    {
-        //positionToMove = new Vector2(25.25f, -1.5f);
-        //transform.position = Vector2.MoveTowards(transform.position, positionToMove, moveSpeed * Time.deltaTime);
-        //transform.Translate((positionToMove - (Vector2)transform.position) * moveSpeed * Time.deltaTime);
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(25f, 10f), moveSpeed * Time.deltaTime);
-    }
 
 
 }
