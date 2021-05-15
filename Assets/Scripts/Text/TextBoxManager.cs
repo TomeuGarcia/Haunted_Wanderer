@@ -26,7 +26,6 @@ public class TextBoxManager : MonoBehaviour
     private bool cancelTyping = false;
     public float typeSpeed;
 
-    public bool startedTyping = false;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +60,7 @@ public class TextBoxManager : MonoBehaviour
 
         //theText.text = textLines[currentLine];
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             if (!isTyping)
             {
@@ -69,7 +68,6 @@ public class TextBoxManager : MonoBehaviour
                 if (currentLine > endAtLine)
                 {
                     DisableTextBox();
-                    startedTyping = false;
                 }
                 else
                 {

@@ -28,9 +28,9 @@ public class ActivateTextAtLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waitForPress && Input.GetKeyDown(KeyCode.E) && !theTextBox.startedTyping)
+        if (waitForPress && Input.GetKeyDown(KeyCode.E))
         {
-            theTextBox.startedTyping = true;
+
             theTextBox.ReloadScript(theText);
             theTextBox.currentLine = startLine;
             theTextBox.endAtLine = endLine;
@@ -56,8 +56,7 @@ public class ActivateTextAtLine : MonoBehaviour
     {
         if(other.name == "Player")
         {
-            theTextBox.startedTyping = false;
-            theTextBox.DisableTextBox();
+            waitForPress = false;
         }
     }
 }
