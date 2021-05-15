@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public HPGained hpGained;
     //can move
     public bool canMove;
+    //particle system
+    public ParticleSystem dust;
 
     //public int currentSanity2;
     //public int maxSanity2 = 100;
@@ -33,8 +35,8 @@ public class PlayerController : MonoBehaviour
     private const float highMoveSpeed = 5f;
     private const float mediumMoveSpeed = 6f;
     private const float lowMoveSpeed = 7f;
-    private const float maxMoveSpeed = highMoveSpeed;
-    private float moveSpeed = maxMoveSpeed;
+    private float maxMoveSpeed = highMoveSpeed;
+    private float moveSpeed = highMoveSpeed;
     private Vector2 direction;
     private Vector2 onJumpDirection;
     private const float moveTime = 0.1f;
@@ -169,6 +171,7 @@ public class PlayerController : MonoBehaviour
         // JUMP
         if (Input.GetButtonDown("Jump") && onGround)
         {
+            CreateDust();
             hitCeiling = false;
             jumping = true;
             jumpTimer = 0f;
@@ -187,6 +190,7 @@ public class PlayerController : MonoBehaviour
         // (fall fester)
         else if (!onGround && !jumping)
         {
+            CreateDust();
             rb2.AddForce(Vector2.down * 2);
         }
 
@@ -327,6 +331,7 @@ public class PlayerController : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+        CreateDust();
     }
 
     // GETTER methods
@@ -366,19 +371,19 @@ public class PlayerController : MonoBehaviour
         switch (currentSanityState)
         {
             case SanityState.LOW:
-                moveSpeed = lowMoveSpeed;
+                maxMoveSpeed = lowMoveSpeed;
                 // test color red
                 //GetComponent<SpriteRenderer>().color = Color.red;
                 animator.SetInteger("Died", 2);
                 break;
             case SanityState.MEDIUM:
-                moveSpeed = mediumMoveSpeed;
+                maxMoveSpeed = mediumMoveSpeed;
                 // test color yellow
                 //GetComponent<SpriteRenderer>().color = Color.yellow;
                 animator.SetInteger("Died", 1);
                 break;
             case SanityState.HIGH:
-                moveSpeed = highMoveSpeed;
+                maxMoveSpeed = highMoveSpeed;
                 // test color white
                 //GetComponent<SpriteRenderer>().color = Color.white;
                 animator.SetInteger("Died", 0);
@@ -676,6 +681,11 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position + colliderOffset, transform.position + colliderOffset + Vector3.up * ceilingLength);
         Gizmos.DrawLine(transform.position - colliderOffset, transform.position - colliderOffset + Vector3.up * ceilingLength);
+    }
+
+    void CreateDust()
+    {
+        dust.Play();
     }
 
 }
