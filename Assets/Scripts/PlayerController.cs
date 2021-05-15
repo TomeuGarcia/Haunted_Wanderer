@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
     private const float highMoveSpeed = 5f;
     private const float mediumMoveSpeed = 6f;
     private const float lowMoveSpeed = 7f;
-    private const float maxMoveSpeed = highMoveSpeed;
-    private float moveSpeed = maxMoveSpeed;
+    private float maxMoveSpeed = highMoveSpeed;
+    private float moveSpeed = highMoveSpeed;
     private Vector2 direction;
     private Vector2 onJumpDirection;
     private const float moveTime = 0.1f;
@@ -371,19 +371,19 @@ public class PlayerController : MonoBehaviour
         switch (currentSanityState)
         {
             case SanityState.LOW:
-                moveSpeed = lowMoveSpeed;
+                maxMoveSpeed = lowMoveSpeed;
                 // test color red
                 //GetComponent<SpriteRenderer>().color = Color.red;
                 animator.SetInteger("Died", 2);
                 break;
             case SanityState.MEDIUM:
-                moveSpeed = mediumMoveSpeed;
+                maxMoveSpeed = mediumMoveSpeed;
                 // test color yellow
                 //GetComponent<SpriteRenderer>().color = Color.yellow;
                 animator.SetInteger("Died", 1);
                 break;
             case SanityState.HIGH:
-                moveSpeed = highMoveSpeed;
+                maxMoveSpeed = highMoveSpeed;
                 // test color white
                 //GetComponent<SpriteRenderer>().color = Color.white;
                 animator.SetInteger("Died", 0);
