@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public HPGained hpGained;
     //can move
     public bool canMove;
+    //particle system
+    public ParticleSystem dust;
 
     //public int currentSanity2;
     //public int maxSanity2 = 100;
@@ -169,6 +171,7 @@ public class PlayerController : MonoBehaviour
         // JUMP
         if (Input.GetButtonDown("Jump") && onGround)
         {
+            CreateDust();
             hitCeiling = false;
             jumping = true;
             jumpTimer = 0f;
@@ -187,6 +190,7 @@ public class PlayerController : MonoBehaviour
         // (fall fester)
         else if (!onGround && !jumping)
         {
+            CreateDust();
             rb2.AddForce(Vector2.down * 2);
         }
 
@@ -327,6 +331,7 @@ public class PlayerController : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+        CreateDust();
     }
 
     // GETTER methods
@@ -676,6 +681,11 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position + colliderOffset, transform.position + colliderOffset + Vector3.up * ceilingLength);
         Gizmos.DrawLine(transform.position - colliderOffset, transform.position - colliderOffset + Vector3.up * ceilingLength);
+    }
+
+    void CreateDust()
+    {
+        dust.Play();
     }
 
 }
