@@ -18,16 +18,16 @@ public class PlatformController : MonoBehaviour
     [SerializeField] public bool lowSanity = false;
 
     // Components
-    private SpriteRenderer sr;
+    //private SpriteRenderer sr;
 
 
     private void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
-        Color c = sr.material.color;
-        // a -> alpha (transparency: 0=transparent , 1=visible)
-        c.a = 1.0f;
-        sr.material.color = c;
+        //sr = GetComponent<SpriteRenderer>();
+        //Color c = sr.material.color;
+        //// a -> alpha (transparency: 0=transparent , 1=visible)
+        //c.a = 1.0f;
+        //sr.material.color = c;
     }
 
 
@@ -55,9 +55,9 @@ public class PlatformController : MonoBehaviour
     {
         for (float f = 0.05f; f <= 1.0f; f += 0.05f)
         {
-            Color c = sr.material.color;
-            c.a = f;
-            sr.material.color = c;
+            //Color c = sr.material.color;
+            //c.a = f;
+            //sr.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
     }
@@ -73,9 +73,9 @@ public class PlatformController : MonoBehaviour
     {
         for (float f = 1.0f; f >= -0.05f; f += -0.05f)
         {
-            Color c = sr.material.color;
-            c.a = f;
-            sr.material.color = c;
+            //Color c = sr.material.color;
+            //c.a = f;
+            //sr.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
         gameObject.SetActive(false);
