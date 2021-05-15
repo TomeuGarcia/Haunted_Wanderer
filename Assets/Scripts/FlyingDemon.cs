@@ -10,7 +10,7 @@ public class FlyingDemon : EnemyController
     private Vector2 waypointB;
 
     private const float bulletSpeed = 5f;
-    private const float shootCooldown = 2f;
+    private const float shootCooldown = 1.5f;
     private float shootTimer;
 
     // Component variables
@@ -23,8 +23,8 @@ public class FlyingDemon : EnemyController
     {
         damagePoints = 10;
         healthPoints = 1;
-        moveSpeed = 5.0f;
-        sightDistance = 12.0f;
+        moveSpeed = 7.0f;
+        sightDistance = 16.0f;
         shootTimer = 0f;
 
         waypointA = new Vector2(spawnPosition.x - movementDistance, spawnPosition.y);
