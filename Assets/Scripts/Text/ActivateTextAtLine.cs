@@ -26,7 +26,7 @@ public class ActivateTextAtLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waitForPress && Input.GetKeyDown(KeyCode.J))
+        if (waitForPress && Input.GetKeyDown(KeyCode.E))
         {
             theTextBox.ReloadScript(theText);
             theTextBox.currentLine = startLine;
