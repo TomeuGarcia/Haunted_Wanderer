@@ -17,6 +17,8 @@ public class ActivateTextAtLine : MonoBehaviour
     private bool waitForPress;
 
     public bool DestroyWhenActivated;
+    
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +28,9 @@ public class ActivateTextAtLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waitForPress && Input.GetKeyDown(KeyCode.J))
+        if (waitForPress && Input.GetKeyDown(KeyCode.E))
         {
+
             theTextBox.ReloadScript(theText);
             theTextBox.currentLine = startLine;
             theTextBox.endAtLine = endLine;
@@ -46,15 +49,6 @@ public class ActivateTextAtLine : MonoBehaviour
             {
                 waitForPress = true;
                 return;
-            }
-
-            theTextBox.ReloadScript(theText);
-            theTextBox.currentLine = startLine;
-            theTextBox.endAtLine = endLine;
-            theTextBox.EnableTextBox();
-            if (DestroyWhenActivated)
-            {
-                Destroy(gameObject);
             }
         }
     }
