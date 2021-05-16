@@ -107,6 +107,10 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
 
 
+    //shroom variables
+    private float shroomTimer = 0f;
+    private float shroomCooldown = 1.0f;
+
     void Start()
     {
         // Position
@@ -655,8 +659,34 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine("Invulnerable");
             }
         }
+        if (collision.CompareTag("MovingPlatform"))
+        {
+            //jumping = false;
+            transform.parent = collision.gameObject.transform;
+        }
     }
-
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Mushrooms"))
+        {
+            if (shroomTimer < shroomCooldown)
+            {
+                shroomTimer += Time.deltaTime;
+                if(shroomTimer >= shroomCooldown)
+                {
+                    loseSanity(2);
+                    shroomTimer = 0.0f;
+                }
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("MovingPlatform"))
+        {
+            transform.parent = null;
+        }
+    }
 
     IEnumerator Invulnerable()
     {
