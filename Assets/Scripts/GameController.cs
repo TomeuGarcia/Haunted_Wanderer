@@ -17,19 +17,10 @@ public class GameController : MonoBehaviour
 
     // Enemies
     private GameObject[] sceneEnemies;
-    /*
-    public GameObject[] highSanityEnemies;
-    public GameObject[] mediumSanityEnemies;
-    public GameObject[] lowSanityEnemies;
-    */
-
     // Platforms
     private GameObject[] scenePlatforms;
-    /*
-    public GameObject[] highSanityPlatforms;
-    public GameObject[] mediumSanityPlatforms;
-    public GameObject[] lowSanityPlatforms;
-    */
+    // Hazards
+    private GameObject[] sceneHazards;
 
     // Flags
     private int playerSanityState;
@@ -57,12 +48,18 @@ public class GameController : MonoBehaviour
             e.GetComponent<EnemyController>().setActiveState(false);
         }
 
-
         // SET PLATFORMS
         scenePlatforms = GameObject.FindGameObjectsWithTag("Platform");
         foreach (GameObject p in scenePlatforms)
         {
             p.GetComponent<PlatformController>().setActiveState(false);
+        }
+
+        // SET HAZARDS
+        sceneHazards = GameObject.FindGameObjectsWithTag("Hazard");
+        foreach (GameObject h in sceneHazards)
+        {
+            h.GetComponent<HazardController>().setActiveState(false);
         }
 
         // FLAGS
@@ -82,7 +79,7 @@ public class GameController : MonoBehaviour
     {
         if (myPlayer.getCurrentSanity() == 0)
         {
-            reactivateScene();
+            StartCoroutine(waitReactiveScene());
             return;
         }
 
@@ -92,7 +89,8 @@ public class GameController : MonoBehaviour
             myPlayer.loseSanityViaTime();
             myPlayer.updateSanityState();
             myPlayer.updateMovementSpeed();
-            updateScenary();
+            if (myPlayer.canUpdateSanity)
+                updateScenary();
         }
     }
 
@@ -101,6 +99,7 @@ public class GameController : MonoBehaviour
     private void updateScenary()
     {
         PlayerController.SanityState sanity = myPlayer.getSanityState();
+
         // HIGH SANITY
         if (playerSanityState != 1 && sanity == PlayerController.SanityState.HIGH)
         {
@@ -110,9 +109,9 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsHighSanity)
+                if (ec.canSpawn && ec.spawnsHighSanity)
                     ec.setActiveState(true);    
-                else
+                else if (!ec.highSanity)
                     ec.setActiveState(false);
             }
 
@@ -120,16 +119,29 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (pc.spawnsHighSanity)
+                if (!pc.isActive && pc.highSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(true);
+                    pc.setActiveState(true);
                 }
-                else
+                else if (!pc.highSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(false);
+                    pc.setActiveState(false);
                 }
             }
-            
+
+            // HAZARDS
+            foreach (GameObject h in sceneHazards)
+            {
+                PlatformController hc = h.GetComponent<PlatformController>();
+                if (!hc.isActive && hc.highSanity)
+                {
+                    hc.setActiveState(true);
+                }
+                else if (!hc.highSanity)
+                {
+                    hc.setActiveState(false);
+                }
+            }
         }
         // MEDIUM SANITY
         else if (playerSanityState != 2 && sanity == PlayerController.SanityState.MEDIUM)
@@ -140,9 +152,9 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsMediumSanity)
+                if (ec.canSpawn && ec.spawnsMediumSanity)
                     ec.setActiveState(true);
-                else if (!ec.spawnsHighSanity && !ec.spawnsMediumSanity && ec.spawnsLowSanity)
+                else if (!ec.mediumSanity)
                     ec.setActiveState(false);
             }
 
@@ -150,17 +162,29 @@ public class GameController : MonoBehaviour
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (!pc.spawnsHighSanity && pc.spawnsMediumSanity)
+                if (!pc.isActive && pc.mediumSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(true);
+                    pc.setActiveState(true);
                 }
-                else if (!pc.spawnsMediumSanity)
+                else if (!pc.mediumSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(false);
+                    pc.setActiveState(false);
                 }
             }
 
-
+            // HAZARDS
+            foreach (GameObject h in sceneHazards)
+            {
+                PlatformController hc = h.GetComponent<PlatformController>();
+                if (!hc.isActive && hc.mediumSanity)
+                {
+                    hc.setActiveState(true);
+                }
+                else if (!hc.mediumSanity)
+                {
+                    hc.setActiveState(false);
+                }
+            }
         }
         // LOW SANITY
         else if (playerSanityState != 3 && sanity == PlayerController.SanityState.LOW)
@@ -171,21 +195,37 @@ public class GameController : MonoBehaviour
             foreach (GameObject e in sceneEnemies)
             {
                 EnemyController ec = e.GetComponent<EnemyController>();
-                if (ec.spawnsLowSanity)
+                if (ec.canSpawn && ec.spawnsLowSanity)
                     ec.setActiveState(true);
+                else if (!ec.lowSanity)
+                    ec.setActiveState(false);
             }
 
             // PLATFORMS
             foreach (GameObject p in scenePlatforms)
             {
                 PlatformController pc = p.GetComponent<PlatformController>();
-                if (!pc.spawnsLowSanity && !pc.spawnsMediumSanity && pc.spawnsLowSanity)
+                if (!pc.isActive && pc.lowSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(true);
+                    pc.setActiveState(true);
                 }
-                else if (!pc.spawnsLowSanity)
+                else if (!pc.lowSanity)
                 {
-                    p.GetComponent<PlatformController>().setActiveState(false);
+                    pc.setActiveState(false);
+                }
+            }
+
+            // HAZARDS
+            foreach (GameObject h in sceneHazards)
+            {
+                PlatformController hc = h.GetComponent<PlatformController>();
+                if (!hc.isActive && hc.lowSanity)
+                {
+                    hc.setActiveState(true);
+                }
+                else if (!hc.lowSanity)
+                {
+                    hc.setActiveState(false);
                 }
             }
 
@@ -201,5 +241,15 @@ public class GameController : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
+    IEnumerator waitReactiveScene()
+    {
+ 
+        yield return new WaitForSeconds(0.9f);
+        reactivateScene();
+    }
+
+
 
 }
+
+

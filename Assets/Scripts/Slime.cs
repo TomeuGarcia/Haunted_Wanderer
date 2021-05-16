@@ -8,9 +8,18 @@ public class Slime : EnemyController
     private const float moveCooldown = 1.5f;
     private float moveTimer;
 
+    private bool onGround = false;
+    private const float groundLength = 1.6f;
+
+    private bool onWall = false;
+    private const float wallLength = 0.6f;
+
     // Component variables
     private Rigidbody2D rb2;
+    public LayerMask groundLayer;
 
+    //Animiator
+    public Animator animator;
 
     void Start()
     {
@@ -24,10 +33,28 @@ public class Slime : EnemyController
         rb2 = GetComponent<Rigidbody2D>();
     }
 
-
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        move();
+        onWall = Physics2D.Raycast(transform.position, Vector2.right, wallLength, groundLayer) ||
+                 Physics2D.Raycast(transform.position, Vector2.left, wallLength, groundLayer);
+
+        if (onWall && !onGround)
+            rb2.velocity = new Vector2(0, -5);
+
+        if (!onGround && Physics2D.Raycast(transform.position, Vector2.down, groundLength, groundLayer))
+            rb2.velocity = new Vector2(0, 0);
+
+        onGround = Physics2D.Raycast(transform.position, Vector2.down, groundLength, groundLayer);
+        if (onGround)
+        {
+            rb2.gravityScale = 0;
+            move();
+
+        }
+        else
+        {
+            rb2.gravityScale = 1;
+        }
     }
 
 
@@ -37,10 +64,12 @@ public class Slime : EnemyController
         // Move if player is within range of sightDistance
         if (Mathf.Abs(vectorEnemyPlayer.magnitude) < sightDistance)
         {
+            animator.SetBool("IsJumping", false);
             // Slime moves (jumps) once every moveCooldown (1.5 seconds)
             moveTimer += Time.deltaTime;
-            if (moveTimer >= moveCooldown)
+            if (moveTimer >= moveCooldown && onGround)
             {
+                animator.SetBool("IsJumping", true);
                 // Move to the right if player is located to the right of the Slmie
                 if (vectorEnemyPlayer.x > 0)
                 {
@@ -55,6 +84,5 @@ public class Slime : EnemyController
             }
         }
     }
-
 
 }
