@@ -11,8 +11,12 @@ public class Slime : EnemyController
     private bool onGround = false;
     private const float groundLength = 1.6f;
 
+    private bool onRightWall = false;
+    private bool onLeftWall = false;
     private bool onWall = false;
     private const float wallLength = 0.6f;
+    private bool facingRight = true;
+    private bool cantMove = false;
 
     // Component variables
     private Rigidbody2D rb2;
@@ -35,8 +39,12 @@ public class Slime : EnemyController
 
     private void FixedUpdate()
     {
-        onWall = Physics2D.Raycast(transform.position, Vector2.right, wallLength, groundLayer) ||
-                 Physics2D.Raycast(transform.position, Vector2.left, wallLength, groundLayer);
+        onRightWall = Physics2D.Raycast(transform.position, Vector2.right, wallLength, groundLayer);
+        onLeftWall = Physics2D.Raycast(transform.position, Vector2.left, wallLength, groundLayer);
+        onWall = onRightWall || onLeftWall;   
+        facingRight = player.transform.position.x > transform.position.x;
+        cantMove = (facingRight && onRightWall) || (!facingRight && onLeftWall);
+
 
         if (onWall && !onGround)
             rb2.velocity = new Vector2(0, -5);
@@ -48,7 +56,8 @@ public class Slime : EnemyController
         if (onGround)
         {
             rb2.gravityScale = 0;
-            move();
+            if (!cantMove)
+                move();
 
         }
         else
@@ -74,11 +83,13 @@ public class Slime : EnemyController
                 if (vectorEnemyPlayer.x > 0)
                 {
                     rb2.velocity = new Vector2(moveSpeed, jumpSpeed);
+                    facingRight = true;
                 }
                 // Move to the left if player is located to the left of the Slmie
                 else
                 {
                     rb2.velocity = new Vector2(-moveSpeed, jumpSpeed);
+                    facingRight = false;
                 }
                 moveTimer = 0.0f;
             }

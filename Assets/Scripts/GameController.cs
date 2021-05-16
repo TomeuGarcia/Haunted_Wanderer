@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class GameController : MonoBehaviour
 {
     // Singleton
@@ -27,7 +28,6 @@ public class GameController : MonoBehaviour
     // 1 = SanityState changed to HIGH
     // 2 = SanityState changed to MEDIUM
     // 3 = SanityState changed to LOW
-
 
     // SINGLETON
     private void Awake()
@@ -241,14 +241,12 @@ public class GameController : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
+
     IEnumerator waitReactiveScene()
     {
- 
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(1f);
         reactivateScene();
     }
-
-
 
 }
 
