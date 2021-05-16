@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EndLevel : MonoBehaviour
 {
     private bool entered = false;
-    
+    public Image myImage;
+
 
     private void Update()
     {
@@ -27,12 +29,18 @@ public class EndLevel : MonoBehaviour
 
     IEnumerator EndLvl()
     {
-        for (float f = 1.0f; f >= -0.05f; f += -0.05f)
+        for (float f = 0.0f; f <= 1.05f; f += 0.05f)
         {
+            Color c = myImage.color;
+            c.a = f;
+            myImage.color = c;
             yield return new WaitForSeconds(0.05f);
         }
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // go to main menu
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        if (SceneManager.GetActiveScene().buildIndex < 2)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+            SceneManager.LoadScene(0);
     }
 }
