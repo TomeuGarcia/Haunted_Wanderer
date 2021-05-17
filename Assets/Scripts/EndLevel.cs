@@ -38,7 +38,7 @@ public class EndLevel : MonoBehaviour
         }
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // go to main menu
-        if (SceneManager.GetActiveScene().buildIndex < 2)
+        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         else
             SceneManager.LoadScene(0);
