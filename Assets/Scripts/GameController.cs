@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class GameController : MonoBehaviour
@@ -25,9 +26,20 @@ public class GameController : MonoBehaviour
 
     // Flags
     private int playerSanityState;
-    // 1 = SanityState changed to HIGH
-    // 2 = SanityState changed to MEDIUM
-    // 3 = SanityState changed to LOW
+    // 0 = SanityState changed to HIGH
+    // 1 = SanityState changed to MEDIUM
+    // 2 = SanityState changed to LOW
+
+    private bool sanityUp = false;
+    private bool sanityDown = false;
+    [Header("UI Elements")]
+    [SerializeField] public Image SanityChangeVFX;
+    [Header("Audio Elements")]
+    [SerializeField] public AudioSource audio;
+    [SerializeField] public AudioClip SanityUp;
+    [SerializeField] public AudioClip SanityDown;
+
+
 
     // SINGLETON
     private void Awake()
@@ -65,6 +77,11 @@ public class GameController : MonoBehaviour
         // FLAGS
         // 0 = NONE
         playerSanityState = 0;
+
+        Color c = SanityChangeVFX.color;
+        c.a = 0f;
+        SanityChangeVFX.color = c;
+        audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -99,11 +116,18 @@ public class GameController : MonoBehaviour
     private void updateScenary()
     {
         PlayerController.SanityState sanity = myPlayer.getSanityState();
+        sanityUp = playerSanityState > (int)sanity;
+        sanityDown = playerSanityState < (int)sanity;
+        if (sanityUp || sanityDown) {
+            StartCoroutine(sanityChangeEffect());
+            //sanityUp = sanityDown = false;
+        }
+            
 
         // HIGH SANITY
         if (playerSanityState != 1 && sanity == PlayerController.SanityState.HIGH)
         {
-            playerSanityState = 1;
+            playerSanityState = 0;
 
             // ENEMIES
             foreach (GameObject e in sceneEnemies)
@@ -146,7 +170,7 @@ public class GameController : MonoBehaviour
         // MEDIUM SANITY
         else if (playerSanityState != 2 && sanity == PlayerController.SanityState.MEDIUM)
         {
-            playerSanityState = 2;
+            playerSanityState = 1;
 
             // ENEMIES
             foreach (GameObject e in sceneEnemies)
@@ -189,7 +213,7 @@ public class GameController : MonoBehaviour
         // LOW SANITY
         else if (playerSanityState != 3 && sanity == PlayerController.SanityState.LOW)
         {
-            playerSanityState = 3;
+            playerSanityState = 2;
 
             // ENEMIES
             foreach (GameObject e in sceneEnemies)
@@ -231,6 +255,8 @@ public class GameController : MonoBehaviour
 
         }
 
+        //if (sanityChanging) StartCoroutine(sanityChangeEffect());
+
     }
 
 
@@ -248,6 +274,30 @@ public class GameController : MonoBehaviour
         reactivateScene();
     }
 
+    IEnumerator sanityChangeEffect() {
+        if (sanityUp) audio.PlayOneShot(SanityUp, 0.5f);
+        else if (sanityDown) audio.PlayOneShot(SanityDown, 0.5f);
+        //sanityUp = false;
+        //sanityDown = false;
+        //sanityChanging = false;
+
+        float f = 0.0f;
+        for (; f <= 0.55f; f += 0.05f)
+        {
+            Color c = SanityChangeVFX.color;
+            c.a = f;
+            SanityChangeVFX.color = c;
+            yield return new WaitForSeconds(0.05f);
+        }
+        for (; f >= -0.05f; f -= 0.05f)
+        {
+            Color c = SanityChangeVFX.color;
+            c.a = f;
+            SanityChangeVFX.color = c;
+            yield return new WaitForSeconds(0.05f);
+        }
+        doneChanging = true;
+    }
 }
 
 
