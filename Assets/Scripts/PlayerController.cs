@@ -43,9 +43,9 @@ public class PlayerController : MonoBehaviour
     private float moveTimer = 0f;
 
     // Jump
-    private const float maxJumpForce = 7f;
+    private const float maxJumpForce = 9f;
     private float jumpForce = maxJumpForce;
-    private const float jumpTime = 1.0f;
+    private const float jumpTime = 0.4f;
     private float jumpTimer = 0f;
     private bool onGround;
     private bool jumping = false;
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
         else if (!onGround && !jumping)
         {
             CreateDust();
-            rb2.AddForce(Vector2.down * 2);
+            rb2.AddForce(Vector2.down * 3);
         }
 
         //// Start jump timer when Space key is pressed
