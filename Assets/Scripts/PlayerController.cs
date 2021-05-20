@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     // Jump
     private const float maxJumpForce = 9f;
     private float jumpForce = maxJumpForce;
-    private const float jumpTime = 0.4f;
+    private const float jumpTime = 0.3f;
     private float jumpTimer = 0f;
     private bool onGround;
     private bool jumping = false;
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private float groundLength = 1.5f;
     private float ceilingLength = 1.05f;
     private bool hitCeiling;
+    private float startMass;
 
     // Jump (movement) variables
     //private bool onWall = false;
@@ -146,7 +147,7 @@ public class PlayerController : MonoBehaviour
         c2 = GetComponent<Collider2D>();
         r = GetComponent<Renderer>();
         c = r.material.color;
-
+        startMass = rb2.mass;
         //Dash
         //dashTime = startDashTime;
     }
@@ -235,7 +236,12 @@ public class PlayerController : MonoBehaviour
         }
 
         if (onGround)
+        {
             hitCeiling = false;
+            //rb2.gravityScale = 1f;
+            rb2.mass = startMass;
+        }
+            
         if (hitCeiling)
         {
             //rb2.velocity = new Vector2(rb2.velocity.x, - maxJumpForce);
@@ -547,7 +553,9 @@ public class PlayerController : MonoBehaviour
         {
             rb2.velocity = new Vector2(rb2.velocity.x, jumpForce);
             jumpTimer += Time.deltaTime;
-            jumpForce -= maxJumpForce * Time.deltaTime;
+            //jumpForce -= maxJumpForce * Time.deltaTime;
+            //rb2.gravityScale += 0.2f;
+            rb2.mass += 0.2f;
         }
         else
             jumping = false;
