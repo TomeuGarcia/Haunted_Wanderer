@@ -6201,6 +6201,8 @@ MonoBehaviour:
   audio: {fileID: 643843913}
   SanityUp: {fileID: 8300000, guid: 7c6acb71315888348a9f79fb85ac7f1e, type: 3}
   SanityDown: {fileID: 8300000, guid: 9367d12812dae6743beda0e314daa27c, type: 3}
+  deadSound01: {fileID: 8300000, guid: 88f387d288fa7694b9c10980c80c31ca, type: 3}
+  deadSound02: {fileID: 8300000, guid: bc7c4fdd4d61950438f44e938313a2ee, type: 3}
 --- !u!82 &643843913
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6213,7 +6215,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.701
   m_Pitch: 1
   Loop: 0
   Mute: 0

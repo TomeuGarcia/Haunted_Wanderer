@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Audio Elements")]
     [SerializeField] public AudioSource audio;
-    [SerializeField] public AudioClip hurtedSound;
+    [SerializeField] public AudioClip hurtedSound01;
 
     void Start()
     {
@@ -396,7 +396,7 @@ public class PlayerController : MonoBehaviour
                 //GetComponent<SpriteRenderer>().color = Color.white;
                 animator.SetInteger("Died", 0);
                 break;
-        }
+        }        
     }
 
     // Function that adds gainAmount of Sanity to player, Sanity cannot be equal or greater than maxSanity
@@ -618,7 +618,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                // >>> play hurt sound here
+                audio.PlayOneShot(hurtedSound01);
                 // hurt player
                 loseSanity(enemy.damagePoints);
                 // reset player's sanityLossLimiter

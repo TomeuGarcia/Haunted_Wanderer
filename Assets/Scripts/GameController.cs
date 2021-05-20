@@ -38,6 +38,8 @@ public class GameController : MonoBehaviour
     [SerializeField] public AudioSource audio;
     [SerializeField] public AudioClip SanityUp;
     [SerializeField] public AudioClip SanityDown;
+    [SerializeField] public AudioClip deadSound01;
+    [SerializeField] public AudioClip deadSound02;
 
 
 
@@ -128,6 +130,7 @@ public class GameController : MonoBehaviour
     {
         if (myPlayer.getCurrentSanity() == 0)
         {
+            audio.PlayOneShot(deadSound02, 0.03f);
             StartCoroutine(waitReactiveScene());
             return;
         }
@@ -281,7 +284,11 @@ public class GameController : MonoBehaviour
 
     IEnumerator sanityChangeEffect() {
         if (sanityUp) audio.PlayOneShot(SanityUp, 0.35f);
-        else if (sanityDown) audio.PlayOneShot(SanityDown, 0.5f);
+        else if (sanityDown)
+        {
+            audio.PlayOneShot(SanityDown, 0.5f);
+            audio.PlayOneShot(deadSound01, 0.7f);
+        }
 
         float f = 0.0f;
         for (; f <= 0.55f; f += 0.05f)
