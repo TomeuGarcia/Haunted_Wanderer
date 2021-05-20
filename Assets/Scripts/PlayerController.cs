@@ -111,6 +111,10 @@ public class PlayerController : MonoBehaviour
     private float shroomTimer = 0f;
     private float shroomCooldown = 1.0f;
 
+    [Header("Audio Elements")]
+    [SerializeField] public AudioSource audio;
+    [SerializeField] public AudioClip hurtedSound;
+
     void Start()
     {
         // Position
@@ -600,19 +604,8 @@ public class PlayerController : MonoBehaviour
             canUpdateSanity = true;
         }
 
-        // Add Golden apple power up for player to use
-        else if (collision.CompareTag("GoldenApple") && !hasGApple)
-        {
-            GoldenApple ga = collision.GetComponent<GoldenApple>();
-            hasGApple = true;
-            healValue = ga.healingPoints;
-            Destroy(collision.gameObject);
-            goldenAppleSprite1.SetActive(false);
-            goldenAppleSprite2.SetActive(true);
-        }
-
-        // Check if Collided with player
-        if (collision.CompareTag("Enemy") && !isImmune)
+        // Check if Collided with enemy
+        else if (collision.CompareTag("Enemy") && !isImmune)
         {
             EnemyController enemy = collision.GetComponent<EnemyController>();
             // if player jumped on top "kill" enemy
@@ -625,6 +618,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                // >>> play hurt sound here
                 // hurt player
                 loseSanity(enemy.damagePoints);
                 // reset player's sanityLossLimiter
@@ -678,6 +672,16 @@ public class PlayerController : MonoBehaviour
                     shroomTimer = 0.0f;
                 }
             }
+        }
+        // Add Golden apple power up for player to use
+        else if (collision.CompareTag("GoldenApple") && !hasGApple)
+        {
+            GoldenApple ga = collision.GetComponent<GoldenApple>();
+            hasGApple = true;
+            healValue = ga.healingPoints;
+            Destroy(collision.gameObject);
+            goldenAppleSprite1.SetActive(false);
+            goldenAppleSprite2.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
