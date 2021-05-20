@@ -27,9 +27,6 @@ public class CameraController : MonoBehaviour
 
     private float speed = 6.0f;
 
-    private const float offCamTime = 0.1f;
-    private float offCamTimer = 0f;
-
     // Components
     private PlayerController pc;
     private Rigidbody2D rb2;
@@ -52,24 +49,13 @@ public class CameraController : MonoBehaviour
     {
         // set camera position equal to player's position if it went out off view range
         if (pc.offCamera)
-        {
-            transform.position = new Vector3(follow.x, follow.y + groundLength, transform.position.z);
-            if (offCamTimer < offCamTime)
-            {
-                offCamTimer += Time.deltaTime;
-                if (offCamTimer >= offCamTime)
-                {
-                    offCamTimer = 0f;
-                    pc.offCamera = false;
-                }
-            }
-        }
+            StartCoroutine(FocusFollow());
 
 
         // Variable that keeps track of followObject's position
         follow = followObject.transform.position;
 
-        // Variable that makes the camera pass through the hole level
+        // Variable that makes the camera pass through the hole level ("cinematic")
         //follow = new Vector3(transform.position.x +5, transform.position.y, transform.position.z);
 
         // Calculate distance between camera-leftsideLimit and camera-rightsideLimit
@@ -154,6 +140,15 @@ public class CameraController : MonoBehaviour
         t.x -= followOffset.x;
         t.y -= followOffset.y;
         return t;
+    }
+
+    IEnumerator FocusFollow()
+    {
+        //pc.canMove = false;
+        transform.position = new Vector3(follow.x, follow.y + groundLength - 1.1f, transform.position.z);
+        yield return new WaitForSeconds(0.2f);
+        //pc.canMove = true;
+        pc.offCamera = false;
     }
 
 

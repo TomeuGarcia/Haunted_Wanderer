@@ -26,6 +26,7 @@ public class TextBoxManager : MonoBehaviour
     private bool cancelTyping = false;
     public float typeSpeed;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,7 +100,7 @@ public class TextBoxManager : MonoBehaviour
     {
         textBox.SetActive(true);
         isActive = true;
-        if (StopPlayerMovement)
+       if (StopPlayerMovement)
         {
             player.canMove = false;
         }

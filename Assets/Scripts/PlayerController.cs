@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public HPGained hpGained;
     //can move
     public bool canMove;
+    //particle system
+    public ParticleSystem dust;
 
     //public int currentSanity2;
     //public int maxSanity2 = 100;
@@ -33,17 +35,17 @@ public class PlayerController : MonoBehaviour
     private const float highMoveSpeed = 5f;
     private const float mediumMoveSpeed = 6f;
     private const float lowMoveSpeed = 7f;
-    private const float maxMoveSpeed = highMoveSpeed;
-    private float moveSpeed = maxMoveSpeed;
+    private float maxMoveSpeed = highMoveSpeed;
+    private float moveSpeed = highMoveSpeed;
     private Vector2 direction;
     private Vector2 onJumpDirection;
     private const float moveTime = 0.1f;
     private float moveTimer = 0f;
 
     // Jump
-    private const float maxJumpForce = 7f;
+    private const float maxJumpForce = 9f;
     private float jumpForce = maxJumpForce;
-    private const float jumpTime = 1.0f;
+    private const float jumpTime = 0.4f;
     private float jumpTimer = 0f;
     private bool onGround;
     private bool jumping = false;
@@ -97,13 +99,21 @@ public class PlayerController : MonoBehaviour
     public GameObject goldenAppleSprite2;
 
     //Dash
-    public float dashSpeed;
+    //public float dashSpeed;
     //private float dashTime;
-    public float startDashTime;
+    //public float startDashTime;
 
     //Animations
     public Animator animator;
 
+
+    //shroom variables
+    private float shroomTimer = 0f;
+    private float shroomCooldown = 1.0f;
+
+    [Header("Audio Elements")]
+    [SerializeField] public AudioSource audio;
+    [SerializeField] public AudioClip hurtedSound01;
 
     void Start()
     {
@@ -169,6 +179,7 @@ public class PlayerController : MonoBehaviour
         // JUMP
         if (Input.GetButtonDown("Jump") && onGround)
         {
+            CreateDust();
             hitCeiling = false;
             jumping = true;
             jumpTimer = 0f;
@@ -187,7 +198,8 @@ public class PlayerController : MonoBehaviour
         // (fall fester)
         else if (!onGround && !jumping)
         {
-            rb2.AddForce(Vector2.down * 2);
+            CreateDust();
+            rb2.AddForce(Vector2.down * 3);
         }
 
         //// Start jump timer when Space key is pressed
@@ -303,21 +315,21 @@ public class PlayerController : MonoBehaviour
         }
 
         //Dash
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            if (!facingRight)
-            {
-                rb2.velocity = new Vector2(0, rb2.velocity.y);
-                //rb2.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 10, transform.position.y, transform.position.z), Time.deltaTime*100);
-            }
-            else
-            {
-                rb2.velocity = new Vector2(0, rb2.velocity.y);
-                //rb2.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Time.deltaTime*100);
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //{
+        //    if (!facingRight)
+        //    {
+        //        rb2.velocity = new Vector2(0, rb2.velocity.y);
+        //        //rb2.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
+        //        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 10, transform.position.y, transform.position.z), Time.deltaTime*100);
+        //    }
+        //    else
+        //    {
+        //        rb2.velocity = new Vector2(0, rb2.velocity.y);
+        //        //rb2.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+        //        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Time.deltaTime*100);
+        //    }
+        //}
     }
 
     //Function to change the direction the sprite is loocking
@@ -327,6 +339,7 @@ public class PlayerController : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+        CreateDust();
     }
 
     // GETTER methods
@@ -366,24 +379,24 @@ public class PlayerController : MonoBehaviour
         switch (currentSanityState)
         {
             case SanityState.LOW:
-                moveSpeed = lowMoveSpeed;
+                maxMoveSpeed = lowMoveSpeed;
                 // test color red
                 //GetComponent<SpriteRenderer>().color = Color.red;
                 animator.SetInteger("Died", 2);
                 break;
             case SanityState.MEDIUM:
-                moveSpeed = mediumMoveSpeed;
+                maxMoveSpeed = mediumMoveSpeed;
                 // test color yellow
                 //GetComponent<SpriteRenderer>().color = Color.yellow;
                 animator.SetInteger("Died", 1);
                 break;
             case SanityState.HIGH:
-                moveSpeed = highMoveSpeed;
+                maxMoveSpeed = highMoveSpeed;
                 // test color white
                 //GetComponent<SpriteRenderer>().color = Color.white;
                 animator.SetInteger("Died", 0);
                 break;
-        }
+        }        
     }
 
     // Function that adds gainAmount of Sanity to player, Sanity cannot be equal or greater than maxSanity
@@ -591,19 +604,8 @@ public class PlayerController : MonoBehaviour
             canUpdateSanity = true;
         }
 
-        // Add Golden apple power up for player to use
-        else if (collision.CompareTag("GoldenApple") && !hasGApple)
-        {
-            GoldenApple ga = collision.GetComponent<GoldenApple>();
-            hasGApple = true;
-            healValue = ga.healingPoints;
-            Destroy(collision.gameObject);
-            goldenAppleSprite1.SetActive(false);
-            goldenAppleSprite2.SetActive(true);
-        }
-
-        // Check if Collided with player
-        if (collision.CompareTag("Enemy") && !isImmune)
+        // Check if Collided with enemy
+        else if (collision.CompareTag("Enemy") && !isImmune)
         {
             EnemyController enemy = collision.GetComponent<EnemyController>();
             // if player jumped on top "kill" enemy
@@ -616,6 +618,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                audio.PlayOneShot(hurtedSound01);
                 // hurt player
                 loseSanity(enemy.damagePoints);
                 // reset player's sanityLossLimiter
@@ -650,8 +653,44 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine("Invulnerable");
             }
         }
+        if (collision.CompareTag("MovingPlatform"))
+        {
+            //jumping = false;
+            transform.parent = collision.gameObject.transform;
+        }
     }
-
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Mushrooms"))
+        {
+            if (shroomTimer < shroomCooldown)
+            {
+                shroomTimer += Time.deltaTime;
+                if(shroomTimer >= shroomCooldown)
+                {
+                    loseSanity(2);
+                    shroomTimer = 0.0f;
+                }
+            }
+        }
+        // Add Golden apple power up for player to use
+        else if (collision.CompareTag("GoldenApple") && !hasGApple)
+        {
+            GoldenApple ga = collision.GetComponent<GoldenApple>();
+            hasGApple = true;
+            healValue = ga.healingPoints;
+            Destroy(collision.gameObject);
+            goldenAppleSprite1.SetActive(false);
+            goldenAppleSprite2.SetActive(true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("MovingPlatform"))
+        {
+            transform.parent = null;
+        }
+    }
 
     IEnumerator Invulnerable()
     {
@@ -676,6 +715,11 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position + colliderOffset, transform.position + colliderOffset + Vector3.up * ceilingLength);
         Gizmos.DrawLine(transform.position - colliderOffset, transform.position - colliderOffset + Vector3.up * ceilingLength);
+    }
+
+    void CreateDust()
+    {
+        dust.Play();
     }
 
 }
