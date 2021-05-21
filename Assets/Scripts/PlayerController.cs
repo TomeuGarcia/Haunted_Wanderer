@@ -17,19 +17,7 @@ public class PlayerController : MonoBehaviour
     //particle system
     public ParticleSystem dust;
 
-    //public int currentSanity2;
-    //public int maxSanity2 = 100;
-
-    //// Movement variables
-    //private const float moveSpeed = 6.0f;
-    //private const float moveSpeedHigh = moveSpeed;
-    //private const float moveSpeedMedium = moveSpeed * 1.35f;
-    //private const float moveSpeedLow = moveSpeed * 1.7f;
-    //private float currentMoveSpeed;
     private bool facingRight = true;
-    //// Movement physics variables
-    //private Vector2 direction;
-    //private float linearDrag = 4.0f;
 
     // Movement
     private const float highMoveSpeed = 5f;
@@ -54,23 +42,6 @@ public class PlayerController : MonoBehaviour
     private float ceilingLength = 1.05f;
     private bool hitCeiling;
     private float startMass;
-
-    // Jump (movement) variables
-    //private bool onWall = false;
-    //private const float jumpSpeed = 10.0f;
-    //private float currentJumpSpeed;
-    //private const float wallLenght = 0.6f;
-    //private Vector3 wallColliderOffset = new Vector3(0.0f, 0.5f, 0.0f);
-
-    // Jump (movement) physics variables
-    //private bool onGround = false;
-    //private const float groundLength = 1.4f;
-    //private Vector3 groundColliderOffset = new Vector3(0.45f, 0.0f, 0.0f);
-    //private float gravity = 1.0f;
-    //private float fallMultiplier = 5.0f;
-    //private float jumpDelay = 0.25f;
-    //private float jumpTimer = 0.0f;
-    //public int jumpDirection = 0; // jumped left direction = -1 ; jumped no direction = 0 ; jumped right direction = 1
 
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
@@ -122,10 +93,6 @@ public class PlayerController : MonoBehaviour
         respawnPosition = transform.position;
         offCamera = false;
 
-        // Movement
-        //currentMoveSpeed = moveSpeedLow;
-        //currentJumpSpeed = jumpSpeed;
-
         // Sanity
         currentSanityState = SanityState.HIGH;
         canUpdateSanity = true;
@@ -155,15 +122,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    Time.timeScale = 0;
-        //}
-        //else
-        //{
-        //    Time.timeScale = 1;
-        //}
-
         if (!canMove)
         {
             return;
@@ -191,60 +149,32 @@ public class PlayerController : MonoBehaviour
             jumping = false;
 
         if (jumping)
-        {
-            //jumpTimer = Time.time + jumpDelay; 
             jump();
-        }
 
-        // (fall fester)
         else if (!onGround && !jumping)
-        {
             CreateDust();
-            rb2.AddForce(Vector2.down * 3);
-        }
-
-        //// Start jump timer when Space key is pressed
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    jumpTimer = Time.time + jumpDelay;
-        //}
 
         // MOVE
         // Get direction from input
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        // 
+        
         if (direction.x != 0)
-        {
-            //moveSpeed = maxMoveSpeed;
-            //move(direction);
             move();
-        }
         else
         {
             if (onGround)
-            {
-                //move(new Vector2(0f, rb2.velocity.y));
-                //move(direction);
                 move();
-            }
-            else if (!onGround)
-            {
-                rb2.velocity = new Vector2(rb2.velocity.x * 0.995f, rb2.velocity.y - Time.deltaTime);
-            }
-
             moveTimer = 0f;
         }
 
         if (onGround)
         {
             hitCeiling = false;
-            //rb2.gravityScale = 1f;
             rb2.mass = startMass;
         }
             
         if (hitCeiling)
         {
-            //rb2.velocity = new Vector2(rb2.velocity.x, - maxJumpForce);
             hitCeiling = false;
             jumping = false;
             rb2.velocity = new Vector2(rb2.velocity.x, 0f);
@@ -299,21 +229,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (onGround && direction.x > 0)
-        //    jumpDirection = 1;
-        //else if (onGround && direction.x == 0)
-        //    jumpDirection = 0;
-        //else if (onGround && direction.x < 0)
-        //    jumpDirection = -1;
-
-        //move(direction.x);
-
-        //if (jumpTimer > Time.time && onGround)
-        //{
-        //    jump();
-        //}
-        //modifyPhysics();
-
         //Function to change the direction the sprite is loocking
         if ((!facingRight && direction.x > 0) || (facingRight && direction.x < 0))
         {
@@ -387,19 +302,16 @@ public class PlayerController : MonoBehaviour
             case SanityState.LOW:
                 maxMoveSpeed = lowMoveSpeed;
                 // test color red
-                //GetComponent<SpriteRenderer>().color = Color.red;
                 animator.SetInteger("Died", 2);
                 break;
             case SanityState.MEDIUM:
                 maxMoveSpeed = mediumMoveSpeed;
                 // test color yellow
-                //GetComponent<SpriteRenderer>().color = Color.yellow;
                 animator.SetInteger("Died", 1);
                 break;
             case SanityState.HIGH:
                 maxMoveSpeed = highMoveSpeed;
                 // test color white
-                //GetComponent<SpriteRenderer>().color = Color.white;
                 animator.SetInteger("Died", 0);
                 break;
         }        
@@ -436,86 +348,7 @@ public class PlayerController : MonoBehaviour
 
 
     // OTHER methods (movement and physics)
-    //// Function that moves the player
-    //private void move(float horizontal)
-    //{
-    //    // Player on top of ground and wants to move
-    //    if (onGround && horizontal != 0)
-    //    {
-    //        rb2.velocity = new Vector2(currentMoveSpeed * horizontal, rb2.velocity.y);
-    //    }
-
-    //    // Player in the air
-    //    if (!onGround)
-    //    {
-    //        // Player slides down if contact with wall
-    //        //if (onWall)
-    //        //{
-    //        //    rb2.velocity = new Vector2(0.0f, rb2.velocity.y);
-    //        //}
-    //        // Player can correct jump if direction is inverted in contrast to jump direction
-    //        if ((jumpDirection == 1 && horizontal < 0) || (jumpDirection == -1 && horizontal > 0) || (jumpDirection == 0 && horizontal != 0))
-    //        {
-    //            rb2.velocity = new Vector2(currentMoveSpeed * horizontal * 0.5f, rb2.velocity.y);
-    //        }
-    //    }
-
-    //    /*
-    //    rb2.AddForce(Vector2.right * horizontal * currentMoveSpeed);
-
-    //    if (Mathf.Abs(rb2.velocity.x) > currentMoveSpeed)
-    //    {
-    //        rb2.velocity = new Vector2(Mathf.Sign(rb2.velocity.x) * currentMoveSpeed, rb2.velocity.y);
-    //    }
-    //    */
-    //}
-
-    //// Functions that lets player jump
-    //private void jump()
-    //{
-    //    // Apply progressive jump force
-    //    // makes velocity force on x axis weaker
-    //    //rb2.velocity = new Vector2(rb2.velocity.x * 0.75f, 0);
-    //    rb2.velocity = new Vector2(rb2.velocity.x, 0);
-    //    rb2.AddForce(Vector2.up * currentJumpSpeed, ForceMode2D.Impulse);
-    //    jumpTimer = 0.0f;
-    //}
-
-    //// Function that modifies drag and gravity physics for movement
-    //private void modifyPhysics()
-    //{
-    //    bool changingDirections = (direction.x > 0 && rb2.velocity.x < 0) || (direction.x < 0 && rb2.velocity.x > 0);
-    //    if (onGround)
-    //    {
-    //        if (Mathf.Abs(direction.x) < linearDrag * 0.1f || changingDirections)
-    //        {
-    //            rb2.drag = linearDrag;
-    //        }
-    //        else
-    //        {
-    //            rb2.drag = 0.0f;
-    //        }
-    //        rb2.gravityScale = 0.0f;
-    //    }
-    //    else
-    //    {
-    //        rb2.gravityScale = gravity;
-    //        rb2.drag = linearDrag * 0.15f;
-    //        // if jump height reached, multiply gravity 
-    //        if (rb2.velocity.y < 0)
-    //        {
-    //            rb2.gravityScale = gravity * fallMultiplier;
-    //        }
-    //        // if jumping but not pressing Space, limit the jump's height
-    //        else if (rb2.velocity.y > 0 && !Input.GetButton("Jump"))
-    //        {
-    //            rb2.gravityScale = gravity * (fallMultiplier / 2);
-    //        }
-    //    }
-
-    //}
-
-
+    // Function that moves the player
     private void move()
     {
         // Moving while on the floor
@@ -536,7 +369,6 @@ public class PlayerController : MonoBehaviour
         // Moving while in the air
         else
         {
-            //moveSpeed = maxMoveSpeed / 2f;
             if (onJumpDirection != direction)
             {
                 onJumpDirection = direction;
@@ -546,22 +378,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    // Functions that lets player jump
     private void jump()
     {
         if (jumpTimer < jumpTime)
         {
             rb2.velocity = new Vector2(rb2.velocity.x, jumpForce);
             jumpTimer += Time.deltaTime;
-            //jumpForce -= maxJumpForce * Time.deltaTime;
-            //rb2.gravityScale += 0.2f;
             rb2.mass += 0.2f;
         }
         else
             jumping = false;
     }
-
-
 
 
 
@@ -580,10 +408,6 @@ public class PlayerController : MonoBehaviour
                 //Teleport player to last checkpoint
                 transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
                 offCamera = true;
-
-                //Vector3 middlePosition = collision.collider.transform.position;
-                //float spikesWidth = collision.collider.GetComponent<BoxCollider2D>().size.x;
-                //gameObject.transform.position = new Vector3(middlePosition.x - spikesWidth - 1, middlePosition.y, transform.position.z);
             }
 
         }
@@ -643,7 +467,6 @@ public class PlayerController : MonoBehaviour
             EnemyController enemy = collision.GetComponent<EnemyController>();
             // if player jumped on top "kill" enemy
             if (transform.position.y > collision.transform.position.y + groundLength)
-            //if (collision.contacts[0].normal.y > 0.5)
             {
                 enemy.hurt();
                 // add +1 to sanityLossLimiter
