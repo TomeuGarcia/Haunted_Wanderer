@@ -47,15 +47,16 @@ public class CameraController : MonoBehaviour
     // Move Camera when followObject (Player) moves
     void FixedUpdate()
     {
+        // set camera position equal to player's position if it went out off view range
         if (pc.offCamera)
-        {
-            transform.position = new Vector3(follow.x, follow.y + groundLength, transform.position.z);
-            pc.offCamera = false;
-        }
+            StartCoroutine(FocusFollow());
 
 
         // Variable that keeps track of followObject's position
         follow = followObject.transform.position;
+
+        // Variable that makes the camera pass through the hole level ("cinematic")
+        //follow = new Vector3(transform.position.x +5, transform.position.y, transform.position.z);
 
         // Calculate distance between camera-leftsideLimit and camera-rightsideLimit
         lLimitDist = Mathf.Abs(lLimit.transform.position.x - follow.x);
@@ -75,7 +76,7 @@ public class CameraController : MonoBehaviour
 
 
 
-        // Update Camera's position evaluating folowObject's position with camera threshold
+        // Update Camera's position evaluating followObject's position with camera threshold
         Vector3 newPosition = transform.position;
         if ((Mathf.Abs(xDiff) >= threshold.x / 8.0f) && !moveHorizontally)
         {
@@ -90,6 +91,8 @@ public class CameraController : MonoBehaviour
             }
         }
 
+
+        // Move camera
         if ((!(Mathf.Abs(yDiff) <= threshold.y / 2.0f || (cameraOnGround && follow.y < transform.position.y))) && !moveVertically)
         {
             moveVertically = true;
@@ -101,6 +104,20 @@ public class CameraController : MonoBehaviour
             {
                 moveVertically = false;
             }
+        }
+
+
+
+        // camera follows object if there is no floor
+        if (!cameraOnGround)
+        {
+            newPosition.y = follow.y;
+        }
+        // 
+        if (cameraOnGround && Physics2D.Raycast(transform.position, Vector2.down, groundLength - 0.1f, groundLayer))
+        {
+            newPosition.y = newPosition.y + 0.1f;
+            transform.position = Vector3.MoveTowards(transform.position, newPosition, 100 * Time.deltaTime);
         }
 
 
@@ -123,6 +140,15 @@ public class CameraController : MonoBehaviour
         t.x -= followOffset.x;
         t.y -= followOffset.y;
         return t;
+    }
+
+    IEnumerator FocusFollow()
+    {
+        //pc.canMove = false;
+        transform.position = new Vector3(follow.x, follow.y + groundLength - 1.1f, transform.position.z);
+        yield return new WaitForSeconds(0.2f);
+        //pc.canMove = true;
+        pc.offCamera = false;
     }
 
 

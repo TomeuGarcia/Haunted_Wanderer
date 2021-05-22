@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8824430244756146013}
   - component: {fileID: 8824430244756146014}
   - component: {fileID: 8824430244756146002}
-  - component: {fileID: 440058502094572884}
+  - component: {fileID: 8549306186065201923}
   m_Layer: 10
   m_Name: Slime
   m_TagString: Enemy
@@ -157,8 +157,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  animator: {fileID: 440058502094572884}
---- !u!95 &440058502094572884
+  animator: {fileID: 8549306186065201923}
+--- !u!95 &8549306186065201923
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
