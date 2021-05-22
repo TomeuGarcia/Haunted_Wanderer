@@ -180,6 +180,7 @@ public class PlayerController : MonoBehaviour
             rb2.velocity = new Vector2(rb2.velocity.x, 0f);
         }
 
+        
 
 
         // CONTROLS
@@ -251,6 +252,7 @@ public class PlayerController : MonoBehaviour
         //        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Time.deltaTime*100);
         //    }
         //}
+
     }
 
     //Function to change the direction the sprite is loocking
@@ -472,6 +474,8 @@ public class PlayerController : MonoBehaviour
                 // add +1 to sanityLossLimiter
                 addSanityLossLimiter();
                 limit += 5;
+                // make player bounce
+                rb2.AddForce(transform.up * 600, ForceMode2D.Impulse);
             }
             else
             {
