@@ -40,31 +40,8 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Check if Collided with player
-        if (collision.collider.CompareTag("Player"))
-        {
-            // if player jumped on top "kill" enemy
-            if (collision.contacts[0].normal.y < -0.5)
-            {
-                setActiveState(false);
-                // add +1 to sanityLossLimiter
-                collision.collider.GetComponent<PlayerController>().addSanityLossLimiter();
-            }
-            // else damage player 
-            else
-            {
-                collision.collider.GetComponent<PlayerController>().loseSanity(damagePoints);
-                // reset player's sanityLossLimiter
-                collision.collider.GetComponent<PlayerController>().resetSanityLossLimiter();
-            }
-        }
-    }
-    */
-
-    // OTHER methods
+    // ACTIVATION METHODS
+    // Function that activates or deactivates the enemy based on isActive parameter
     public void setActiveState(bool isActive)
     {
         if (isActive)
@@ -81,6 +58,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+
+    // DAMAGE METHODS
+    // Function that hurts the enemy, substracting 1 health point
     public void hurt()
     {
         healthPoints--;

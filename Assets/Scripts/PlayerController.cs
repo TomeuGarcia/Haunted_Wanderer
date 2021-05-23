@@ -9,17 +9,16 @@ public class PlayerController : MonoBehaviour
     private Vector2 respawnPosition;
     public bool offCamera = false;
 
-    //can move
+    // Flag that determines if player can Move
     public bool canMove;
-    //particle system
+
+    // Particles
     public ParticleSystem dust;
 
-    private bool facingRight = true;
-
     // Movement
-    private const float highMoveSpeed = 5f;
-    private const float mediumMoveSpeed = 6f;
-    private const float lowMoveSpeed = 7f;
+    private const float highMoveSpeed = 6f;
+    private const float mediumMoveSpeed = 7f;
+    private const float lowMoveSpeed = 8f;
     private float maxMoveSpeed = highMoveSpeed;
     private float moveSpeed = highMoveSpeed;
     private Vector2 direction;
@@ -28,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private float moveTimer = 0f;
 
     // Jump
-    private const float maxJumpForce = 9f;
+    private const float maxJumpForce = 8f;
     private float jumpForce = maxJumpForce;
     private const float jumpTime = 0.3f;
     private float jumpTimer = 0f;
@@ -76,6 +75,7 @@ public class PlayerController : MonoBehaviour
     //public float startDashTime;
 
     //Animations
+    private bool facingRight = true;
     public Animator animator;
 
 
@@ -89,10 +89,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        // Position
+        // Set default respawn position
         respawnPosition = transform.position;
 
-        // Sanity
+        // Set default sanity 
         canUpdateSanity = true;
         currentSanity = (int)(maxSanity*0.9);
         healthbar.bar = maxSanity;
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
         goldenAppleSprite1.SetActive(true);
         goldenAppleSprite2.SetActive(false);
 
-        // Components
+        // Get game object's components
         rb2 = GetComponent<Rigidbody2D>();
         c2 = GetComponent<Collider2D>();
         r = GetComponent<Renderer>();
@@ -117,229 +117,114 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!canMove)
-        {
-            return;
-        }
-
-
-        if (!hitCeiling && jumping)
-            hitCeiling = Physics2D.Raycast(transform.position + colliderOffset, Vector2.up, ceilingLength, groundLayer) ||
-                         Physics2D.Raycast(transform.position - colliderOffset, Vector2.up, ceilingLength, groundLayer);
-
-        onGround = Physics2D.Raycast(transform.position + colliderOffset, Vector2.down, groundLength, groundLayer) ||
-                   Physics2D.Raycast(transform.position - colliderOffset, Vector2.down, groundLength, groundLayer);
-
-        // JUMP
-        if (Input.GetButtonDown("Jump") && onGround)
-        {
-            CreateDust();
-            hitCeiling = false;
-            jumping = true;
-            jumpTimer = 0f;
-            jumpForce = maxJumpForce;
-            onJumpDirection = direction;
-        }
-        else if (Input.GetButtonUp("Jump"))
-            jumping = false;
-
-        if (jumping)
-            jump();
-
-        else if (!onGround && !jumping)
-            CreateDust();
-
-        // MOVE
-        // Get direction from input
-        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        
-        if (direction.x != 0)
-            move();
-        else
-        {
-            if (onGround)
-                move();
-            moveTimer = 0f;
-        }
-
-        if (onGround)
-        {
-            hitCeiling = false;
-            rb2.mass = startMass;
-        }
-            
-        if (hitCeiling)
-        {
-            hitCeiling = false;
-            jumping = false;
-            rb2.velocity = new Vector2(rb2.velocity.x, 0f);
-        }
-
-        
-
-
         // CONTROLS
         // Use consumible and heal sanity
         if (Input.GetKeyDown(KeyCode.Q) && hasGApple)
         {
-            gainSanity(healValue);
+            GainSanity(healValue);
             hasGApple = false;
             healValue = 0;
             goldenAppleSprite1.SetActive(true);
             goldenAppleSprite2.SetActive(false);
         }
 
-
         // Cheat button: I -> gain 5 sanity
         if (Input.GetKeyDown(KeyCode.Z))
-            gainSanity(5);
+            GainSanity(5);
         // Cheat button: O -> lose 5 sanity
         if (Input.GetKeyDown(KeyCode.X))
-            loseSanity(5);
+            LoseSanity(5);
+
         // Cheat button: C -> reset sanityLimiter
         if (Input.GetKeyDown(KeyCode.C))
-            resetSanityLimiter();
+            ResetSanityLimiter();
         // Cheat button: V -> increment sanityLimiter 
         if (Input.GetKeyDown(KeyCode.V))
-            incrementSanityLimiter();
-
-        healthbar.bar = currentSanity;
-        healthbar.SetHealth();
-        healthbar.limiter = currentLimiter;
-        healthbar.SetLimiter();
+            IncrementSanityLimiter();
 
 
-        //Change animation between IDLE / WALK / RUN 
-        animator.SetFloat("Speed", Mathf.Abs(direction.x));
+        // check if player hit the ceiling
+        if (!hitCeiling && jumping)
+            hitCeiling = Physics2D.Raycast(transform.position + colliderOffset, Vector2.up, ceilingLength, groundLayer) ||
+                         Physics2D.Raycast(transform.position - colliderOffset, Vector2.up, ceilingLength, groundLayer);
 
-        if (currentSanity == 0)
+        // check if player hit the ground
+        onGround = Physics2D.Raycast(transform.position + colliderOffset, Vector2.down, groundLength, groundLayer) ||
+                   Physics2D.Raycast(transform.position - colliderOffset, Vector2.down, groundLength, groundLayer);
+        
+        // If the player hit the ground, reset mass
+        if (onGround)
+            rb2.mass = startMass;
+
+        // JUMP
+        // if "Jump" button was pressed while player on ground, enable jumping
+        if (Input.GetButtonDown("Jump") && onGround)
         {
-            animator.SetInteger("Died", 3);
+            CreateDust();
+            jumping = true;
+            jumpTimer = 0f;
+            jumpForce = maxJumpForce;
+            onJumpDirection = direction;
+        }
+        // if "Jump" button was unpressed OR player hit the ceiling, disable jumping
+        else if (Input.GetButtonUp("Jump") || hitCeiling)
+        {
+            hitCeiling = false;
+            jumping = false;
         }
 
+        // MOVE
+        // Get movement direction from user's inputs
+        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+
+        // ANIMATIONS
+        // Change animation between IDLE / WALK / RUN 
+        animator.SetFloat("Speed", Mathf.Abs(direction.x));
+
+        // if player has no sanity left, play Death animation
+        if (currentSanity == 0)
+            animator.SetInteger("Died", 3);
+
+        // Flip player's sprite
+        if ((!facingRight && direction.x > 0) || (facingRight && direction.x < 0))
+            Flip();
     }
 
     private void FixedUpdate()
     {
-        //Function to change the direction the sprite is loocking
-        if ((!facingRight && direction.x > 0) || (facingRight && direction.x < 0))
-        {
-            Flip();
-        }
+        // if flag disabled, don't execute any movement 
+        if (!canMove)
+            return;
 
-        //Dash
-        //if (Input.GetKeyDown(KeyCode.LeftShift))
-        //{
-        //    if (!facingRight)
-        //    {
-        //        rb2.velocity = new Vector2(0, rb2.velocity.y);
-        //        //rb2.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
-        //        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 10, transform.position.y, transform.position.z), Time.deltaTime*100);
-        //    }
-        //    else
-        //    {
-        //        rb2.velocity = new Vector2(0, rb2.velocity.y);
-        //        //rb2.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
-        //        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Time.deltaTime*100);
-        //    }
-        //}
+        // JUMP
+        // if jumping enabled, execute Jump()
+        if (jumping)
+            Jump();
 
-    }
-
-    //Function to change the direction the sprite is loocking
-    void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
-        CreateDust();
-    }
-
-    // GETTER methods
-    // Function that returns player's current SanityState
-    public SanityState getSanityState()
-    {
-        if (currentSanity < maxSanity * 0.33)
-            return SanityState.LOW;
-        else if (currentSanity < maxSanity * 0.66)
-            return SanityState.MEDIUM;
+        // MOVE
+        if (direction.x != 0)
+            Move();
         else
-            return SanityState.HIGH;
-    }
-
-    // Function that returns player's current Sanity (int)
-    public int getCurrentSanity() { return currentSanity; }
-
-
-    // Function that returns player's maxSanity (constant) (int)
-    public int getMaxSanity() { return maxSanity; }
-
-
-    // MODIFY ATTRIBUTES methods
-    // Function that updates player's SanityState
-    public void updateSanityState() { 
-        if (canUpdateSanity)
         {
-            currentSanityState = getSanityState();
+            if (onGround)
+                Move();
+            moveTimer = 0f;
         }
+
+        //// DASH
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //    Dash();
+
     }
 
-    // Function that updates player's movement velocity based on its sanityLevel
-    public void updateMovementSpeed()
-    {
-        switch (currentSanityState)
-        {
-            case SanityState.LOW:
-                maxMoveSpeed = lowMoveSpeed;
-                animator.SetInteger("Died", 2);
-                break;
-            case SanityState.MEDIUM:
-                maxMoveSpeed = mediumMoveSpeed;
-                animator.SetInteger("Died", 1);
-                break;
-            case SanityState.HIGH:
-                maxMoveSpeed = highMoveSpeed;
-                animator.SetInteger("Died", 0);
-                break;
-        }        
-    }
-
-    // Function that adds gainAmount of Sanity to player, Sanity cannot be equal or greater than maxSanity
-    public void gainSanity(int gainAmount)
-    {
-        currentSanity = (currentSanity + gainAmount < maxSanity) ? currentSanity + gainAmount : maxSanity;
-    }
-
-    // Function that substracts lossAmount of Sanity to player, Sanity cannot be equal or less than 0
-    public void loseSanity(int lossAmount)
-    {
-        currentSanity = (currentSanity - lossAmount > 0) ? currentSanity - lossAmount : 0;
-    }
-
-    // Function that makes player lose 1 point of Sanity every sanityLossCooldown seconds
-    public void loseSanityViaTime()
-    {
-        sanityLossTimer += Time.deltaTime;
-        if (sanityLossTimer >= sanityLossCooldown)
-        {
-            loseSanity(1);
-            sanityLossTimer = 0.0f;
-        }
-    }
-
-    // Function that adds +1 to sanityLossLimiter if limit (5) wasn't reached
-    public void incrementSanityLimiter() { currentLimiter = (currentLimiter < maxLimiter) ? currentLimiter + startLimiter : currentLimiter; }
-
-    // Function that resets sanityLossLimiter to 1
-    public void resetSanityLimiter() { currentLimiter = startLimiter; }
 
 
-    // OTHER methods (movement and physics)
+    // MOVEMENT / PHYSICS RELATED METHODS
     // Function that moves the player
-    private void move()
+    private void Move()
     {
-        // Moving while on the floor
+        // Moving while on the ground
         if (onGround)
         {
             if (moveTimer < moveTime)
@@ -366,8 +251,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Functions that lets player jump
-    private void jump()
+    // Functions that lets player Jump
+    private void Jump()
     {
         if (jumpTimer < jumpTime)
         {
@@ -379,8 +264,136 @@ public class PlayerController : MonoBehaviour
             jumping = false;
     }
 
+    private void Dash()
+    {
+        if (!facingRight)
+        {
+            rb2.velocity = new Vector2(0, rb2.velocity.y);
+            //rb2.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 10, transform.position.y, transform.position.z), Time.deltaTime * 100);
+        }
+        else
+        {
+            rb2.velocity = new Vector2(0, rb2.velocity.y);
+            //rb2.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Time.deltaTime * 100);
+        }
+    }
 
 
+
+    // SANITY RELATED METHODS
+
+    // Function that returns player's current SanityState
+    public SanityState GetSanityState()
+    {
+        if (currentSanity < maxSanity * 0.33)
+            return SanityState.LOW;
+        else if (currentSanity < maxSanity * 0.66)
+            return SanityState.MEDIUM;
+        else
+            return SanityState.HIGH;
+    }
+
+
+    // Function that returns player's current Sanity (int)
+    public int GetCurrentSanity() { return currentSanity; }
+
+
+    // Function that returns player's maxSanity (constant) (int)
+    public int GetMaxSanity() { return maxSanity; }
+
+
+    // Function that updates player's SanityState
+    public void UpdateSanityState() { 
+        if (canUpdateSanity)
+            currentSanityState = GetSanityState();
+    }
+
+
+    // Function that updates player's movement velocity based on its sanityLevel
+    public void UpdateMovementSpeed()
+    {
+        switch (currentSanityState)
+        {
+            case SanityState.LOW:
+                maxMoveSpeed = lowMoveSpeed;
+                animator.SetInteger("Died", 2);
+                break;
+            case SanityState.MEDIUM:
+                maxMoveSpeed = mediumMoveSpeed;
+                animator.SetInteger("Died", 1);
+                break;
+            case SanityState.HIGH:
+                maxMoveSpeed = highMoveSpeed;
+                animator.SetInteger("Died", 0);
+                break;
+        }        
+    }
+
+    // Function that adds gainAmount of Sanity to player, Sanity cannot be equal or greater than maxSanity
+    public void GainSanity(int gainAmount)
+    {
+        currentSanity = (currentSanity + gainAmount < maxSanity) ? currentSanity + gainAmount : maxSanity;
+        UpdateHealthbarBar();
+    }
+
+    // Function that substracts lossAmount of Sanity to player, Sanity cannot be equal or less than 0
+    public void LoseSanity(int lossAmount)
+    {
+        currentSanity = (currentSanity - lossAmount > 0) ? currentSanity - lossAmount : 0;
+        UpdateHealthbarBar();
+    }
+
+
+    // Function that makes player lose 1 point of Sanity every sanityLossCooldown seconds
+    public void LoseSanityViaTime()
+    {
+        sanityLossTimer += Time.deltaTime;
+        if (sanityLossTimer >= sanityLossCooldown)
+        {
+            LoseSanity(1);
+            sanityLossTimer = 0.0f;
+        }
+    }
+
+
+    // Function that adds increments currentLimiter if limit, can't exceed maxLimiter
+    public void IncrementSanityLimiter()
+    {
+        currentLimiter = (currentLimiter < maxLimiter) ? currentLimiter + startLimiter : currentLimiter;
+        UpdateHealthbarLimiter();
+    }
+
+
+    // Function that resets currentLimiter to startLimiter
+    public void ResetSanityLimiter()
+    {
+        currentLimiter = startLimiter;
+        UpdateHealthbarLimiter();
+    }
+
+
+
+    // UI RELATED METHODS
+    // Function that updates the HealthBar 
+    private void UpdateHealthbarBar()
+    {
+        healthbar.bar = currentSanity;
+        healthbar.SetHealth();
+    }
+
+
+    // Function that updates the HealthBar's sanity Limiter
+    public void UpdateHealthbarLimiter()
+    {
+        healthbar.limiter = currentLimiter;
+        healthbar.SetLimiter();
+    }
+
+
+    
+    // COLLISION METHODS
     private void OnCollisionEnter2D(Collision2D collision)
     { 
         // Check if player collided with a Hazard
@@ -391,101 +404,139 @@ public class PlayerController : MonoBehaviour
             if (hc.isSpikes)
             {
                 //Hurt player 
-                loseSanity(10);
+                LoseSanity(10);
 
                 //Teleport player to last checkpoint
                 transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
                 offCamera = true;
             }
-
         }
-
-
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    // TRIGGER METHODS
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // Load new respawn position if players enters checkpoint
-        if (collision.CompareTag("Checkpoint"))
+        if (other.CompareTag("Checkpoint"))
         {
-            Checkpoint cp = collision.GetComponent<Checkpoint>();
+            Checkpoint cp = other.GetComponent<Checkpoint>();
             respawnPosition = new Vector2(cp.X, cp.Y);
         }
 
         // Lock player's sanity state (can't be updated)
-        else if (collision.CompareTag("SanityLocker"))
+        else if (other.CompareTag("SanityLocker"))
         {
             canUpdateSanity = false;
         }
         // Unlock player's sanity state (can be updated)
-        else if (collision.CompareTag("SanityUnlocker"))
+        else if (other.CompareTag("SanityUnlocker"))
         {
             canUpdateSanity = true;
         }
 
         // Check if Collided with enemy
-        else if (collision.CompareTag("Enemy") && !isImmune)
+        else if (other.CompareTag("Enemy") && !isImmune)
         {
-            EnemyController enemy = collision.GetComponent<EnemyController>();
+            EnemyController enemy = other.GetComponent<EnemyController>();
             // if player jumped on top "kill" enemy
-            if (transform.position.y > collision.transform.position.y && (transform.position.x < collision.transform.position.x + 0.4 && transform.position.x > collision.transform.position.x - 0.4))
+            if (transform.position.y > enemy.transform.position.y && (transform.position.x < enemy.transform.position.x + 0.4 && transform.position.x > enemy.transform.position.x - 0.4))
             {
                 enemy.hurt();
-                incrementSanityLimiter();
+                IncrementSanityLimiter();
             }
             else
             {
                 audio.PlayOneShot(hurtedSound01);
                 // hurt player
-                loseSanity(enemy.damagePoints);
+                LoseSanity(enemy.damagePoints);
                 // reset player's sanityLossLimiter
-                resetSanityLimiter();
+                ResetSanityLimiter();
 
                 // Make player immune to enemies for 2 seconds
                 StartCoroutine("Invulnerable");
             }
         }
+        else if (other.CompareTag("Bullet") && !isImmune)
+        {
+            Bullet bullet = other.GetComponent<Bullet>();
+            audio.PlayOneShot(hurtedSound01);
+            // hurt player
+            LoseSanity(bullet.damagePoints);
+            // reset player's sanityLossLimiter
+            ResetSanityLimiter();
 
-        else if (collision.CompareTag("MovingPlatform"))
+            // Make player immune to enemies for 2 seconds
+            StartCoroutine("Invulnerable");
+        }
+
+        else if (other.CompareTag("MovingPlatform"))
         {
             //jumping = false;
-            transform.parent = collision.gameObject.transform;
+            transform.parent = other.gameObject.transform;
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
+
+
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (collision.CompareTag("Mushrooms"))
+        if (other.CompareTag("Mushrooms"))
         {
             if (shroomTimer < shroomCooldown)
             {
                 shroomTimer += Time.deltaTime;
                 if(shroomTimer >= shroomCooldown)
                 {
-                    loseSanity(2);
+                    LoseSanity(2);
                     shroomTimer = 0.0f;
                 }
             }
         }
         // Add Golden apple power up for player to use
-        else if (collision.CompareTag("GoldenApple") && !hasGApple)
+        else if (other.CompareTag("GoldenApple") && !hasGApple)
         {
-            GoldenApple ga = collision.GetComponent<GoldenApple>();
+            GoldenApple ga = other.GetComponent<GoldenApple>();
             hasGApple = true;
             healValue = ga.healingPoints;
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
             goldenAppleSprite1.SetActive(false);
             goldenAppleSprite2.SetActive(true);
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+
+
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (collision.CompareTag("MovingPlatform"))
+        if (other.CompareTag("MovingPlatform"))
         {
             transform.parent = null;
         }
     }
 
+    //Function that changes the sprite's direction
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 Scaler = transform.localScale;
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
+        CreateDust();
+    }
+
+
+
+    // PARTICLE RELATED METHODS
+    // Function that spawns dust particles
+    void CreateDust()
+    {
+        dust.Play();
+    }
+    
+    
+    
+    // COROUTINES
+    // Coroutine that makes the player invulnerable for 2 seconds and makes player's sprite fade
     IEnumerator Invulnerable()
     {
         isImmune = true;
@@ -499,7 +550,8 @@ public class PlayerController : MonoBehaviour
 
 
 
-
+    // GIZMOS METHODS
+    // Function that draws lines repressenting onGround and onCeiling
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -509,11 +561,6 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position + colliderOffset, transform.position + colliderOffset + Vector3.up * ceilingLength);
         Gizmos.DrawLine(transform.position - colliderOffset, transform.position - colliderOffset + Vector3.up * ceilingLength);
-    }
-
-    void CreateDust()
-    {
-        dust.Play();
     }
 
 }

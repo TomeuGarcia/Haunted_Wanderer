@@ -124,7 +124,7 @@ public class GameController : MonoBehaviour
     // Function that executes the player Sanity cycle
     private void playerSanityCycle()
     {
-        if (myPlayer.getCurrentSanity() == 0)
+        if (myPlayer.GetCurrentSanity() == 0)
         {
             audio.PlayOneShot(deadSound02, 0.03f);
             StartCoroutine(waitReactiveScene());
@@ -132,11 +132,11 @@ public class GameController : MonoBehaviour
         }
 
         // player can't die from losing sanity over time (stays at 10%)
-        else if (myPlayer.getCurrentSanity() > myPlayer.currentLimiter)
+        else if (myPlayer.GetCurrentSanity() > myPlayer.currentLimiter)
         {
-            myPlayer.loseSanityViaTime();
-            myPlayer.updateSanityState();
-            myPlayer.updateMovementSpeed();
+            myPlayer.LoseSanityViaTime();
+            myPlayer.UpdateSanityState();
+            myPlayer.UpdateMovementSpeed();
             if (myPlayer.canUpdateSanity)
                 updateScenary();
         }
@@ -146,7 +146,7 @@ public class GameController : MonoBehaviour
     // Function that updates the scene based on player's SanityState
     private void updateScenary()
     {
-        PlayerController.SanityState sanity = myPlayer.getSanityState();
+        PlayerController.SanityState sanity = myPlayer.GetSanityState();
         sanityUp = (int)sanity < playerSanityState;
         sanityDown = (int)sanity > playerSanityState;
         if (sanityUp || sanityDown) {

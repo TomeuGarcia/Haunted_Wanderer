@@ -18,7 +18,7 @@ public class GoldenApple : MonoBehaviour
     //    // Check if Collided with player
     //    if (other.CompareTag("Player"))
     //    {
-    //        other.GetComponent<PlayerController>().gainSanity(healingPoints);
+    //        other.GetComponent<PlayerController>().GainSanity(healingPoints);
     //        Destroy(gameObject);
     //    }
     //}
