@@ -7,11 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     // Position variables
     private Vector2 respawnPosition;
-    public bool offCamera;
+    public bool offCamera = false;
 
-    //healthBar
-    public HealthBar healthBar;
-    public HPGained hpGained;
     //can move
     public bool canMove;
     //particle system
@@ -45,19 +42,22 @@ public class PlayerController : MonoBehaviour
 
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
-    private SanityState currentSanityState;
-    public bool canUpdateSanity;
+    private SanityState currentSanityState = SanityState.HIGH;
+    public bool canUpdateSanity = true;
     public const int maxSanity = 100;
     private int currentSanity;
-    private int limit;
+    public const int maxLimiter = maxSanity / 2;
+    public const int startLimiter = maxLimiter / 5;
+    public int currentLimiter = startLimiter;
 
-    private const float sanityLossCooldown = 1.0f;
-    private float sanityLossTimer;
-    public int sanityLossLimiter; // Can only equal 1,2,3,4,5 -> 1 = 10% , 2 = 20% , ... , 5 = 50%
+    private const float sanityLossCooldown = 1f;
+    private float sanityLossTimer = 0f;
+
+    public HealthBar healthbar;
 
     // Heal sanity
-    public bool hasGApple;
-    private int healValue;
+    public bool hasGApple = false;
+    private int healValue = 0;
     private bool isImmune = false;
 
 
@@ -91,21 +91,15 @@ public class PlayerController : MonoBehaviour
     {
         // Position
         respawnPosition = transform.position;
-        offCamera = false;
 
         // Sanity
-        currentSanityState = SanityState.HIGH;
-        canUpdateSanity = true;
         currentSanity = (int)(maxSanity*0.9);
-        healthBar.SetMaxSanity(maxSanity);
-        //hpGained.sanityLimit(1);
-        limit = 10;
+        healthbar.bar = maxSanity;
+        healthbar.SetMaxHealth();
+        healthbar.limiter = currentLimiter;
+        healthbar.SetStartLimiter();
 
-        sanityLossTimer = 0.0f;
-        sanityLossLimiter = 1;
-
-        hasGApple = false;
-        healValue = 0;
+        // UI sprites
         goldenAppleSprite1.SetActive(true);
         goldenAppleSprite2.SetActive(false);
 
@@ -207,18 +201,20 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-                limit += 5;
+            currentLimiter += startLimiter;
         }
         // Cheat button: O -> lose 5 sanity
         if (Input.GetKeyDown(KeyCode.V))
         {
-                limit -=5;
+            currentLimiter -= startLimiter;
         }
-        healthBar.SetHealth(currentSanity);
-        hpGained.sanityLimit(limit);
+        healthbar.bar = currentSanity;
+        healthbar.SetHealth();
+        healthbar.limiter = currentLimiter;
+        healthbar.SetLimiter();
 
 
-        //Change animation between IDL / WALK / RUN 
+        //Change animation between IDLE / WALK / RUN 
         animator.SetFloat("Speed", Mathf.Abs(direction.x));
 
         if (currentSanity == 0)
@@ -280,8 +276,6 @@ public class PlayerController : MonoBehaviour
     // Function that returns player's current Sanity (int)
     public int getCurrentSanity() { return currentSanity; }
 
-    //Function that returns the limit
-    public int getLimit() { return limit; }
 
     // Function that returns player's maxSanity (constant) (int)
     public int getMaxSanity() { return maxSanity; }
@@ -303,17 +297,14 @@ public class PlayerController : MonoBehaviour
         {
             case SanityState.LOW:
                 maxMoveSpeed = lowMoveSpeed;
-                // test color red
                 animator.SetInteger("Died", 2);
                 break;
             case SanityState.MEDIUM:
                 maxMoveSpeed = mediumMoveSpeed;
-                // test color yellow
                 animator.SetInteger("Died", 1);
                 break;
             case SanityState.HIGH:
                 maxMoveSpeed = highMoveSpeed;
-                // test color white
                 animator.SetInteger("Died", 0);
                 break;
         }        
@@ -343,10 +334,10 @@ public class PlayerController : MonoBehaviour
     }
 
     // Function that adds +1 to sanityLossLimiter if limit (5) wasn't reached
-    public void addSanityLossLimiter() { sanityLossLimiter = sanityLossLimiter < 5 ? sanityLossLimiter++ : sanityLossLimiter; }
+    public void addSanityLossLimiter() { currentLimiter += (currentLimiter < maxLimiter) ? (startLimiter) : 0; }
 
     // Function that resets sanityLossLimiter to 1
-    public void resetSanityLossLimiter() { sanityLossLimiter = 1; }
+    public void resetSanityLossLimiter() { currentLimiter = startLimiter; }
 
 
     // OTHER methods (movement and physics)
@@ -446,9 +437,7 @@ public class PlayerController : MonoBehaviour
             if (transform.position.y > collision.transform.position.y && (transform.position.x < collision.transform.position.x + 0.4 && transform.position.x > collision.transform.position.x - 0.4))
             {
                 enemy.hurt();
-                // add +1 to sanityLossLimiter
                 addSanityLossLimiter();
-                limit += 5;
             }
             else
             {
@@ -463,32 +452,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Check if Collided with player
-        else if (collision.CompareTag("Enemy"))
-        {
-            EnemyController enemy = collision.GetComponent<EnemyController>();
-            // if player jumped on top "kill" enemy
-            if (transform.position.y > collision.transform.position.y + groundLength)
-            {
-                enemy.hurt();
-                // add +1 to sanityLossLimiter
-                addSanityLossLimiter();
-                limit += 5;
-                // make player bounce
-                rb2.AddForce(transform.up * 600, ForceMode2D.Impulse);
-            }
-            else
-            {
-                // hurt player
-                loseSanity(enemy.damagePoints);
-                // reset player's sanityLossLimiter
-                resetSanityLossLimiter();
-
-                // Make player immune to enemies for 2 seconds
-                StartCoroutine("Invulnerable");
-            }
-        }
-        if (collision.CompareTag("MovingPlatform"))
+        else if (collision.CompareTag("MovingPlatform"))
         {
             //jumping = false;
             transform.parent = collision.gameObject.transform;
