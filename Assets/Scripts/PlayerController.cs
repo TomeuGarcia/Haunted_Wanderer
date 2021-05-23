@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
         respawnPosition = transform.position;
 
         // Sanity
+        canUpdateSanity = true;
         currentSanity = (int)(maxSanity*0.9);
         healthbar.bar = maxSanity;
         healthbar.SetMaxHealth();
@@ -191,23 +192,17 @@ public class PlayerController : MonoBehaviour
 
         // Cheat button: I -> gain 5 sanity
         if (Input.GetKeyDown(KeyCode.Z))
-        {
             gainSanity(5);
-        }
         // Cheat button: O -> lose 5 sanity
         if (Input.GetKeyDown(KeyCode.X))
-        {
             loseSanity(5);
-        }
+        // Cheat button: C -> reset sanityLimiter
         if (Input.GetKeyDown(KeyCode.C))
-        {
-            currentLimiter += startLimiter;
-        }
-        // Cheat button: O -> lose 5 sanity
+            resetSanityLimiter();
+        // Cheat button: V -> increment sanityLimiter 
         if (Input.GetKeyDown(KeyCode.V))
-        {
-            currentLimiter -= startLimiter;
-        }
+            incrementSanityLimiter();
+
         healthbar.bar = currentSanity;
         healthbar.SetHealth();
         healthbar.limiter = currentLimiter;
@@ -265,9 +260,9 @@ public class PlayerController : MonoBehaviour
     // Function that returns player's current SanityState
     public SanityState getSanityState()
     {
-        if (currentSanity < maxSanity * 0.3)
+        if (currentSanity < maxSanity * 0.33)
             return SanityState.LOW;
-        else if (currentSanity < maxSanity * 0.6)
+        else if (currentSanity < maxSanity * 0.66)
             return SanityState.MEDIUM;
         else
             return SanityState.HIGH;
@@ -334,10 +329,10 @@ public class PlayerController : MonoBehaviour
     }
 
     // Function that adds +1 to sanityLossLimiter if limit (5) wasn't reached
-    public void addSanityLossLimiter() { currentLimiter += (currentLimiter < maxLimiter) ? (startLimiter) : 0; }
+    public void incrementSanityLimiter() { currentLimiter = (currentLimiter < maxLimiter) ? currentLimiter + startLimiter : currentLimiter; }
 
     // Function that resets sanityLossLimiter to 1
-    public void resetSanityLossLimiter() { currentLimiter = startLimiter; }
+    public void resetSanityLimiter() { currentLimiter = startLimiter; }
 
 
     // OTHER methods (movement and physics)
@@ -437,7 +432,7 @@ public class PlayerController : MonoBehaviour
             if (transform.position.y > collision.transform.position.y && (transform.position.x < collision.transform.position.x + 0.4 && transform.position.x > collision.transform.position.x - 0.4))
             {
                 enemy.hurt();
-                addSanityLossLimiter();
+                incrementSanityLimiter();
             }
             else
             {
@@ -445,7 +440,7 @@ public class PlayerController : MonoBehaviour
                 // hurt player
                 loseSanity(enemy.damagePoints);
                 // reset player's sanityLossLimiter
-                resetSanityLossLimiter();
+                resetSanityLimiter();
 
                 // Make player immune to enemies for 2 seconds
                 StartCoroutine("Invulnerable");

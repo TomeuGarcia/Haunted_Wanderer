@@ -6331,7 +6331,7 @@ GameObject:
   - component: {fileID: 379652404}
   - component: {fileID: 379652406}
   m_Layer: 5
-  m_Name: Apple1
+  m_Name: Apple_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18718,7 +18718,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794294824}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -650, y: 450, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 194259078}
@@ -18747,7 +18747,7 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 0.20784314, g: 0.078431375, b: 0.21568628, a: 1}
     key1: {r: 0.3600967, g: 0.12993948, b: 0.3773585, a: 1}
-    key2: {r: 0.43732902, g: 0.18155928, b: 0.4528302, a: 0}
+    key2: {r: 0.46958736, g: 0.21560164, b: 0.4811321, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -19153,6 +19153,16 @@ PrefabInstance:
       propertyPath: goldenAppleSprite2
       value: 
       objectReference: {fileID: 379652402}
+    - target: {fileID: -6358030632039320346, guid: befccced808635c4bac144c8e0d1677c,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 849073994}
+    - target: {fileID: -6358030632039320346, guid: befccced808635c4bac144c8e0d1677c,
+        type: 3}
+      propertyPath: dust
+      value: 
+      objectReference: {fileID: 686436392}
     - target: {fileID: 691108911244322176, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19228,6 +19238,12 @@ PrefabInstance:
 --- !u!4 &849073993 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 691108911244322176, guid: befccced808635c4bac144c8e0d1677c,
+    type: 3}
+  m_PrefabInstance: {fileID: 849073992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &849073994 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2514493948306757681, guid: befccced808635c4bac144c8e0d1677c,
     type: 3}
   m_PrefabInstance: {fileID: 849073992}
   m_PrefabAsset: {fileID: 0}
@@ -23724,7 +23740,7 @@ GameObject:
   - component: {fileID: 1353789153}
   - component: {fileID: 1353789152}
   m_Layer: 5
-  m_Name: Apple2
+  m_Name: Apple_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
