@@ -131,7 +131,7 @@ public class Slime : EnemyController
     IEnumerator AttackAnimation()
     {
         yield return new WaitForSeconds(0.3f);
-        GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.8f);
+        GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.6f);
         yield return new WaitForSeconds(0.8f);
         GetComponent<BoxCollider2D>().size = startCollSize;
         animator.SetBool("isAttacking", false);

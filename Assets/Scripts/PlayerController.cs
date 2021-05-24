@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private bool hitCeiling;
     private float startMass;
 
+    private bool stompEnemy = false;
+
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
     private SanityState currentSanityState = SanityState.HIGH;
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
     private Renderer r;
     private Color c;
     public LayerMask groundLayer;
+    public LayerMask enemyLayer;
     public GameObject goldenAppleSprite1;
     public GameObject goldenAppleSprite2;
 
@@ -241,12 +244,13 @@ public class PlayerController : MonoBehaviour
 
         // Moving while in the air
         else
-        {   if (onJumpDirection.x != 0)
-            {
-                onJumpDirection = direction;
-                moveSpeed = maxMoveSpeed / 1.5f;
-            }
-            else if (onJumpDirection != direction)
+        {   
+            //if (onJumpDirection.x != 0)
+            //{
+            //    onJumpDirection = direction;
+            //    moveSpeed = maxMoveSpeed / 1.5f;
+            //}
+            if (onJumpDirection != direction)
             {
                 onJumpDirection = direction;
                 moveSpeed = maxMoveSpeed / 2f;
@@ -288,7 +292,7 @@ public class PlayerController : MonoBehaviour
     private void BounceOnEnemy()
     {
         rb2.mass = startMass;
-        rb2.AddForce(transform.up * 35, ForceMode2D.Impulse);
+        rb2.AddForce(transform.up * 20, ForceMode2D.Impulse);
     }
 
 
@@ -447,20 +451,25 @@ public class PlayerController : MonoBehaviour
         }
 
         // Check if Collided with enemy
-        else if (other.CompareTag("Enemy") && !isImmune)
+        else if (other.CompareTag("Enemy"))
         {
             EnemyController enemy = other.GetComponent<EnemyController>();
             //skip collision if enemy is dying (playing death acyion)
             if (enemy.isDead) { return; }
 
+
+            //stompEnemy = Physics2D.Raycast(transform.position + colliderOffset, Vector2.down, groundLength, enemyLayer) ||
+            //             Physics2D.Raycast(transform.position - colliderOffset, Vector2.down, groundLength, enemyLayer);
+
             // if player jumped on top "kill" enemy
-            if (transform.position.y > enemy.transform.position.y && (transform.position.x < enemy.transform.position.x + 0.4 && transform.position.x > enemy.transform.position.x - 0.4))
+            if (transform.position.y > enemy.transform.position.y && (transform.position.x < enemy.transform.position.x + 0.5 && transform.position.x > enemy.transform.position.x - 0.5))
+            //if (stompEnemy)
             {
                 enemy.Hurt();
                 IncrementSanityLimiter();
                 BounceOnEnemy();
             }
-            else
+            else if (!isImmune)
             {
                 audio.PlayOneShot(hurtedSound01);
                 // Hurt player
