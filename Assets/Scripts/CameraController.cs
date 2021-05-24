@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
         // Calculate distance between camera-leftsideLimit and camera-rightsideLimit
         lLimitDist = Mathf.Abs(lLimit.transform.position.x - follow.x);
         rLimitDist = Mathf.Abs(rLimit.transform.position.x - follow.x);
-        // Don't move the camera if player is close to the limits
+        // Don't Move the camera if player is close to the limits
         if (lLimitDist <= threshold.x * 0.95f || rLimitDist <= threshold.x * 0.95f)
         {
             return;

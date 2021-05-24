@@ -40,7 +40,7 @@ public class FlyingDemon : EnemyController
 
     public void move()
     {
-        // Act (move and shoot) if player is in sight distance
+        // Act (Move and shoot) if player is in sight distance
         Vector2 distanceEnemyPlayer = player.transform.position - transform.position;
         if (Mathf.Abs(distanceEnemyPlayer.x) < sightDistance)
         {
@@ -49,7 +49,7 @@ public class FlyingDemon : EnemyController
             // Calculate and Normalize distance from currentPosition to playerPosition
             //Vector2 distanceEnemyPlayer = new Vector2(player.transform.position.x - currentPosition.x, 0f);
             distanceEnemyPlayer.Normalize();
-            // Calculate distance to move each frame
+            // Calculate distance to Move each frame
             Vector2 distanceToMove = distanceEnemyPlayer * Vector2.right * moveSpeed * Time.deltaTime;
 
             // Move self if in movement range 

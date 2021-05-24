@@ -5,23 +5,37 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    public int bar;
+    public int limiter;
 
-    public Slider slider;
-    public Gradient gradient;
+    public Slider sliderBar;
+    public Slider sliderLimiter;
     public Image fill;
+    public Gradient gradient;
 
-    public void SetMaxSanity(int sanity)
+    public void SetMaxHealth()
     {
-        slider.maxValue = sanity;
-        slider.value = sanity;
+        sliderBar.maxValue = bar;
+        sliderBar.value = bar;
 
         fill.color = gradient.Evaluate(1f);
     }
 
-    public void SetHealth(int sanity)
+    public void SetHealth()
     {
-        slider.value = sanity;
+        sliderBar.value = bar;
 
-        fill.color = gradient.Evaluate(slider.normalizedValue);
+        fill.color = gradient.Evaluate(sliderBar.normalizedValue);
+    }
+
+    public void SetStartLimiter()
+    {
+        sliderLimiter.maxValue = limiter * 5;
+        sliderLimiter.value = limiter;
+    }
+
+    public void SetLimiter()
+    {
+        sliderLimiter.value = limiter;
     }
 }

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 691108911244322176}
   - component: {fileID: 691108911244322177}
   - component: {fileID: 691108911244322179}
-  - component: {fileID: 691108911244322188}
   - component: {fileID: 2514493948306757681}
   - component: {fileID: 3551516790901272362}
   - component: {fileID: 749412806153997525}
+  - component: {fileID: -6358030632039320346}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -99,45 +99,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1.5
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &691108911244322188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691108911244322189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be17672ca0f626a449920d558a255deb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offCamera: 0
-  healthBar: {fileID: 0}
-  hpGained: {fileID: 0}
-  canMove: 0
-  dust: {fileID: 0}
-  canUpdateSanity: 0
-  sanityLossLimiter: 0
-  hasGApple: 0
-  rb2: {fileID: 0}
-  c2: {fileID: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  goldenAppleSprite1: {fileID: 0}
-  goldenAppleSprite2: {fileID: 0}
-  animator: {fileID: 0}
-  audio: {fileID: 749412806153997525}
-  hurtedSound01: {fileID: 8300000, guid: e5e540d187c4410428db4bd787371d7c, type: 3}
 --- !u!95 &2514493948306757681
 Animator:
   serializedVersion: 3
@@ -279,3 +249,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6358030632039320346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691108911244322189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be17672ca0f626a449920d558a255deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offCamera: 0
+  canMove: 0
+  dust: {fileID: 0}
+  canUpdateSanity: 0
+  currentLimiter: 10
+  healthbar: {fileID: 0}
+  hasGApple: 0
+  rb2: {fileID: 691108911244322179}
+  c2: {fileID: 3551516790901272362}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  goldenAppleSprite1: {fileID: 0}
+  goldenAppleSprite2: {fileID: 0}
+  animator: {fileID: 0}
+  audio: {fileID: 749412806153997525}
+  hurtedSound01: {fileID: 8300000, guid: e5e540d187c4410428db4bd787371d7c, type: 3}
