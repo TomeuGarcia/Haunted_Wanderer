@@ -241,8 +241,12 @@ public class PlayerController : MonoBehaviour
 
         // Moving while in the air
         else
-        {
-            if (onJumpDirection != direction && onJumpDirection.x != 0)
+        {   if (onJumpDirection.x != 0)
+            {
+                onJumpDirection = direction;
+                moveSpeed = maxMoveSpeed / 1.5f;
+            }
+            else if (onJumpDirection != direction)
             {
                 onJumpDirection = direction;
                 moveSpeed = maxMoveSpeed / 2f;
