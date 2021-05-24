@@ -63,6 +63,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    //Flip enemies sprites
+    public void Flip()
+    {
+        Vector3 Scaler = transform.localScale;
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
+    }
 
     // DAMAGE METHODS
     // Function that hurts the enemy, substracting 1 health point

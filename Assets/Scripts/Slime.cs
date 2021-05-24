@@ -17,6 +17,7 @@ public class Slime : EnemyController
     private const float wallLength = 0.6f;
     private bool facingRight = true;
     private bool cantMove = false;
+    private bool canAttack = false;
     private Vector2 vectorEnemyPlayer;
 
     // Component variables
@@ -40,7 +41,14 @@ public class Slime : EnemyController
         collider = GetComponent<BoxCollider2D>();
         startCollSize = collider.bounds.size;
     }
-
+    private void Update()
+    {
+        if((facingRight && player.transform.position.x < transform.position.x) || 
+            (!facingRight && player.transform.position.x > transform.position.x)) 
+        {
+            Flip();
+        }
+    }
     private void FixedUpdate()
     {
         onRightWall = Physics2D.Raycast(transform.position, Vector2.right, wallLength, groundLayer);
@@ -62,8 +70,12 @@ public class Slime : EnemyController
         if (onGround)
         {
             rb2.gravityScale = 0;
-            if (!cantMove)
+            if (!cantMove && vectorEnemyPlayer.magnitude > 3f)
                 Move();
+            else if (!canAttack && vectorEnemyPlayer.magnitude < 3f)
+            {
+                Attack();
+            }
 
         }
         else
@@ -71,7 +83,10 @@ public class Slime : EnemyController
             rb2.gravityScale = 1;
         }
 
-        Attack();
+        //if (!canAttack && onGround && vectorEnemyPlayer.magnitude < 4f)
+        //{
+        //    Attack();
+        //}
     }
 
 
@@ -102,16 +117,24 @@ public class Slime : EnemyController
             else if (moveTimer >= moveCooldown - Time.deltaTime*10 && onGround)
             {
                 animator.SetBool("isJumping", true);
+                canAttack = false;
             }
         }
     }
+
     private void Attack()
     {
-        if(vectorEnemyPlayer.magnitude < 1f)
-        {
-            GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.8f);
-            animator.SetBool("isAttacking", true);
-        }
-
+        StartCoroutine(AttackAnimation());
+        animator.SetBool("isAttacking", true);
     }
+
+    IEnumerator AttackAnimation()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.8f);
+        yield return new WaitForSeconds(0.8f);
+        GetComponent<BoxCollider2D>().size = startCollSize;
+        animator.SetBool("isAttacking", false);
+        canAttack = false;
+    } 
 }
