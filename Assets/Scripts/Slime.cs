@@ -17,13 +17,15 @@ public class Slime : EnemyController
     private const float wallLength = 0.6f;
     private bool facingRight = true;
     private bool cantMove = false;
+    private Vector2 vectorEnemyPlayer;
 
     // Component variables
     private Rigidbody2D rb2;
     public LayerMask groundLayer;
 
-    //Animiator
-    //public Animator animator;
+    private Collider2D collider;
+    private Vector2 startCollSize;
+
 
     void Start()
     {
@@ -35,6 +37,8 @@ public class Slime : EnemyController
         moveTimer = 0.0f;
 
         rb2 = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
+        startCollSize = collider.bounds.size;
     }
 
     private void FixedUpdate()
@@ -44,6 +48,8 @@ public class Slime : EnemyController
         onWall = onRightWall || onLeftWall;   
         facingRight = player.transform.position.x > transform.position.x;
         cantMove = (facingRight && onRightWall) || (!facingRight && onLeftWall);
+
+        vectorEnemyPlayer = player.transform.position - transform.position;
 
 
         if (onWall && !onGround)
@@ -57,19 +63,20 @@ public class Slime : EnemyController
         {
             rb2.gravityScale = 0;
             if (!cantMove)
-                move();
+                Move();
 
         }
         else
         {
             rb2.gravityScale = 1;
         }
+
+        Attack();
     }
 
 
-    private void move()
+    private void Move()
     {
-        Vector2 vectorEnemyPlayer = player.transform.position - transform.position;
         // Move if player is within range of sightDistance
         if (Mathf.Abs(vectorEnemyPlayer.magnitude) < sightDistance)
         {
@@ -98,5 +105,13 @@ public class Slime : EnemyController
             }
         }
     }
+    private void Attack()
+    {
+        if(vectorEnemyPlayer.magnitude < 1f)
+        {
+            GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.8f);
+            animator.SetBool("isAttacking", true);
+        }
 
+    }
 }

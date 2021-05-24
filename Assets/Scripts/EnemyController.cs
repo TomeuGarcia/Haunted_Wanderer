@@ -66,7 +66,7 @@ public class EnemyController : MonoBehaviour
 
     // DAMAGE METHODS
     // Function that hurts the enemy, substracting 1 health point
-    public void hurt()
+    public void Hurt()
     {
         healthPoints--;
         if (healthPoints < 1)

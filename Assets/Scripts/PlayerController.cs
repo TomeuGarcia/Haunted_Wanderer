@@ -452,14 +452,14 @@ public class PlayerController : MonoBehaviour
             // if player jumped on top "kill" enemy
             if (transform.position.y > enemy.transform.position.y && (transform.position.x < enemy.transform.position.x + 0.4 && transform.position.x > enemy.transform.position.x - 0.4))
             {
-                enemy.hurt();
+                enemy.Hurt();
                 IncrementSanityLimiter();
                 BounceOnEnemy();
             }
             else
             {
                 audio.PlayOneShot(hurtedSound01);
-                // hurt player
+                // Hurt player
                 LoseSanity(enemy.damagePoints);
                 // reset player's sanityLossLimiter
                 ResetSanityLimiter();
@@ -472,7 +472,7 @@ public class PlayerController : MonoBehaviour
         {
             Bullet bullet = other.GetComponent<Bullet>();
             audio.PlayOneShot(hurtedSound01);
-            // hurt player
+            // Hurt player
             LoseSanity(bullet.damagePoints);
             // reset player's sanityLossLimiter
             ResetSanityLimiter();
