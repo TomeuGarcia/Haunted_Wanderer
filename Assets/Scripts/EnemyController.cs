@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
 
     // Enemy boolean flags (tags)
     public bool canSpawn = true;
+    public bool isDead = false;
 
     [Header("Enemy Spawns When")]
     [SerializeField] public bool spawnsHighSanity;
@@ -31,6 +32,7 @@ public class EnemyController : MonoBehaviour
 
     // Other classes variables
     public GameObject player;
+    public Animator animator;
 
 
     void Awake()
@@ -48,13 +50,18 @@ public class EnemyController : MonoBehaviour
         {
             transform.position = spawnPosition;
             canSpawn = false;
+            GetComponent<Collider2D>().isTrigger = true;
+            isDead = false;
             gameObject.SetActive(true);
         }
         else
         {
             // canSpawn should turn true after cooldown
             canSpawn = true;
-            gameObject.SetActive(false);
+            GetComponent<Collider2D>().isTrigger = false;
+            isDead = true;
+            StartCoroutine(Die());
+            animator.SetBool("isDead", true);
         }
     }
 
@@ -66,5 +73,12 @@ public class EnemyController : MonoBehaviour
         healthPoints--;
         if (healthPoints < 1)
             setActiveState(false);
+    }
+
+    //Coroutine
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(0.8f);
+        gameObject.SetActive(false);
     }
 }

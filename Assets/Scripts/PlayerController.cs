@@ -440,6 +440,11 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("Enemy") && !isImmune)
         {
             EnemyController enemy = other.GetComponent<EnemyController>();
+            /*if (enemy.isDead)
+            {
+                return;
+            }
+            */
             // if player jumped on top "kill" enemy
             if (transform.position.y > enemy.transform.position.y && (transform.position.x < enemy.transform.position.x + 0.4 && transform.position.x > enemy.transform.position.x - 0.4))
             {

@@ -9,7 +9,7 @@ public class Slime : EnemyController
     private float moveTimer;
 
     private bool onGround = false;
-    private const float groundLength = 1.6f;
+    private const float groundLength = 0.2f;
 
     private bool onRightWall = false;
     private bool onLeftWall = false;
@@ -23,7 +23,7 @@ public class Slime : EnemyController
     public LayerMask groundLayer;
 
     //Animiator
-    public Animator animator;
+    //public Animator animator;
 
     void Start()
     {
@@ -73,12 +73,10 @@ public class Slime : EnemyController
         // Move if player is within range of sightDistance
         if (Mathf.Abs(vectorEnemyPlayer.magnitude) < sightDistance)
         {
-            animator.SetBool("IsJumping", false);
             // Slime moves (jumps) once every moveCooldown (1.5 seconds)
             moveTimer += Time.deltaTime;
             if (moveTimer >= moveCooldown && onGround)
             {
-                animator.SetBool("IsJumping", true);
                 // Move to the right if player is located to the right of the Slmie
                 if (vectorEnemyPlayer.x > 0)
                 {
@@ -92,6 +90,11 @@ public class Slime : EnemyController
                     facingRight = false;
                 }
                 moveTimer = 0.0f;
+                animator.SetBool("isJumping", false);
+            }
+            else if (moveTimer >= moveCooldown - Time.deltaTime*10 && onGround)
+            {
+                animator.SetBool("isJumping", true);
             }
         }
     }
