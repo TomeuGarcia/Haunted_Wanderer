@@ -273,6 +273,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   goldenAppleSprite1: {fileID: 0}
   goldenAppleSprite2: {fileID: 0}
   animator: {fileID: 0}

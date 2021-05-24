@@ -58,8 +58,9 @@ public class EnemyController : MonoBehaviour
             // canSpawn should turn true after cooldown
             canSpawn = true;
             isDead = true;
-            StartCoroutine(Die());
             animator.SetBool("isDead", true);
+            if (gameObject.active) // if not checking if active, coroutine can start when not active - resulting in error
+                StartCoroutine(Die());
         }
     }
 

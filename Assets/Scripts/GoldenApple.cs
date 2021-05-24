@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoldenApple : MonoBehaviour
 {
-    public int healingPoints = 40;
+    public int healingPoints = 30;
 
     //// Start is called before the first frame update
     //void Start()
