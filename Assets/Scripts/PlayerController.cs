@@ -281,6 +281,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private void BounceOnEnemy()
+    {
+        rb2.mass = startMass;
+        rb2.AddForce(transform.up * 35, ForceMode2D.Impulse);
+    }
+
 
     // SANITY RELATED METHODS
 
@@ -440,16 +446,15 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("Enemy") && !isImmune)
         {
             EnemyController enemy = other.GetComponent<EnemyController>();
-            /*if (enemy.isDead)
-            {
-                return;
-            }
-            */
+            //skip collision if enemy is dying (playing death acyion)
+            if (enemy.isDead) { return; }
+
             // if player jumped on top "kill" enemy
             if (transform.position.y > enemy.transform.position.y && (transform.position.x < enemy.transform.position.x + 0.4 && transform.position.x > enemy.transform.position.x - 0.4))
             {
                 enemy.hurt();
                 IncrementSanityLimiter();
+                BounceOnEnemy();
             }
             else
             {
@@ -528,7 +533,6 @@ public class PlayerController : MonoBehaviour
         transform.localScale = Scaler;
         CreateDust();
     }
-
 
 
     // PARTICLE RELATED METHODS

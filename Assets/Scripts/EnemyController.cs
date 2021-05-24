@@ -50,7 +50,6 @@ public class EnemyController : MonoBehaviour
         {
             transform.position = spawnPosition;
             canSpawn = false;
-            GetComponent<Collider2D>().isTrigger = true;
             isDead = false;
             gameObject.SetActive(true);
         }
@@ -58,7 +57,6 @@ public class EnemyController : MonoBehaviour
         {
             // canSpawn should turn true after cooldown
             canSpawn = true;
-            GetComponent<Collider2D>().isTrigger = false;
             isDead = true;
             StartCoroutine(Die());
             animator.SetBool("isDead", true);
