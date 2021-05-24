@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb2;
     private Vector2 screenBounds;
 
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,16 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Enemy"))
-            Destroy(gameObject);
+        {
+            rb2.bodyType = RigidbodyType2D.Static;
+            StartCoroutine(Explode());
+        }
+    }
+
+    IEnumerator Explode()
+    {
+        animator.SetBool("Explode", true);
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 }
