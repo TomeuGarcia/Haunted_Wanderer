@@ -5609,25 +5609,9 @@ CompositeCollider2D:
       - X: 1100000000
         Y: 30000000
       - X: 1100000000
-        Y: 39999900
-      - X: 1100000041
-        Y: 39999900
-      - X: 1100000100
-        Y: 39999959
-      - X: 1100000100
-        Y: 50000041
-      - X: 1100000041
-        Y: 50000100
-      - X: 1089999959
-        Y: 50000100
-      - X: 1089999900
-        Y: 50000041
-      - X: 1089999900
-        Y: 39999959
-      - X: 1089999959
-        Y: 39999900
+        Y: 50000000
       - X: 1090000000
-        Y: 39999900
+        Y: 50000000
       - X: 1090000000
         Y: 10000000
       - X: 1130000000
@@ -5759,8 +5743,8 @@ CompositeCollider2D:
       - {x: 112, y: 2.0000293}
       - {x: 111.99998, y: 3}
       - {x: 110, y: 3.0000293}
-      - {x: 109.99998, y: 5.00001}
-      - {x: 108.999985, y: 4.9999747}
+      - {x: 109.99998, y: 5}
+      - {x: 109, y: 4.999971}
       - {x: 109.00003, y: 1}
     - - {x: 145.99997, y: -7}
       - {x: 146.00003, y: -2}
@@ -19191,12 +19175,17 @@ PrefabInstance:
     - target: {fileID: -6358030632039320346, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
       propertyPath: maxJumpForce
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: -6358030632039320346, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
       propertyPath: jumpForce
-      value: 15
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6358030632039320346, guid: befccced808635c4bac144c8e0d1677c,
+        type: 3}
+      propertyPath: massIncrement
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 691108911244322176, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}

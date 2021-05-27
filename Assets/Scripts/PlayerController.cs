@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dust;
 
     // Movement
-    private const float highMoveSpeed = 6f;
-    private const float mediumMoveSpeed = 7f;
-    private const float lowMoveSpeed = 8f;
+    private const float highMoveSpeed = 7f;
+    private const float mediumMoveSpeed = 8f;
+    private const float lowMoveSpeed = 9f;
     private float maxMoveSpeed = highMoveSpeed;
     private float moveSpeed = highMoveSpeed;
     private Vector2 direction;
@@ -27,9 +27,9 @@ public class PlayerController : MonoBehaviour
     private float moveTimer = 0f;
 
     // Jump
-    public float maxJumpForce = 8f;
+    public float maxJumpForce;
     public float jumpForce = 0.0f;
-    private const float jumpTime = 0.3f;
+    public const float jumpTime = 0.2f;
     private float jumpTimer = 0f;
     private bool onGround;
     private bool jumping = false;
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private float ceilingLength = 1.05f;
     private bool hitCeiling;
     private float startMass;
+    public float massIncrement;
 
     private bool stompEnemy = false;
 
@@ -157,7 +158,7 @@ public class PlayerController : MonoBehaviour
         
         // If the player hit the ground, reset mass
         if (onGround)
-            //rb2.mass = startMass;
+            rb2.mass = startMass;
 
         // JUMP
         // if "Jump" button was pressed while player on ground, enable jumping
@@ -250,7 +251,7 @@ public class PlayerController : MonoBehaviour
             //    onJumpDirection = direction;
             //    moveSpeed = maxMoveSpeed / 1.5f;
             //}
-            if (onJumpDirection != direction)
+            if (onJumpDirection != direction && onJumpDirection.x != 0)
             {
                 onJumpDirection = direction;
                 moveSpeed = maxMoveSpeed / 2f;
@@ -266,7 +267,7 @@ public class PlayerController : MonoBehaviour
         {
             rb2.velocity = new Vector2(rb2.velocity.x, jumpForce);
             jumpTimer += Time.deltaTime;
-           // rb2.mass += 0.2f;
+            //rb2.mass += massIncrement;
         }
         else
             jumping = false;
