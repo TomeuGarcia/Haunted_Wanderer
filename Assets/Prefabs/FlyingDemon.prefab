@@ -154,6 +154,7 @@ MonoBehaviour:
   mediumSanity: 0
   lowSanity: 0
   player: {fileID: 0}
+  animator: {fileID: 7801419998166337385}
   bulletPrefab: {fileID: 9136370441424090003, guid: e12bab90c72ffbf4b80016e54a69cd72,
     type: 3}
 --- !u!95 &7801419998166337385

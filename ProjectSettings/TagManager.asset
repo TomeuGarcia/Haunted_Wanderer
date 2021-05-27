@@ -11,12 +11,12 @@ TagManager:
   - Checkpoint
   - Hazard
   - GoldenApple
-  - LowSanityEnemies
   - SanityLocker
   - SanityUnlocker
   - CameraFloor
   - Mushrooms
   - MovingPlatform
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoldenApple : MonoBehaviour
 {
-    public int healingPoints = 40;
+    public int healingPoints = 30;
 
     //// Start is called before the first frame update
     //void Start()
@@ -18,7 +18,7 @@ public class GoldenApple : MonoBehaviour
     //    // Check if Collided with player
     //    if (other.CompareTag("Player"))
     //    {
-    //        other.GetComponent<PlayerController>().gainSanity(healingPoints);
+    //        other.GetComponent<PlayerController>().GainSanity(healingPoints);
     //        Destroy(gameObject);
     //    }
     //}
