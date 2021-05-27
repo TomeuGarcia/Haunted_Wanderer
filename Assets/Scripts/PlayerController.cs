@@ -253,9 +253,11 @@ public class PlayerController : MonoBehaviour
             //}
             if (onJumpDirection != direction && onJumpDirection.x != 0)
             {
+                Debug.Log("move in air");
                 onJumpDirection = direction;
                 moveSpeed = maxMoveSpeed / 2f;
             }
+            moveSpeed = maxMoveSpeed + 0.5f; // make movement on air slightly faster
             rb2.velocity = new Vector2(direction.x * moveSpeed, rb2.velocity.y);
         }
     }
