@@ -1050,7 +1050,7 @@ PrefabInstance:
     - target: {fileID: 6608204486404972477, guid: e1408297d8a2b0c4c967d87c977d5221,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.5
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 6608204486404972477, guid: e1408297d8a2b0c4c967d87c977d5221,
         type: 3}
@@ -19188,6 +19188,16 @@ PrefabInstance:
       propertyPath: dust
       value: 
       objectReference: {fileID: 686436392}
+    - target: {fileID: -6358030632039320346, guid: befccced808635c4bac144c8e0d1677c,
+        type: 3}
+      propertyPath: maxJumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -6358030632039320346, guid: befccced808635c4bac144c8e0d1677c,
+        type: 3}
+      propertyPath: jumpForce
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 691108911244322176, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19246,12 +19256,12 @@ PrefabInstance:
     - target: {fileID: 691108911244322179, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
       propertyPath: m_GravityScale
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 691108911244322179, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
       propertyPath: m_Mass
-      value: 1.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 691108911244322189, guid: befccced808635c4bac144c8e0d1677c,
         type: 3}
@@ -48628,7 +48638,7 @@ PrefabInstance:
     - target: {fileID: 6608204486404972477, guid: e1408297d8a2b0c4c967d87c977d5221,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.5
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6608204486404972477, guid: e1408297d8a2b0c4c967d87c977d5221,
         type: 3}

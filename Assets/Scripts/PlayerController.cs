@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     private float moveTimer = 0f;
 
     // Jump
-    private const float maxJumpForce = 8f;
-    private float jumpForce = maxJumpForce;
+    public float maxJumpForce = 8f;
+    public float jumpForce = 0.0f;
     private const float jumpTime = 0.3f;
     private float jumpTimer = 0f;
     private bool onGround;
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
         
         // If the player hit the ground, reset mass
         if (onGround)
-            rb2.mass = startMass;
+            //rb2.mass = startMass;
 
         // JUMP
         // if "Jump" button was pressed while player on ground, enable jumping
@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         // Moving while on the ground
-        if (onGround)
+        if (onGround)// || (!onGround && direction.x != 0))
         {
             if (moveTimer < moveTime)
             {
@@ -266,7 +266,7 @@ public class PlayerController : MonoBehaviour
         {
             rb2.velocity = new Vector2(rb2.velocity.x, jumpForce);
             jumpTimer += Time.deltaTime;
-            rb2.mass += 0.2f;
+           // rb2.mass += 0.2f;
         }
         else
             jumping = false;
