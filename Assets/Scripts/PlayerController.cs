@@ -257,7 +257,10 @@ public class PlayerController : MonoBehaviour
                 onJumpDirection = direction;
                 moveSpeed = maxMoveSpeed / 2f;
             }
-            moveSpeed = maxMoveSpeed + 1.5f; //0.5f; // make movement on air slightly faster
+            else
+            {
+                moveSpeed = maxMoveSpeed + 1.5f; //0.5f; // make movement on air slightly faster
+            }
             rb2.velocity = new Vector2(direction.x * moveSpeed, rb2.velocity.y);
         }
     }
