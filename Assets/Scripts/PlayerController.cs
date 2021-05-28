@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dust;
 
     // Movement
-    private const float highMoveSpeed = 7f;
-    private const float mediumMoveSpeed = 8f;
-    private const float lowMoveSpeed = 9f;
+    private const float highMoveSpeed = 6f;// 7f;
+    private const float mediumMoveSpeed = 7f;//8f;
+    private const float lowMoveSpeed = 8f;//9f;
     private float maxMoveSpeed = highMoveSpeed;
     private float moveSpeed = highMoveSpeed;
     private Vector2 direction;
@@ -251,13 +251,13 @@ public class PlayerController : MonoBehaviour
             //    onJumpDirection = direction;
             //    moveSpeed = maxMoveSpeed / 1.5f;
             //}
-            if (onJumpDirection != direction && onJumpDirection.x != 0)
+            if (onJumpDirection != direction && direction.x != 0)
             {
                 Debug.Log("move in air");
                 onJumpDirection = direction;
                 moveSpeed = maxMoveSpeed / 2f;
             }
-            moveSpeed = maxMoveSpeed + 0.5f; // make movement on air slightly faster
+            moveSpeed = maxMoveSpeed + 1.5f; //0.5f; // make movement on air slightly faster
             rb2.velocity = new Vector2(direction.x * moveSpeed, rb2.velocity.y);
         }
     }
