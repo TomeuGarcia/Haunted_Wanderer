@@ -721,7 +721,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 92337771}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Camera Floors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2076,7 +2076,7 @@ GameObject:
   - component: {fileID: 294367609}
   m_Layer: 12
   m_Name: CameraFloor_1
-  m_TagString: CameraFloor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8127,11 +8127,9 @@ MonoBehaviour:
   moveVertically: 0
   canMoveUp: 0
   canMoveDown: 0
-  groundLayer:
+  cameraLimitLayer:
     serializedVersion: 2
     m_Bits: 4096
-  ceilingTrigger: {fileID: 643843915}
-  groundTrigger: {fileID: 643843914}
 --- !u!114 &643843911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22294,7 +22292,7 @@ GameObject:
   - component: {fileID: 1217668166}
   m_Layer: 12
   m_Name: CameraCeiling_1
-  m_TagString: CameraFloor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23899,7 +23897,7 @@ GameObject:
   - component: {fileID: 1560085276}
   m_Layer: 12
   m_Name: CameraFloor_3
-  m_TagString: CameraFloor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30455,7 +30453,7 @@ GameObject:
   - component: {fileID: 1799102756}
   m_Layer: 12
   m_Name: CameraCeiling_3
-  m_TagString: CameraFloor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30894,7 +30892,7 @@ GameObject:
   - component: {fileID: 1865689449}
   m_Layer: 12
   m_Name: CameraCeiling_2
-  m_TagString: CameraFloor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31789,7 +31787,7 @@ GameObject:
   - component: {fileID: 1980634268}
   m_Layer: 12
   m_Name: CameraFloor_2
-  m_TagString: CameraFloor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -24,8 +24,8 @@ public class CameraController : MonoBehaviour
     private float ceilingLength;
     public bool moveHorizontally;
     public bool moveVertically;
-    public bool canMoveUp;
-    public bool canMoveDown;
+    public bool canMoveUp = false;
+    public bool canMoveDown = false;
 
 
     private float speed = 6.0f;
@@ -33,10 +33,7 @@ public class CameraController : MonoBehaviour
     // Components
     private PlayerController pc;
     private Rigidbody2D rb2;
-    public LayerMask groundLayer;
-
-    public Collider2D ceilingTrigger;
-    public Collider2D groundTrigger;
+    public LayerMask cameraLimitLayer;
 
     void Start()
     {
@@ -44,10 +41,19 @@ public class CameraController : MonoBehaviour
         pc = followObject.GetComponent<PlayerController>();
         rb2 = followObject.GetComponent<Rigidbody2D>();
 
-        ceilingLength = groundLength = Camera.main.orthographicSize;// * 0.8f;
+        ceilingLength = groundLength = Camera.main.orthographicSize;
         moveVertically = false;
         moveHorizontally = false;
     }
+
+    private void Update()
+    {
+        // Camera can move up if not in contact with cameraCeiling
+        canMoveUp = !Physics2D.Raycast(transform.position, Vector2.up, ceilingLength, cameraLimitLayer);
+        // Camera can move down if not in contact with cameraGround
+        canMoveDown = !Physics2D.Raycast(transform.position, Vector2.down, groundLength, cameraLimitLayer);
+    }
+
 
 
     // Move Camera when followObject (Player) moves
@@ -99,21 +105,22 @@ public class CameraController : MonoBehaviour
 
        // Camera moves vertically
        const float offset = 5f;
-       if ((canMoveUp && follow.y > transform.position.y) ||
-           (canMoveDown && follow.y < transform.position.y))
+       if ((canMoveUp && follow.y > transform.position.y + offset) ||
+           (canMoveDown && follow.y < transform.position.y - offset))
        {
-            newPosition.y = follow.y;
+            newPosition.y = follow.y; 
        }
-       //else
-       //{
-       //     newPosition.y = transform.position.y;
-       //}
+       else
+       {
+            newPosition.y = transform.position.y;
+       }
 
 
 
         // Move Camera at required speed
         float moveSpeed = rb2.velocity.magnitude > speed ? rb2.velocity.magnitude : speed;
         transform.position = Vector3.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
+
     }
 
 
@@ -128,6 +135,7 @@ public class CameraController : MonoBehaviour
         return t;
     }
 
+
     IEnumerator FocusFollow()
     {
         //pc.canMove = false;
@@ -136,47 +144,6 @@ public class CameraController : MonoBehaviour
         //pc.canMove = true;
         pc.offCamera = false;
     }
-
-
-    // Check if camera can move vertically (not colliding with camera limits)
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("CameraFloor"))
-        {
-            if (other.IsTouching(ceilingTrigger))
-            {
-                canMoveUp = false;
-                Debug.Log("cam touching ceiling");
-            }
-            else if (other.IsTouching(groundTrigger))
-            {
-                canMoveDown = false;
-                Debug.Log("cam touching ground");
-            }
-            Debug.Log("trigger enter");
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("CameraFloor")) {
-            if (!other.IsTouching(ceilingTrigger))
-            {
-                canMoveUp = true;
-                Debug.Log("cam NOT touching ceiling");
-            }
-            else if (!other.IsTouching(groundTrigger))
-            {
-                canMoveDown = true;
-                Debug.Log("cam NOT touching ground");
-            }
-            Debug.Log("trigger exit");
-        }
-    }
-
-
-
-
 
 
     // Function that visualized Camera threshold in Editor
