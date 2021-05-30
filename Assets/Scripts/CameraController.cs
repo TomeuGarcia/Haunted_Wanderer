@@ -103,8 +103,8 @@ public class CameraController : MonoBehaviour
         }
 
 
-       // Camera moves vertically
-       const float offset = 5f;
+        // Camera moves vertically
+        const float offset = 2f;// 3f;// 5f;
        if ((canMoveUp && follow.y > transform.position.y + offset) ||
            (canMoveDown && follow.y < transform.position.y - offset))
        {
@@ -139,7 +139,8 @@ public class CameraController : MonoBehaviour
     IEnumerator FocusFollow()
     {
         //pc.canMove = false;
-        transform.position = new Vector3(follow.x, follow.y + groundLength - 1.1f, transform.position.z);
+        //transform.position = new Vector3(follow.x, follow.y + groundLength - 1.1f, transform.position.z);
+        transform.position = new Vector3(follow.x, follow.y, transform.position.z);
         yield return new WaitForSeconds(0.2f);
         //pc.canMove = true;
         pc.offCamera = false;
