@@ -193,6 +193,13 @@ public class PlayerController : MonoBehaviour
         // Flip player's sprite
         if ((!facingRight && direction.x > 0) || (facingRight && direction.x < 0))
             Flip();
+
+
+        // CAMERA
+        if (offCamera && canMove)
+            canMove = false;
+        else if (!offCamera && !canMove)
+            canMove = true;
     }
 
     private void FixedUpdate()
@@ -429,6 +436,7 @@ public class PlayerController : MonoBehaviour
                 //Teleport player to last checkpoint
                 transform.position = respawnPosition;
                 offCamera = true;
+                canMove = false;
             }
         }
     }

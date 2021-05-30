@@ -141,11 +141,10 @@ public class CameraController : MonoBehaviour
 
     IEnumerator FocusFollow()
     {
-        //pc.canMove = false;
-        //transform.position = new Vector3(follow.x, follow.y + groundLength - 1.1f, transform.position.z);
-        transform.position = respawnPosition;
-        yield return new WaitForSeconds(0.2f);
-        //pc.canMove = true;
+        transform.position = Vector3.MoveTowards(transform.position, respawnPosition, 3f); // Camera moves rapidly towards new position
+        //transform.position = respawnPosition; // Camera teleports to new position
+        float distance = (respawnPosition - transform.position).magnitude;
+        yield return new WaitForSeconds(distance * 0.25f); // player stays immovile for longer time depending on distance camra needs to travel
         pc.offCamera = false;
     }
 
