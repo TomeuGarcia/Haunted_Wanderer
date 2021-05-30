@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     // Position variables
-    private Vector2 respawnPosition;
+    public Vector2 respawnPosition;
     public bool offCamera = false;
 
     // Flag that determines if player can Move
@@ -427,7 +427,7 @@ public class PlayerController : MonoBehaviour
                 LoseSanity(10);
 
                 //Teleport player to last checkpoint
-                transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
+                transform.position = respawnPosition;
                 offCamera = true;
             }
         }
@@ -438,15 +438,8 @@ public class PlayerController : MonoBehaviour
     // TRIGGER METHODS
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Load new respawn position if players enters checkpoint
-        if (other.CompareTag("Checkpoint"))
-        {
-            Checkpoint cp = other.GetComponent<Checkpoint>();
-            respawnPosition = new Vector2(cp.X, cp.Y);
-        }
-
         // Lock player's sanity state (can't be updated)
-        else if (other.CompareTag("SanityLocker"))
+        if (other.CompareTag("SanityLocker"))
         {
             canUpdateSanity = false;
         }

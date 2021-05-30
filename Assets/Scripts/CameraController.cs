@@ -27,6 +27,7 @@ public class CameraController : MonoBehaviour
     public bool canMoveUp = false;
     public bool canMoveDown = false;
 
+    public Vector3 respawnPosition;
 
     private float speed = 6.0f;
 
@@ -44,6 +45,8 @@ public class CameraController : MonoBehaviour
         ceilingLength = groundLength = Camera.main.orthographicSize;
         moveVertically = false;
         moveHorizontally = false;
+
+        respawnPosition = transform.position;
     }
 
     private void Update()
@@ -140,7 +143,7 @@ public class CameraController : MonoBehaviour
     {
         //pc.canMove = false;
         //transform.position = new Vector3(follow.x, follow.y + groundLength - 1.1f, transform.position.z);
-        transform.position = new Vector3(follow.x, follow.y, transform.position.z);
+        transform.position = respawnPosition;
         yield return new WaitForSeconds(0.2f);
         //pc.canMove = true;
         pc.offCamera = false;

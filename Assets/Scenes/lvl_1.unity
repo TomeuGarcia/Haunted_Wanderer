@@ -8127,6 +8127,7 @@ MonoBehaviour:
   moveVertically: 0
   canMoveUp: 0
   canMoveDown: 0
+  respawnPosition: {x: 0, y: 0}
   cameraLimitLayer:
     serializedVersion: 2
     m_Bits: 4096
@@ -25018,6 +25019,36 @@ PrefabInstance:
       propertyPath: Y
       value: -4.5
       objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 643843910}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 68909014}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: playerX
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: playerY
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: camY
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: camX
+      value: 8.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1111460743646670154, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
       propertyPath: m_Sprite
@@ -30357,6 +30388,36 @@ PrefabInstance:
       propertyPath: Y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 643843910}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 68909014}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: playerX
+      value: 143.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: playerY
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: camX
+      value: 143.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: camY
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1111460743646670154, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
       propertyPath: m_Sprite
@@ -31978,6 +32039,36 @@ PrefabInstance:
         type: 3}
       propertyPath: Y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 68909014}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 643843910}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: playerX
+      value: 79.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: playerY
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: camX
+      value: 79.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
+        type: 3}
+      propertyPath: camY
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1111460743646670154, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
