@@ -32815,7 +32815,7 @@ PrefabInstance:
     - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
       propertyPath: playerX
-      value: 143.5
+      value: 183.5
       objectReference: {fileID: 0}
     - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
@@ -32825,7 +32825,7 @@ PrefabInstance:
     - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
       propertyPath: camX
-      value: 143.5
+      value: 183.5
       objectReference: {fileID: 0}
     - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
@@ -34283,12 +34283,12 @@ PrefabInstance:
     - target: {fileID: 2250076634756936466, guid: cb7abd30cc8fcde4c96963c8f6cf6de2,
         type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2250076634756936466, guid: cb7abd30cc8fcde4c96963c8f6cf6de2,
         type: 3}
       propertyPath: m_Size.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2250076634756936466, guid: cb7abd30cc8fcde4c96963c8f6cf6de2,
         type: 3}
@@ -34308,7 +34308,7 @@ PrefabInstance:
     - target: {fileID: 6726529960024344354, guid: cb7abd30cc8fcde4c96963c8f6cf6de2,
         type: 3}
       propertyPath: m_Size.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6726529960024344354, guid: cb7abd30cc8fcde4c96963c8f6cf6de2,
         type: 3}
@@ -34318,7 +34318,7 @@ PrefabInstance:
     - target: {fileID: 6726529960024344355, guid: cb7abd30cc8fcde4c96963c8f6cf6de2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 71
+      value: 70.5
       objectReference: {fileID: 0}
     - target: {fileID: 6726529960024344355, guid: cb7abd30cc8fcde4c96963c8f6cf6de2,
         type: 3}
@@ -34959,7 +34959,7 @@ PrefabInstance:
     - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
       propertyPath: playerX
-      value: 79.5
+      value: 119.5
       objectReference: {fileID: 0}
     - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
@@ -34969,7 +34969,7 @@ PrefabInstance:
     - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
       propertyPath: camX
-      value: 79.5
+      value: 119.5
       objectReference: {fileID: 0}
     - target: {fileID: 128275970793705623, guid: 1b4c3b8655b787f43970fcf45946a903,
         type: 3}
