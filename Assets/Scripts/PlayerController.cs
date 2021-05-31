@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private SanityState currentSanityState = SanityState.HIGH;
     public bool canUpdateSanity = true;
     public const int maxSanity = 100;
-    private int currentSanity;
+    public int currentSanity = maxSanity;
     public const int maxLimiter = maxSanity / 2;
     public const int startLimiter = maxLimiter / 5;
     public int currentLimiter = startLimiter;
@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour
 
         // Set default sanity 
         canUpdateSanity = true;
-        currentSanity = (int)(maxSanity*0.9);
         healthbar.bar = maxSanity;
         healthbar.SetMaxHealth();
         healthbar.limiter = currentLimiter;

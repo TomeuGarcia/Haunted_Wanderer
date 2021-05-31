@@ -99,6 +99,7 @@ MonoBehaviour:
   highSanity: 0
   mediumSanity: 0
   lowSanity: 0
+  sr: {fileID: 1628058605089082300}
   isSpikes: 1
 --- !u!61 &1168445906415445746
 BoxCollider2D:
