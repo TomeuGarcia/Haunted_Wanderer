@@ -7,10 +7,10 @@ public class PlatformController : MonoBehaviour
     // Variables
     private bool appearing;
     private bool disappearing;
-    private const float disappearTime = 1f;
+    private const float disappearTime = 2f;
     private float disappearTimer = disappearTime; // timer that counts backwards
 
-    private const float appearInc = 0.025f;
+    private float appearInc;
 
     // Platform boolean flags (tags)
     public bool isActive;
@@ -30,6 +30,8 @@ public class PlatformController : MonoBehaviour
         // a -> alpha (transparency: 0=transparent , 1=visible)
         c.a = 1.0f;
         sr.material.color = c;
+
+        appearInc = Time.deltaTime;
     }
 
     private void Update()
@@ -99,7 +101,7 @@ public class PlatformController : MonoBehaviour
             Color c = sr.material.color;
             c.a = f;
             sr.material.color = c;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(appearInc);
         }
         appearing = false;
     }
