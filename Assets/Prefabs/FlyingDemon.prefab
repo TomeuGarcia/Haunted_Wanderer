@@ -155,8 +155,6 @@ MonoBehaviour:
   highSanity: 0
   mediumSanity: 0
   lowSanity: 0
-  audio: {fileID: -1725816688100806503}
-  slimeDies: {fileID: 8300000, guid: eeed6f178e53a4f4cad8481846399579, type: 3}
   player: {fileID: 0}
   animator: {fileID: 7801419998166337385}
   bulletPrefab: {fileID: 9136370441424090003, guid: e12bab90c72ffbf4b80016e54a69cd72,
