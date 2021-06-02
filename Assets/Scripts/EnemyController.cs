@@ -81,9 +81,16 @@ public class EnemyController : MonoBehaviour
             setActiveState(false);
     }
 
+    public virtual void DeathSound()
+    {
+        return;
+    }
+
     //Coroutine
     IEnumerator Die()
     {
+        if ((player.transform.position - transform.position).magnitude < 20f) // play sound if enemy close enough to player
+            DeathSound(); 
         yield return new WaitForSeconds(0.8f);
         gameObject.SetActive(false);
     }

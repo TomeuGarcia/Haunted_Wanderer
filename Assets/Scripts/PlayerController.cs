@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
     [Header("Audio Elements")]
     [SerializeField] public AudioSource audio;
     [SerializeField] public AudioClip hurtedSound01;
+    [SerializeField] public AudioClip biteApple;
 
     void Start()
     {
@@ -124,11 +125,7 @@ public class PlayerController : MonoBehaviour
         // Use consumible and heal sanity
         if (Input.GetKeyDown(KeyCode.Q) && hasGApple)
         {
-            GainSanity(healValue);
-            hasGApple = false;
-            healValue = 0;
-            goldenAppleSprite1.SetActive(true);
-            goldenAppleSprite2.SetActive(false);
+            EatApple();
         }
 
         // Cheat button: I -> gain 5 sanity
@@ -259,7 +256,7 @@ public class PlayerController : MonoBehaviour
             //}
             if (onJumpDirection != direction && direction.x != 0)
             {
-                Debug.Log("move in air");
+                //Debug.Log("move in air");
                 onJumpDirection = direction;
                 moveSpeed = maxMoveSpeed / 2f;
             }
@@ -397,6 +394,17 @@ public class PlayerController : MonoBehaviour
     {
         currentLimiter = startLimiter;
         UpdateHealthbarLimiter();
+    }
+
+
+    private void EatApple()
+    {
+        audio.PlayOneShot(biteApple, 0.5f);
+        GainSanity(healValue);
+        hasGApple = false;
+        healValue = 0;
+        goldenAppleSprite1.SetActive(true);
+        goldenAppleSprite2.SetActive(false);
     }
 
 

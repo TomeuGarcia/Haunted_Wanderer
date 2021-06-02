@@ -18,6 +18,7 @@ public class Slime : EnemyController
     private bool facingRight = true;
     private bool cantMove = false;
     private bool canAttack = false;
+    private bool attacking = false;
     private Vector2 vectorEnemyPlayer;
 
     // Component variables
@@ -27,6 +28,11 @@ public class Slime : EnemyController
     private Collider2D collider;
     private Vector2 startCollSize;
 
+    [Header("Audio Elements")]
+    [SerializeField] public AudioSource audio;
+    [SerializeField] public AudioClip slimeJumps;
+    [SerializeField] public AudioClip slimeSlashes;
+    [SerializeField] public AudioClip slimeDies;
 
     void Start()
     {
@@ -48,7 +54,9 @@ public class Slime : EnemyController
         {
             Flip();
         }
+
     }
+
     private void FixedUpdate()
     {
         onRightWall = Physics2D.Raycast(transform.position, Vector2.right, wallLength, groundLayer);
@@ -72,7 +80,7 @@ public class Slime : EnemyController
             rb2.gravityScale = 0;
             if (!cantMove && vectorEnemyPlayer.magnitude > 3f)
                 Move();
-            else if (!canAttack && vectorEnemyPlayer.magnitude < 3f)
+            else if (!canAttack && vectorEnemyPlayer.magnitude < 3f && !attacking)
             {
                 Attack();
             }
@@ -99,6 +107,7 @@ public class Slime : EnemyController
             moveTimer += Time.deltaTime;
             if (moveTimer >= moveCooldown && onGround)
             {
+                audio.PlayOneShot(slimeJumps);
                 // Move to the right if player is located to the right of the Slmie
                 if (vectorEnemyPlayer.x > 0)
                 {
@@ -124,6 +133,7 @@ public class Slime : EnemyController
 
     private void Attack()
     {
+        attacking = true;
         StartCoroutine(AttackAnimation());
         animator.SetBool("isAttacking", true);
     }
@@ -132,9 +142,18 @@ public class Slime : EnemyController
     {
         yield return new WaitForSeconds(0.3f);
         GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.6f);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.3f);
+        audio.PlayOneShot(slimeSlashes, 0.5f);
+        yield return new WaitForSeconds(0.5f);
         GetComponent<BoxCollider2D>().size = startCollSize;
         animator.SetBool("isAttacking", false);
         canAttack = false;
-    } 
+        attacking = false;
+    }
+
+
+    public override void DeathSound()
+    {
+        audio.PlayOneShot(slimeDies, 0.4f);
+    }
 }

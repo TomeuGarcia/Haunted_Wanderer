@@ -10,6 +10,10 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb2;
     private Vector2 screenBounds;
 
+    [Header("Audio Elements")]
+    [SerializeField] public AudioSource audio;
+    [SerializeField] public AudioClip bulletSplash;
+
     public Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -30,6 +34,7 @@ public class Bullet : MonoBehaviour
 
     IEnumerator Explode()
     {
+        audio.PlayOneShot(bulletSplash, 2f);
         animator.SetBool("Explode", true);
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
