@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private const float mediumMoveSpeed = 7f;//8f;
     private const float lowMoveSpeed = 8f;//9f;
     private float maxMoveSpeed = highMoveSpeed;
-    private float moveSpeed = highMoveSpeed;
+    public float moveSpeed = highMoveSpeed;
     private Vector2 direction;
     private Vector2 onJumpDirection;
     private const float moveTime = 0.1f;
@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public AudioSource audio;
     [SerializeField] public AudioClip hurtedSound01;
     [SerializeField] public AudioClip biteApple;
+    [SerializeField] public AudioClip fallingOnSpikes;
 
     void Start()
     {
@@ -437,6 +438,9 @@ public class PlayerController : MonoBehaviour
             HazardController hc = collision.collider.GetComponent<HazardController>();
             if (hc.isSpikes)
             {
+                // Play sound
+                audio.PlayOneShot(fallingOnSpikes, 0.5f);
+
                 //Hurt player 
                 LoseSanity(10);
 

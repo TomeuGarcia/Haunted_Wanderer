@@ -34,9 +34,9 @@ public class Bullet : MonoBehaviour
 
     IEnumerator Explode()
     {
-        audio.PlayOneShot(bulletSplash, 2f);
+        audio.PlayOneShot(bulletSplash, 0.1f);
         animator.SetBool("Explode", true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
         Destroy(gameObject);
     }
 }

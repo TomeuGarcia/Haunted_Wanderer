@@ -35,19 +35,24 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
-        spitTimer = 0f;
+        spitTimer = spitTime * 0.8f;
 
         rb2 = GetComponent<Rigidbody2D>();
-        mouthPosition = new Vector2(transform.position.x + 2f, transform.position.y + 6); // test coord
     }
 
     void Update()
     {
+        // Update movement speed
+        movementSpeed = player.moveSpeed;
+
         // Updated distance between Boss and Player
-        distanceToPlayer = (player.transform.position - transform.position).magnitude;
+        distanceToPlayer = (player.transform.position.x - transform.position.x);
+
+        // Update mouth position
+        mouthPosition = new Vector2(transform.position.x + 2f, transform.position.y + 2f); // test coord
 
         // Spit enemy if player is in spitRange and cooldown passed
-        if (distanceToPlayer < spitRange)
+        if (distanceToPlayer >= spitRange)
         {
             if (spitTimer <= spitTime)
             {
@@ -62,14 +67,30 @@ public class BossController : MonoBehaviour
         Debug.Log(spitTimer);
     }
 
+    private void FixedUpdate()
+    {
+        Move();
+        if (player.offCamera)
+            transform.position = new Vector2(player.transform.position.x - 10, transform.position.y);
+    }
+
+
+    // Move self towards player
+    private void Move()
+    {
+        if (distanceToPlayer > 10)
+        {
+            Vector2 positionToMove = new Vector2(player.transform.position.x, transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, positionToMove, movementSpeed * Time.deltaTime);
+        }
+    }
 
 
     // Spit a Slime
     private void SpitSlime()
     {
-        Debug.Log("spitting slime");
         GameObject slimeClone = Instantiate(slimeCopy.gameObject, mouthPosition, Quaternion.identity);
         Rigidbody2D rbSlime = slimeClone.GetComponent<Rigidbody2D>();
-        //rbSlime.AddForce(new Vector2(30f, 10f), ForceMode2D.Impulse);
+        rbSlime.AddForce(new Vector2(12f, 9f), ForceMode2D.Impulse);
     }
 }

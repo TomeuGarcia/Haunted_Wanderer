@@ -155,5 +155,7 @@ public class Slime : EnemyController
     public override void DeathSound()
     {
         audio.PlayOneShot(slimeDies, 0.4f);
+        // also set attacking to false if Slime was killed while attacking
+        if (attacking) attacking = false;
     }
 }
