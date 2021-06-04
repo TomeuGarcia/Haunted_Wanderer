@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour
     private void BounceOnEnemy()
     {
         rb2.mass = startMass;
-        rb2.AddForce(transform.up * 20, ForceMode2D.Impulse);
+        rb2.AddForce(transform.up * 130, ForceMode2D.Impulse);
     }
 
 

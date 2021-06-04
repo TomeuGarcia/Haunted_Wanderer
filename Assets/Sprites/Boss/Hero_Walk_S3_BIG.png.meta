@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: 133f76af0be91f945be1d63e25a5104c
+guid: 4729f3bf82b879548bfd5c4335b5f7bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 226388189527135614
-    second: ARetroBlack_0
+      213: -461759137817159588
+    second: Hero_Walk_S3_BIG_0
   - first:
-      213: 3123500521261175077
-    second: ARetroBlack_1
+      213: 1247961923068853105
+    second: Hero_Walk_S3_BIG_1
   - first:
-      213: 4370686214713772374
-    second: ARetroBlack_2
+      213: -2638331827748705404
+    second: Hero_Walk_S3_BIG_2
   - first:
-      213: 4446371427897624658
-    second: ARetroBlack_3
-  - first:
-      213: -7459322574480737086
-    second: ARetroBlack_4
-  - first:
-      213: -6214994959808778568
-    second: ARetroBlack_5
+      213: -4972533178245331249
+    second: Hero_Walk_S3_BIG_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -63,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 15
+  spritePixelsToUnits: 180
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,127 +99,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ARetroBlack_0
+      name: Hero_Walk_S3_BIG_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 16
-        height: 16
+        y: 2048
+        width: 2048
+        height: 2048
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e75db12ebda442300800000000000000
-      internalID: 226388189527135614
+      spriteID: c581e9ab2808799f0800000000000000
+      internalID: -461759137817159588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARetroBlack_1
+      name: Hero_Walk_S3_BIG_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
+        x: 2048
+        y: 2048
+        width: 2048
+        height: 2048
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5211581dc27e85b20800000000000000
-      internalID: 3123500521261175077
+      spriteID: 17b7bbdc1c6a15110800000000000000
+      internalID: 1247961923068853105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARetroBlack_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65906b494fbc7ac30800000000000000
-      internalID: 4370686214713772374
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ARetroBlack_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 258c84b714fa4bd30800000000000000
-      internalID: 4446371427897624658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ARetroBlack_4
+      name: Hero_Walk_S3_BIG_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 15
+        width: 2048
+        height: 2048
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ccf503c3a92b7890800000000000000
-      internalID: -7459322574480737086
+      spriteID: 48b6e6f5e23c26bd0800000000000000
+      internalID: -2638331827748705404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARetroBlack_5
+      name: Hero_Walk_S3_BIG_3
       rect:
         serializedVersion: 2
-        x: 16
+        x: 2048
         y: 0
-        width: 15
-        height: 15
+        width: 2048
+        height: 2048
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8be21c33307efb9a0800000000000000
-      internalID: -6214994959808778568
+      spriteID: fc6c7d48b630efab0800000000000000
+      internalID: -4972533178245331249
       vertices: []
       indices: 
       edges: []

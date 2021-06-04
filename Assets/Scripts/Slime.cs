@@ -156,6 +156,10 @@ public class Slime : EnemyController
     {
         audio.PlayOneShot(slimeDies, 0.4f);
         // also set attacking to false if Slime was killed while attacking
-        if (attacking) attacking = false;
+        if (attacking)
+        {
+            attacking = false;
+            canAttack = true;
+        }
     }
 }

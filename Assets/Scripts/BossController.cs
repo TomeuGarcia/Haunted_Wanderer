@@ -35,7 +35,7 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
-        spitTimer = spitTime * 0.8f;
+        spitTimer = spitTime;
 
         rb2 = GetComponent<Rigidbody2D>();
     }
@@ -46,7 +46,7 @@ public class BossController : MonoBehaviour
         movementSpeed = player.moveSpeed;
 
         // Updated distance between Boss and Player
-        distanceToPlayer = (player.transform.position.x - transform.position.x);
+        distanceToPlayer = Mathf.Abs(player.transform.position.x - transform.position.x);
 
         // Update mouth position
         mouthPosition = new Vector2(transform.position.x + 2f, transform.position.y + 2f); // test coord
@@ -54,17 +54,8 @@ public class BossController : MonoBehaviour
         // Spit enemy if player is in spitRange and cooldown passed
         if (distanceToPlayer >= spitRange)
         {
-            if (spitTimer <= spitTime)
-            {
-                spitTimer += Time.deltaTime;
-            }
-            else
-            {
-                spitTimer = 0f;
-                SpitSlime();
-            }
+            Spit();
         }
-        Debug.Log(spitTimer);
     }
 
     private void FixedUpdate()
@@ -85,6 +76,22 @@ public class BossController : MonoBehaviour
         }
     }
 
+
+
+    // Spit logic
+    private void Spit()
+    {
+        if (spitTimer <= spitTime)
+        {
+            spitTimer += Time.deltaTime;
+        }
+        else
+        {
+            spitTimer = 0f;
+            SpitSlime();
+        }
+        Debug.Log(spitTimer);
+    }
 
     // Spit a Slime
     private void SpitSlime()

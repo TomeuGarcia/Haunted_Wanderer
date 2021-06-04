@@ -1,25 +1,22 @@
 fileFormatVersion: 2
-guid: 133f76af0be91f945be1d63e25a5104c
+guid: 8e018d208095d8046be67b9a3d11a042
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 226388189527135614
-    second: ARetroBlack_0
+      213: 4590767559589203742
+    second: Tilemap_Sprites_0
   - first:
-      213: 3123500521261175077
-    second: ARetroBlack_1
+      213: 3640303811120556425
+    second: Tilemap_Sprites_1
   - first:
-      213: 4370686214713772374
-    second: ARetroBlack_2
+      213: -850261644956642676
+    second: Tilemap_Sprites_2
   - first:
-      213: 4446371427897624658
-    second: ARetroBlack_3
+      213: 6654575131687097669
+    second: Tilemap_Sprites_3
   - first:
-      213: -7459322574480737086
-    second: ARetroBlack_4
-  - first:
-      213: -6214994959808778568
-    second: ARetroBlack_5
+      213: -1924064031286111114
+    second: Tilemap_Sprites_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -63,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 15
+  spritePixelsToUnits: 22
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -82,7 +79,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -94,7 +91,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,127 +102,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ARetroBlack_0
+      name: Tilemap_Sprites_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 16
-        height: 16
+        y: 78
+        width: 22
+        height: 22
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e75db12ebda442300800000000000000
-      internalID: 226388189527135614
+      spriteID: e1f83b3c5cea5bf30800000000000000
+      internalID: 4590767559589203742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARetroBlack_1
+      name: Tilemap_Sprites_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
+        x: 22
+        y: 78
+        width: 22
+        height: 22
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5211581dc27e85b20800000000000000
-      internalID: 3123500521261175077
+      spriteID: 98967507705f48230800000000000000
+      internalID: 3640303811120556425
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARetroBlack_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65906b494fbc7ac30800000000000000
-      internalID: 4370686214713772374
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ARetroBlack_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 258c84b714fa4bd30800000000000000
-      internalID: 4446371427897624658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ARetroBlack_4
+      name: Tilemap_Sprites_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 16
-        height: 15
+        y: 56
+        width: 22
+        height: 22
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ccf503c3a92b7890800000000000000
-      internalID: -7459322574480737086
+      spriteID: c82583ee9834334f0800000000000000
+      internalID: -850261644956642676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARetroBlack_5
+      name: Tilemap_Sprites_3
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 15
-        height: 15
+        x: 22
+        y: 56
+        width: 22
+        height: 22
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8be21c33307efb9a0800000000000000
-      internalID: -6214994959808778568
+      spriteID: 5459b5723dcc95c50800000000000000
+      internalID: 6654575131687097669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tilemap_Sprites_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 674d51a25f95c45e0800000000000000
+      internalID: -1924064031286111114
       vertices: []
       indices: 
       edges: []
@@ -242,7 +218,7 @@ TextureImporter:
     secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
+  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
