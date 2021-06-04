@@ -16,6 +16,7 @@ TagManager:
   - Mushrooms
   - MovingPlatform
   - Bullet
+  - SlimeSpitTrigger
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - Enemies
   - Player
   - CameraLimit
-  - 
+  - Boss
   - 
   - 
   - 

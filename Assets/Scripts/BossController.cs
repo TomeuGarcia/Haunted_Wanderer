@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
+    private bool didReset = false;
+    private bool reset = false;
+
     // Movement
     private float movementSpeed;
 
-    // Health
-    private const int maxHealth = 100;
-    private int health = maxHealth;
+    // Sanity
+    //public enum SanityState { HIGH, MEDIUM, LOW };
+    private PlayerController.SanityState currentSanityState = PlayerController.SanityState.HIGH;
 
     // Melee Attack
     private const int meleeDamage = 20;
@@ -17,9 +20,7 @@ public class BossController : MonoBehaviour
     private float meleeAtkTimer = 0f;
 
     // Slime Spit Attack
-    private const float spitRange = 10f;
-    private const float spitTime = 5f;
-    private float spitTimer;// = 0f;
+    private Vector2 mouthPosition;
 
 
     // Other GameObjects
@@ -27,21 +28,29 @@ public class BossController : MonoBehaviour
     private float distanceToPlayer;
     
     public Slime slimeCopy;
-    private Vector2 mouthPosition;
 
     // Components
     private Rigidbody2D rb2;
 
+    [Header("Audio Elements")]
+    [SerializeField] public AudioSource audio;
+    [SerializeField] public AudioClip spit;
+
 
     void Start()
     {
-        spitTimer = spitTime;
+        //spitTimer = spitTime;
 
         rb2 = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        // Reset if player was sent back to a checkpoint
+        if (!didReset && player.offCamera) didReset = reset = true;
+        else if (!player.offCamera) didReset = reset = false;
+
+
         // Update movement speed
         movementSpeed = player.moveSpeed;
 
@@ -50,19 +59,17 @@ public class BossController : MonoBehaviour
 
         // Update mouth position
         mouthPosition = new Vector2(transform.position.x + 2f, transform.position.y + 2f); // test coord
-
-        // Spit enemy if player is in spitRange and cooldown passed
-        if (distanceToPlayer >= spitRange)
-        {
-            Spit();
-        }
     }
 
     private void FixedUpdate()
     {
         Move();
+
+        // Move boss with player if teleported to checkpoint 
         if (player.offCamera)
-            transform.position = new Vector2(player.transform.position.x - 10, transform.position.y);
+        {
+            transform.position = new Vector2(player.transform.position.x - 12f, transform.position.y);
+        }
     }
 
 
@@ -77,27 +84,34 @@ public class BossController : MonoBehaviour
     }
 
 
-
-    // Spit logic
-    private void Spit()
+    // Update's Boss' sanity state
+    private void UpdateSanityState()
     {
-        if (spitTimer <= spitTime)
-        {
-            spitTimer += Time.deltaTime;
-        }
-        else
-        {
-            spitTimer = 0f;
-            SpitSlime();
-        }
-        Debug.Log(spitTimer);
+        if (currentSanityState != player.currentSanityState)
+            currentSanityState = player.currentSanityState;
     }
+
 
     // Spit a Slime
     private void SpitSlime()
     {
+        audio.PlayOneShot(spit, 0.5f);
         GameObject slimeClone = Instantiate(slimeCopy.gameObject, mouthPosition, Quaternion.identity);
         Rigidbody2D rbSlime = slimeClone.GetComponent<Rigidbody2D>();
         rbSlime.AddForce(new Vector2(12f, 9f), ForceMode2D.Impulse);
     }
+
+
+
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("SlimeSpitTrigger") && currentSanityState == PlayerController.SanityState.HIGH)
+        {
+            SpitSlime();
+        }
+    }
+
+
 }

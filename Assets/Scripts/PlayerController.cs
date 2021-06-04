@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     // Sanity variables
     public enum SanityState { HIGH, MEDIUM, LOW };
-    private SanityState currentSanityState = SanityState.HIGH;
+    public SanityState currentSanityState = SanityState.HIGH;
     public bool canUpdateSanity = true;
     public const int maxSanity = 100;
     public int currentSanity = maxSanity;
