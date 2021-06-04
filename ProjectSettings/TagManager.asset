@@ -13,7 +13,6 @@ TagManager:
   - GoldenApple
   - SanityLocker
   - SanityUnlocker
-  - CameraFloor
   - Mushrooms
   - MovingPlatform
   - Bullet
@@ -30,7 +29,7 @@ TagManager:
   - Background
   - Enemies
   - Player
-  - CameraFloor
+  - CameraLimit
   - 
   - 
   - 

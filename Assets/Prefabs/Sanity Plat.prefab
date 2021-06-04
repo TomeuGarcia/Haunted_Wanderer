@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1162e8e85e5f841bac061f6f572d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePosition: {x: 0, y: 0}
-  isSpontaneous: 1
+  isActive: 0
   highSanity: 0
   mediumSanity: 0
   lowSanity: 0
+  sr: {fileID: 6726529960024344354}
 --- !u!1001 &8451514729962309446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,6 +114,12 @@ PrefabInstance:
 --- !u!1 &6726529960024344352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2886983842611363942, guid: e3b6adbcbac9c7e4d99704b9c0482bcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 8451514729962309446}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &6726529960024344354 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2886983842611363940, guid: e3b6adbcbac9c7e4d99704b9c0482bcf,
     type: 3}
   m_PrefabInstance: {fileID: 8451514729962309446}
   m_PrefabAsset: {fileID: 0}

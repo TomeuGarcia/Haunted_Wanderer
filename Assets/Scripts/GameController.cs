@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
     private bool sanityDown = false;
     [Header("UI Elements")]
     [SerializeField] public Image SanityChangeVFX;
+    [SerializeField] public Image BlackScreen;
     [Header("Audio Elements")]
     [SerializeField] public AudioSource audio;
     [SerializeField] public AudioClip SanityUp;
@@ -51,26 +52,6 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        //// SET ENEMIES
-        //sceneEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        //foreach (GameObject e in sceneEnemies)
-        //{
-        //    e.GetComponent<EnemyController>().setActiveState(false);
-        //}
-
-        //// SET PLATFORMS
-        //scenePlatforms = GameObject.FindGameObjectsWithTag("Platform");
-        //foreach (GameObject p in scenePlatforms)
-        //{
-        //    p.GetComponent<PlatformController>().setActiveState(false);
-        //}
-
-        //// SET HAZARDS
-        //sceneHazards = GameObject.FindGameObjectsWithTag("Hazard");
-        //foreach (GameObject h in sceneHazards)
-        //{
-        //    h.GetComponent<HazardController>().setActiveState(false);
-        //}
         // ENEMIES
         sceneEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject e in sceneEnemies)
@@ -107,11 +88,18 @@ public class GameController : MonoBehaviour
         // FLAGS
         // 0 = NONE
         playerSanityState = 0; // -1
-
+        
+        audio = GetComponent<AudioSource>();
         Color c = SanityChangeVFX.color;
         c.a = 0f;
         SanityChangeVFX.color = c;
-        audio = GetComponent<AudioSource>();
+        
+        Color c2 = BlackScreen.color;
+        c2.a = 1f;
+        BlackScreen.color = c2;
+
+        StartCoroutine(SceneStartFade());
+
     }
 
     void Update()
@@ -277,6 +265,19 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         reactivateScene();
     }
+
+    IEnumerator SceneStartFade()
+    {
+        for (float f = 1f; f >= -0.025f; f -= 0.025f)
+        {
+            Color c2 = BlackScreen.color;
+            c2.a = f;
+            BlackScreen.color = c2;
+            yield return new WaitForSeconds(0.025f);
+        }
+    }
+
+
 
     IEnumerator sanityChangeEffect() {
         if (sanityUp) audio.PlayOneShot(SanityUp, 0.35f);

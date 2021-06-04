@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     // Position variables
-    private Vector2 respawnPosition;
+    public Vector2 respawnPosition;
     public bool offCamera = false;
 
     // Flag that determines if player can Move
@@ -16,11 +16,11 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dust;
 
     // Movement
-    private const float highMoveSpeed = 7f;
-    private const float mediumMoveSpeed = 8f;
-    private const float lowMoveSpeed = 9f;
+    private const float highMoveSpeed = 6f;// 7f;
+    private const float mediumMoveSpeed = 7f;//8f;
+    private const float lowMoveSpeed = 8f;//9f;
     private float maxMoveSpeed = highMoveSpeed;
-    private float moveSpeed = highMoveSpeed;
+    public float moveSpeed = highMoveSpeed;
     private Vector2 direction;
     private Vector2 onJumpDirection;
     private const float moveTime = 0.1f;
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private SanityState currentSanityState = SanityState.HIGH;
     public bool canUpdateSanity = true;
     public const int maxSanity = 100;
-    private int currentSanity;
+    public int currentSanity = maxSanity;
     public const int maxLimiter = maxSanity / 2;
     public const int startLimiter = maxLimiter / 5;
     public int currentLimiter = startLimiter;
@@ -90,6 +90,8 @@ public class PlayerController : MonoBehaviour
     [Header("Audio Elements")]
     [SerializeField] public AudioSource audio;
     [SerializeField] public AudioClip hurtedSound01;
+    [SerializeField] public AudioClip biteApple;
+    [SerializeField] public AudioClip fallingOnSpikes;
 
     void Start()
     {
@@ -98,7 +100,6 @@ public class PlayerController : MonoBehaviour
 
         // Set default sanity 
         canUpdateSanity = true;
-        currentSanity = (int)(maxSanity*0.9);
         healthbar.bar = maxSanity;
         healthbar.SetMaxHealth();
         healthbar.limiter = currentLimiter;
@@ -125,11 +126,7 @@ public class PlayerController : MonoBehaviour
         // Use consumible and heal sanity
         if (Input.GetKeyDown(KeyCode.Q) && hasGApple)
         {
-            GainSanity(healValue);
-            hasGApple = false;
-            healValue = 0;
-            goldenAppleSprite1.SetActive(true);
-            goldenAppleSprite2.SetActive(false);
+            EatApple();
         }
 
         // Cheat button: I -> gain 5 sanity
@@ -193,6 +190,13 @@ public class PlayerController : MonoBehaviour
         // Flip player's sprite
         if ((!facingRight && direction.x > 0) || (facingRight && direction.x < 0))
             Flip();
+
+
+        // CAMERA
+        if (offCamera && canMove)
+            canMove = false;
+        else if (!offCamera && !canMove)
+            canMove = true;
     }
 
     private void FixedUpdate()
@@ -251,10 +255,15 @@ public class PlayerController : MonoBehaviour
             //    onJumpDirection = direction;
             //    moveSpeed = maxMoveSpeed / 1.5f;
             //}
-            if (onJumpDirection != direction && onJumpDirection.x != 0)
+            if (onJumpDirection != direction && direction.x != 0)
             {
+                //Debug.Log("move in air");
                 onJumpDirection = direction;
                 moveSpeed = maxMoveSpeed / 2f;
+            }
+            else
+            {
+                moveSpeed = maxMoveSpeed + 1.5f; //0.5f; // make movement on air slightly faster
             }
             rb2.velocity = new Vector2(direction.x * moveSpeed, rb2.velocity.y);
         }
@@ -293,7 +302,7 @@ public class PlayerController : MonoBehaviour
     private void BounceOnEnemy()
     {
         rb2.mass = startMass;
-        rb2.AddForce(transform.up * 20, ForceMode2D.Impulse);
+        rb2.AddForce(transform.up * 130, ForceMode2D.Impulse);
     }
 
 
@@ -389,6 +398,17 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private void EatApple()
+    {
+        audio.PlayOneShot(biteApple, 0.5f);
+        GainSanity(healValue);
+        hasGApple = false;
+        healValue = 0;
+        goldenAppleSprite1.SetActive(true);
+        goldenAppleSprite2.SetActive(false);
+    }
+
+
 
     // UI RELATED METHODS
     // Function that updates the HealthBar 
@@ -418,12 +438,16 @@ public class PlayerController : MonoBehaviour
             HazardController hc = collision.collider.GetComponent<HazardController>();
             if (hc.isSpikes)
             {
+                // Play sound
+                audio.PlayOneShot(fallingOnSpikes, 0.5f);
+
                 //Hurt player 
                 LoseSanity(10);
 
                 //Teleport player to last checkpoint
-                transform.position = new Vector2(respawnPosition.x, respawnPosition.y);
+                transform.position = respawnPosition;
                 offCamera = true;
+                canMove = false;
             }
         }
     }
@@ -433,15 +457,8 @@ public class PlayerController : MonoBehaviour
     // TRIGGER METHODS
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Load new respawn position if players enters checkpoint
-        if (other.CompareTag("Checkpoint"))
-        {
-            Checkpoint cp = other.GetComponent<Checkpoint>();
-            respawnPosition = new Vector2(cp.X, cp.Y);
-        }
-
         // Lock player's sanity state (can't be updated)
-        else if (other.CompareTag("SanityLocker"))
+        if (other.CompareTag("SanityLocker"))
         {
             canUpdateSanity = false;
         }

@@ -261,13 +261,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be17672ca0f626a449920d558a255deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnPosition: {x: 0, y: 0}
   offCamera: 0
   canMove: 0
   dust: {fileID: 0}
+  maxMoveSpeed: 6
   maxJumpForce: 14
   jumpForce: 0
   massIncrement: 0
   canUpdateSanity: 0
+  currentSanity: 100
   currentLimiter: 10
   healthbar: {fileID: 0}
   hasGApple: 0
@@ -284,3 +287,5 @@ MonoBehaviour:
   animator: {fileID: 0}
   audio: {fileID: 749412806153997525}
   hurtedSound01: {fileID: 8300000, guid: e5e540d187c4410428db4bd787371d7c, type: 3}
+  biteApple: {fileID: 8300000, guid: 2b1988d01251fe647937fe8ea5cf2458, type: 3}
+  fallingOnSpikes: {fileID: 8300000, guid: 085aa8336b9b3f54fb025aa7985fe6e1, type: 3}

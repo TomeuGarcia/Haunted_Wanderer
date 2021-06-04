@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     // Variables
-    //private Vector2 notActivePosition;
-    //public Vector2 activePosition;
-    //private Vector2 positionToMove;
+    private bool appearing;
+    private bool disappearing;
+    private const float disappearTime = 2f;
+    private float disappearTimer = disappearTime; // timer that counts backwards
 
+    private float appearInc;
 
     // Platform boolean flags (tags)
     public bool isActive;
@@ -18,16 +20,44 @@ public class PlatformController : MonoBehaviour
     [SerializeField] public bool lowSanity = false;
 
     // Components
-    //private SpriteRenderer sr;
+    public SpriteRenderer sr;
 
 
     private void Start()
     {
-        //sr = GetComponent<SpriteRenderer>();
-        //Color c = sr.material.color;
-        //// a -> alpha (transparency: 0=transparent , 1=visible)
-        //c.a = 1.0f;
-        //sr.material.color = c;
+        sr = GetComponent<SpriteRenderer>();
+        Color c = sr.material.color;
+        // a -> alpha (transparency: 0=transparent , 1=visible)
+        c.a = 1.0f;
+        sr.material.color = c;
+
+        appearInc = Time.deltaTime;
+    }
+
+    private void Update()
+    {
+        if (disappearing)
+        {
+            if (disappearTimer >= -appearInc)
+            {
+                Color c = sr.material.color;
+                c.a = disappearTimer;
+                sr.material.color = c;
+                disappearTimer -= appearInc;
+            }
+            else
+            {
+                disappearing = false;
+                //disappearTimer = disappearTime;
+                //gameObject.SetActive(false);
+            }
+        }
+
+        if (!disappearing && disappearTimer < 0)
+        {
+            disappearTimer = disappearTime;
+            gameObject.SetActive(false);
+        }
     }
 
 
@@ -36,56 +66,61 @@ public class PlatformController : MonoBehaviour
     {
         if (active)
         {
-            isActive = true;
             gameObject.SetActive(true);
-            startFadingIn();
+            if (disappearing)
+            {
+                disappearing = false;
+                StopCoroutine(FadeIn());
+            }
+            
+            appearing = true;
+            isActive = true;
+            StartCoroutine(FadeIn());
         }
         else
         {
+            if (appearing)
+            {
+                appearing = false;
+                //StopCoroutine(FadeOut());
+            }
+
+            disappearing = true;
             isActive = false;
-            startFadingOut();
-            //gameObject.SetActive(false);
+            //StartCoroutine(FadeOut());
         }
     }
 
 
     // Fade platforms (methods called when isSpontaneous == true)
     // Fade in
-    IEnumerator fadeIn()
+    IEnumerator FadeIn()
     {
-        for (float f = 0.05f; f <= 1.0f; f += 0.05f)
+        for (float f = appearInc; f <= 1.0f; f += appearInc)
         {
-            //Color c = sr.material.color;
-            //c.a = f;
-            //sr.material.color = c;
-            yield return new WaitForSeconds(0.05f);
+            Color c = sr.material.color;
+            c.a = f;
+            sr.material.color = c;
+            yield return new WaitForSeconds(appearInc);
         }
-    }
-    void startFadingIn()
-    {
-        //StartCoroutine(fadeIn());
-        gameObject.SetActive(true);
+        appearing = false;
     }
 
 
     // Fade out
-    IEnumerator fadeOut()
-    {
-        for (float f = 1.0f; f >= -0.05f; f += -0.05f)
-        {
-            //Color c = sr.material.color;
-            //c.a = f;
-            //sr.material.color = c;
-            yield return new WaitForSeconds(0.05f);
-        }
-        gameObject.SetActive(false);
-    }
+    //IEnumerator FadeOut()
+    //{
+    //    for (float f = 1.0f; f >= -appearInc; f += -appearInc)
+    //    {
+    //        Color c = sr.material.color;
+    //        c.a = f;
+    //        sr.material.color = c;
+    //        yield return new WaitForSeconds(0.05f);
+    //    }
+    //    disappearing = false;
+    //}
 
-    void startFadingOut()
-    {
-        //StartCoroutine(fadeOut());
-        gameObject.SetActive(false);
-    }
+
 
 
 
