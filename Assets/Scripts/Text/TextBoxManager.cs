@@ -24,7 +24,7 @@ public class TextBoxManager : MonoBehaviour
 
     private bool isTyping = false;
     private bool cancelTyping = false;
-    public float typeSpeed;
+    public float typeSpeed = 0.035f;
 
 
     // Start is called before the first frame update
