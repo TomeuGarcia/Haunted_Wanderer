@@ -22,6 +22,15 @@ public class BossController : MonoBehaviour
     // Slime Spit Attack
     private Vector2 mouthPosition;
 
+    // Charge Attack
+    private bool charging = false;
+    private const float chargeTime = 5f;
+    private float chargeTimer = 0f;
+    private bool resting = false;
+    private const float restingTime = 3f;
+    private float restingTimer = 0f;
+    private Vector2 chargeSpeed = new Vector2(30, 0);
+
 
     // Other GameObjects
     public PlayerController player;
@@ -37,6 +46,8 @@ public class BossController : MonoBehaviour
     [SerializeField] public AudioClip spit;
 
 
+    public Animator animator;
+
     void Start()
     {
         //spitTimer = spitTime;
@@ -51,8 +62,12 @@ public class BossController : MonoBehaviour
         else if (!player.offCamera) didReset = reset = false;
 
 
+        // update Sanity State
+        UpdateSanityState();
+
         // Update movement speed
-        movementSpeed = player.moveSpeed;
+        if (!resting && !charging)
+            UpdateMoveSpeed();
 
         // Updated distance between Boss and Player
         distanceToPlayer = Mathf.Abs(player.transform.position.x - transform.position.x);
@@ -63,7 +78,11 @@ public class BossController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (!resting && !charging)
+            Move();
+
+        CheckCharge();        
+
 
         // Move boss with player if teleported to checkpoint 
         if (player.offCamera)
@@ -73,22 +92,49 @@ public class BossController : MonoBehaviour
     }
 
 
-    // Move self towards player
-    private void Move()
+
+    private void UpdateMoveSpeed()
     {
-        if (distanceToPlayer > 10)
-        {
-            Vector2 positionToMove = new Vector2(player.transform.position.x, transform.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, positionToMove, movementSpeed * Time.deltaTime);
-        }
+        movementSpeed = player.moveSpeed;
     }
 
 
-    // Update's Boss' sanity state
+    // Move self towards player
+    private void Move()
+    {
+        //if (distanceToPlayer > 10)
+        //{
+        //    Vector2 positionToMove = new Vector2(player.transform.position.x, transform.position.y);
+        //    transform.position = Vector2.MoveTowards(transform.position, positionToMove, movementSpeed * Time.deltaTime);
+        //}
+        Vector2 positionToMove = new Vector2(player.transform.position.x, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, positionToMove, movementSpeed * Time.deltaTime);
+    }
+
+
+    // Update Boss' sanity state
     private void UpdateSanityState()
     {
         if (currentSanityState != player.currentSanityState)
+        {
             currentSanityState = player.currentSanityState;
+            
+            // Update sprite
+            if (currentSanityState == PlayerController.SanityState.HIGH)
+            {
+                animator.SetInteger("Sanity", 1);
+            }
+            else if (currentSanityState == PlayerController.SanityState.MEDIUM)
+            {
+                animator.SetInteger("Sanity", 2);
+                chargeTimer = 0f;
+            }
+            else    //else if (currentSanityState == PlayerController.SanityState.LOW)
+            {
+                animator.SetInteger("Sanity", 3);
+            }
+        }
+            
     }
 
 
@@ -102,6 +148,53 @@ public class BossController : MonoBehaviour
     }
 
 
+    // Charge 
+    private void CheckCharge()
+    {
+        if (currentSanityState == PlayerController.SanityState.MEDIUM)
+        {
+            if (!resting)
+            {
+                ChargeCounter();
+                if (charging)
+                {
+                    rb2.AddForce(chargeSpeed, ForceMode2D.Impulse);
+                    charging = false;
+                    resting = true;
+                }
+            }
+            else
+            {
+                RestingCounter();
+            }
+        }
+    }
+
+    private void ChargeCounter()
+    {
+        if (chargeTimer < chargeTime)
+        {
+            chargeTimer += Time.deltaTime;
+        }
+        else
+        {
+            chargeTimer = 0f;
+            charging = true;
+        }
+    }
+
+    private void RestingCounter()
+    {
+        if (restingTimer < restingTime)
+        {
+            restingTimer += Time.deltaTime;
+        }
+        else
+        {
+            restingTimer = 0f;
+            resting = false;
+        }
+    }
 
 
 
