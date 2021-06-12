@@ -306,6 +306,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public void KnockedForward(Vector2 knockForce)
+    {
+        rb2.AddForce(knockForce, ForceMode2D.Impulse);
+    }
+
+
     // SANITY RELATED METHODS
 
     // Function that returns player's current SanityState

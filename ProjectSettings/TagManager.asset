@@ -17,6 +17,7 @@ TagManager:
   - MovingPlatform
   - Bullet
   - SlimeSpitTrigger
+  - ChargeAttackTrigger
   layers:
   - Default
   - TransparentFX

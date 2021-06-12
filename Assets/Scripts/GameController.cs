@@ -119,10 +119,12 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        // player can't die from losing sanity over time (stays at 10%)
-        else if (myPlayer.GetCurrentSanity() > myPlayer.currentLimiter)
+        else 
         {
-            myPlayer.LoseSanityViaTime();
+            // player can't die from losing sanity over time (stays at 10%)
+            if (myPlayer.GetCurrentSanity() > myPlayer.currentLimiter)
+                myPlayer.LoseSanityViaTime();
+
             myPlayer.UpdateSanityState();
             myPlayer.UpdateMovementSpeed();
             if (myPlayer.canUpdateSanity)
