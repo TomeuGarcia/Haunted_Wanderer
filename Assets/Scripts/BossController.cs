@@ -9,9 +9,9 @@ public class BossController : MonoBehaviour
 
     // Spawn
     private bool startSpawning = false;
-    private bool hasSpawned = false;
     private const float spawnTime = 4f;
     private float spawnTimer = 0f;
+    public bool hasSpawned = false;
     public BoxCollider2D spawnTrigger;
 
     public GameObject spawnCamWall;
@@ -289,6 +289,7 @@ public class BossController : MonoBehaviour
             if (other.IsTouching(spawnTrigger) && !hasSpawned)
             {
                 startSpawning = true;
+                animator.SetBool("Spawn", true);
                 audio.PlayOneShot(spawnGrunt, 0.85f);
                 Debug.Log("BOSS SPAWNS");
             }
