@@ -10,7 +10,7 @@ public class BossController : MonoBehaviour
     // Spawn
     private bool startSpawning = false;
     private bool hasSpawned = false;
-    private const float spawnTime = 3f;
+    private const float spawnTime = 4f;
     private float spawnTimer = 0f;
     public BoxCollider2D spawnTrigger;
 
@@ -57,6 +57,7 @@ public class BossController : MonoBehaviour
 
     [Header("Audio Elements")]
     [SerializeField] public AudioSource audio;
+    [SerializeField] public AudioClip spawnGrunt;
     [SerializeField] public AudioClip spit;
 
 
@@ -288,6 +289,7 @@ public class BossController : MonoBehaviour
             if (other.IsTouching(spawnTrigger) && !hasSpawned)
             {
                 startSpawning = true;
+                audio.PlayOneShot(spawnGrunt, 0.85f);
                 Debug.Log("BOSS SPAWNS");
             }
 
