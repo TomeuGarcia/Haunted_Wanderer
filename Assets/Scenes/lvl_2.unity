@@ -42860,7 +42860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6506bb5c0f9844c83cfe18a6e81652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theText: {fileID: 4900000, guid: beb143574ffe7c24c98a637946afa8f1, type: 3}
+  theText: {fileID: 4900000, guid: d6ddcd18a1f588b4c896e37a7d12bb38, type: 3}
   startLine: 0
   endLine: 1
   theTextBox: {fileID: 0}
@@ -43978,7 +43978,7 @@ MonoBehaviour:
   currentLine: 0
   endAtLine: 0
   player: {fileID: 1331461243}
-  isActive: 1
+  isActive: 0
   StopPlayerMovement: 0
   typeSpeed: 0
 --- !u!4 &1142438272
