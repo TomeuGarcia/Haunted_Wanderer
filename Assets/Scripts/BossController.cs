@@ -103,7 +103,13 @@ public class BossController : MonoBehaviour
 
 
         // Reset if player was sent back to a checkpoint
-        if (!didReset && player.offCamera) didReset = reset = true;
+        if (!didReset && player.offCamera)
+        {
+            didReset = reset = true;
+
+            charging = resting = false;
+            bulletAttack = flewUp = flewDown = false;
+        }
         else if (!player.offCamera) didReset = reset = false;
 
 
@@ -340,7 +346,7 @@ public class BossController : MonoBehaviour
         {
             if (flyUpTimer < Time.deltaTime)
             {
-                bulletAttackPosition = new Vector2(player.transform.position.x + 16, transform.position.y);
+                bulletAttackPosition = new Vector2(player.transform.position.x + 16, transform.position.y + 2);
             }
             flyUpTimer += Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y + 10), flySpeed * Time.deltaTime);
@@ -376,10 +382,6 @@ public class BossController : MonoBehaviour
     {
         if (flyUpTimer < flyUpTime)
         {
-            if (flyUpTimer < Time.deltaTime)
-            {
-                //followPosition = new Vector2(player.transform.position.x - 12, transform.position.y);
-            }
             flyUpTimer += Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y + 10), flySpeed * Time.deltaTime);
         }
@@ -388,7 +390,7 @@ public class BossController : MonoBehaviour
             flyUpTimer = 0f;
             flewUp = true;
 
-            transform.position = followPosition;// new Vector2(bulletAttackPosition.x, bulletAttackPosition.y + 10);
+            transform.position = followPosition;
             transform.Rotate(0, 0, 180);
             
             bulletAttack = false;
