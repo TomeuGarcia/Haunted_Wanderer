@@ -15,7 +15,7 @@ public class BossController : MonoBehaviour
     public BoxCollider2D spawnTrigger;
 
     public GameObject spawnCamWall;
-    private Vector2 camWallEndPosition = new Vector2(200, 0);
+    private Vector2 camWallEndPosition = new Vector2(300, 0);
 
 
     // Movement
@@ -59,6 +59,7 @@ public class BossController : MonoBehaviour
     [SerializeField] public AudioSource audio;
     [SerializeField] public AudioClip spawnGrunt;
     [SerializeField] public AudioClip spit;
+    [SerializeField] public AudioClip chargeScream;
 
 
     public Animator animator;
@@ -241,6 +242,8 @@ public class BossController : MonoBehaviour
     {
         if (chargeTimer < chargeTime)
         {
+            if (chargeTimer < Time.deltaTime)
+                audio.PlayOneShot(chargeScream, 0.5f);
             chargeTimer += Time.deltaTime;
         }
         else
@@ -280,6 +283,19 @@ public class BossController : MonoBehaviour
     }
 
 
+    IEnumerator KnockedBack()
+    {
+        
+        rb2.AddForce(new Vector2(-4.5f, 4.5f), ForceMode2D.Impulse);
+        rb2.gravityScale = 1f;
+        yield return new WaitForSeconds(0.875f);
+        rb2.velocity = Vector2.zero;
+        rb2.angularVelocity = 0f;
+
+        rb2.gravityScale = 0f;
+    }
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         // When collides with player
@@ -290,13 +306,13 @@ public class BossController : MonoBehaviour
             {
                 startSpawning = true;
                 animator.SetBool("Spawn", true);
-                audio.PlayOneShot(spawnGrunt, 0.85f);
-                Debug.Log("BOSS SPAWNS");
+                audio.PlayOneShot(spawnGrunt, 0.5f);
             }
 
             // Damage player
             if (other.IsTouching(bossCollider) && hasSpawned)
             {
+                StartCoroutine(KnockedBack());
                 player.KnockedForward(new Vector2(500, 100));
                 waitStill = true;
                 canMove = false;
