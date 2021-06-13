@@ -518,11 +518,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine("Invulnerable");
         }
 
-        else if (other.CompareTag("MovingPlatform"))
-        {
-            //jumping = false;
-            transform.parent = other.gameObject.transform;
-        }
     }
 
 
@@ -553,9 +548,16 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private void OnCollisionEnter2D(Collision other)
+    {
+        if (other.gameObject.CompareTag("MovingPlatform")){
+            transform.parent = other.gameObject.transform;
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("MovingPlatform"))
+        if (other.gameObject.CompareTag("Platform"))
         {
             transform.parent = null;
         }
