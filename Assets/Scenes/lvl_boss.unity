@@ -13151,7 +13151,7 @@ PrefabInstance:
     - target: {fileID: 4526847674286520275, guid: 5909a6f6c1234554a8cb53a1c894a99b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 105
+      value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 4526847674286520275, guid: 5909a6f6c1234554a8cb53a1c894a99b,
         type: 3}
@@ -38625,6 +38625,8 @@ MonoBehaviour:
   spawnGrunt: {fileID: 8300000, guid: 301816d0608da8f4dbbc0669d9acd41c, type: 3}
   spit: {fileID: 8300000, guid: c386f0f8e92a3764fa3e44806f091b27, type: 3}
   chargeScream: {fileID: 8300000, guid: dcec15ff0de56e34da7076eee59a8236, type: 3}
+  whoosh: {fileID: 8300000, guid: f84b89c2b0ecb394ea5ac442aa12445c, type: 3}
+  shoot: {fileID: 8300000, guid: 86a9fcb1c5867d94f862213f92e11a5e, type: 3}
   animator: {fileID: 1969685136}
 --- !u!4 &1969685134
 Transform:

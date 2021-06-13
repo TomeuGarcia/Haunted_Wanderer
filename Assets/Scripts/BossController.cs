@@ -74,6 +74,8 @@ public class BossController : MonoBehaviour
     [SerializeField] public AudioClip spawnGrunt;
     [SerializeField] public AudioClip spit;
     [SerializeField] public AudioClip chargeScream;
+    [SerializeField] public AudioClip whoosh;
+    [SerializeField] public AudioClip shoot;
 
 
     public Animator animator;
@@ -396,9 +398,12 @@ public class BossController : MonoBehaviour
 
     private void ShootBullet()
     {
+        audio.PlayOneShot(shoot, 0.5f);
+
         // Instantiate Bullet projectile and set its position equal to Enemy
         GameObject b = Instantiate(bulletPrefab);
         b.transform.position = transform.position;
+        b.transform.Rotate(0, 0, 300);
 
         // Set bullet's destiny direction and speed
         Vector2 distanceTarget = (player.transform.position - b.transform.position);
@@ -464,7 +469,7 @@ public class BossController : MonoBehaviour
                 flyUpTimer = flyDownTimer = 0f; //
                 followPosition = new Vector2(transform.position.x + 2, transform.position.y);
 
-                Debug.Log("shoot bullet");
+                audio.PlayOneShot(whoosh, 0.5f);
             }
         }
     }
