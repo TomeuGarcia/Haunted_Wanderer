@@ -18,7 +18,7 @@ Executar el projecte Haunted_Wanderer des de UnitHub
 
 Descarga mitjançant .zip
 ========================
-Descomprimir el comprimit .zip de nom AA2_SlimeReligion_david_jamie_tomeu.zip dins 
+Descomprimir el comprimit .zip de nom AA4_G06_TRIBUNAL_SlimeReligion_HauntedWanderer.zip dins 
 un directori local. 
 Obrir UnityHub i afegir com a nou projecte la carpeta Haunted_Wanderer obtinguda al descomprimir.
 Executar el projecte Haunted_Wanderer des de UnitHub
@@ -26,8 +26,8 @@ Executar el projecte Haunted_Wanderer des de UnitHub
 
 Com jugar
 =========
-Dins el projecte de Unity Haunted_Wanderer, trobeu dins de la carpeta Assets --> Scenes. 
-Seleccionar l'escena Main Menu i clicar sobre Play.
+Si s'utilitza la build només fa falta obrir-ho i donarli a play. 
+En qualsevol altre cas fa falta seleccionar l'escena dintre de l'editor de unity per saber quin nivell es vol jugar. 
 
 
 Controls
@@ -40,16 +40,14 @@ Enter -> Passar de diàleg.
 
 Z -> "cheat button" guanyar Sanity
 X -> "cheat button" perdre Sanity
+V -> "cheat button" pujar limitador de Sanity
 
 Altre informació 
 ================
-Tan les escenes MainMenu i lvl_1 estan finalitzades. 
-L'esecna lvl_2 encara està pendent de desenvolupar (al arribar al final que hi ha, el joc et torna al menú principal).
+Hi ha dos llocs trobats que et pots quedar encallat. Però són difícils d'arribar.
 
 Known Bugs
 ==========
-1. L'enemic Slime pot arribar a travessar parets.
-2. L'enemic Giant Fly pot no disparar en la direcció del Player.
 3. Quan el jugador es teletransporta a un checkpoint la camarà pot fer moviments extranys.
 
 
