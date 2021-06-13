@@ -108,7 +108,8 @@ public class BossController : MonoBehaviour
             didReset = reset = true;
 
             charging = resting = false;
-            bulletAttack = flewUp = flewDown = false;
+            if (bulletAttack)
+                bulletAttack = flewUp = flewDown = true;
         }
         else if (!player.offCamera) didReset = reset = false;
 
