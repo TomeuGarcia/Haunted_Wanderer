@@ -11,12 +11,17 @@ TagManager:
   - Checkpoint
   - Hazard
   - GoldenApple
-  - LowSanityEnemies
   - SanityLocker
   - SanityUnlocker
-  - CameraFloor
   - Mushrooms
   - MovingPlatform
+  - Bullet
+  - SlimeSpitTrigger
+  - ChargeAttackTrigger
+  - Boss
+  - ShootBulletTrigger
+  - CameraFloor
+  - KillBossTrigger
   layers:
   - Default
   - TransparentFX
@@ -30,9 +35,9 @@ TagManager:
   - Background
   - Enemies
   - Player
-  - CameraFloor
-  - 
-  - 
+  - CameraLimit
+  - Boss
+  - BossFloor
   - 
   - 
   - 

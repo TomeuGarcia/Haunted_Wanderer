@@ -20,17 +20,21 @@ public class CameraController : MonoBehaviour
     private float xDiff;
     private float yDiff;
 
-    private bool cameraOnGround;
     private float groundLength;
-    public bool moveVertically;
+    private float ceilingLength;
     public bool moveHorizontally;
+    public bool moveVertically;
+    public bool canMoveUp = false;
+    public bool canMoveDown = false;
+
+    public Vector3 respawnPosition;
 
     private float speed = 6.0f;
 
     // Components
     private PlayerController pc;
     private Rigidbody2D rb2;
-    public LayerMask groundLayer;
+    public LayerMask cameraLimitLayer;
 
     void Start()
     {
@@ -38,10 +42,21 @@ public class CameraController : MonoBehaviour
         pc = followObject.GetComponent<PlayerController>();
         rb2 = followObject.GetComponent<Rigidbody2D>();
 
-        groundLength = Camera.main.orthographicSize * 0.8f;
+        ceilingLength = groundLength = Camera.main.orthographicSize;
         moveVertically = false;
         moveHorizontally = false;
+
+        respawnPosition = transform.position;
     }
+
+    private void Update()
+    {
+        // Camera can move up if not in contact with cameraCeiling
+        canMoveUp = !Physics2D.Raycast(transform.position, Vector2.up, ceilingLength, cameraLimitLayer);
+        // Camera can move down if not in contact with cameraGround
+        canMoveDown = !Physics2D.Raycast(transform.position, Vector2.down, groundLength, cameraLimitLayer);
+    }
+
 
 
     // Move Camera when followObject (Player) moves
@@ -61,7 +76,7 @@ public class CameraController : MonoBehaviour
         // Calculate distance between camera-leftsideLimit and camera-rightsideLimit
         lLimitDist = Mathf.Abs(lLimit.transform.position.x - follow.x);
         rLimitDist = Mathf.Abs(rLimit.transform.position.x - follow.x);
-        // Don't move the camera if player is close to the limits
+        // Don't Move the camera if player is close to the limits
         if (lLimitDist <= threshold.x * 0.95f || rLimitDist <= threshold.x * 0.95f)
         {
             return;
@@ -72,10 +87,9 @@ public class CameraController : MonoBehaviour
         xDiff = transform.position.x - follow.x;
         // Variable that keeps track of the distance from the followObject to the center of the Camera on the Y axis
         yDiff = transform.position.y - follow.y;
-        cameraOnGround = Physics2D.Raycast(transform.position, Vector2.down, groundLength, groundLayer);
 
 
-
+        // Camera moves horizontally
         // Update Camera's position evaluating followObject's position with camera threshold
         Vector3 newPosition = transform.position;
         if ((Mathf.Abs(xDiff) >= threshold.x / 8.0f) && !moveHorizontally)
@@ -92,42 +106,24 @@ public class CameraController : MonoBehaviour
         }
 
 
-        // Move camera
-        if ((!(Mathf.Abs(yDiff) <= threshold.y / 2.0f || (cameraOnGround && follow.y < transform.position.y))) && !moveVertically)
-        {
-            moveVertically = true;
-        }
-        if (moveVertically)
-        {
-            newPosition.y = follow.y;
-            if ((Mathf.Abs(follow.y) <= Mathf.Abs(transform.position.y) + 0.05f && Mathf.Abs(follow.y) >= Mathf.Abs(transform.position.y) - 0.05f) || cameraOnGround)
-            {
-                moveVertically = false;
-            }
-        }
+        // Camera moves vertically
+        const float offset = 2f;// 3f;// 5f;
+       if ((canMoveUp && follow.y > transform.position.y + offset) ||
+           (canMoveDown && follow.y < transform.position.y - offset))
+       {
+            newPosition.y = follow.y; 
+       }
+       else
+       {
+            newPosition.y = transform.position.y;
+       }
 
 
-
-        // camera follows object if there is no floor
-        if (!cameraOnGround)
-        {
-            newPosition.y = follow.y;
-        }
-        // 
-        if (cameraOnGround && Physics2D.Raycast(transform.position, Vector2.down, groundLength - 0.1f, groundLayer))
-        {
-            newPosition.y = newPosition.y + 0.1f;
-            transform.position = Vector3.MoveTowards(transform.position, newPosition, 100 * Time.deltaTime);
-        }
-
-
-        //if (cameraOnGround) {
-        //    Debug.Log("cameraOnGround");
-        //}
 
         // Move Camera at required speed
         float moveSpeed = rb2.velocity.magnitude > speed ? rb2.velocity.magnitude : speed;
         transform.position = Vector3.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
+
     }
 
 
@@ -142,12 +138,13 @@ public class CameraController : MonoBehaviour
         return t;
     }
 
+
     IEnumerator FocusFollow()
     {
-        //pc.canMove = false;
-        transform.position = new Vector3(follow.x, follow.y + groundLength - 1.1f, transform.position.z);
-        yield return new WaitForSeconds(0.2f);
-        //pc.canMove = true;
+        transform.position = Vector3.MoveTowards(transform.position, respawnPosition, 3f); // Camera moves rapidly towards new position
+        //transform.position = respawnPosition; // Camera teleports to new position
+        float distance = (respawnPosition - transform.position).magnitude;
+        yield return new WaitForSeconds(distance * 0.5f); // player stays immovile for longer time depending on distance camra needs to travel
         pc.offCamera = false;
     }
 
@@ -160,6 +157,8 @@ public class CameraController : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector3(border.x * 2, border.y * 2, 1));
 
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundLength));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y + ceilingLength));
     }
 
 }

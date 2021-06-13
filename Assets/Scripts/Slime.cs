@@ -9,7 +9,7 @@ public class Slime : EnemyController
     private float moveTimer;
 
     private bool onGround = false;
-    private const float groundLength = 1.6f;
+    private const float groundLength = 0.2f;
 
     private bool onRightWall = false;
     private bool onLeftWall = false;
@@ -17,13 +17,22 @@ public class Slime : EnemyController
     private const float wallLength = 0.6f;
     private bool facingRight = true;
     private bool cantMove = false;
+    private bool canAttack = false;
+    private bool attacking = false;
+    private Vector2 vectorEnemyPlayer;
 
     // Component variables
     private Rigidbody2D rb2;
     public LayerMask groundLayer;
 
-    //Animiator
-    public Animator animator;
+    private Collider2D collider;
+    private Vector2 startCollSize;
+
+    [Header("Audio Elements")]
+    [SerializeField] public AudioSource audio;
+    [SerializeField] public AudioClip slimeJumps;
+    [SerializeField] public AudioClip slimeSlashes;
+    [SerializeField] public AudioClip slimeDies;
 
     void Start()
     {
@@ -35,6 +44,17 @@ public class Slime : EnemyController
         moveTimer = 0.0f;
 
         rb2 = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
+        startCollSize = collider.bounds.size;
+    }
+    private void Update()
+    {
+        if((facingRight && player.transform.position.x < transform.position.x) || 
+            (!facingRight && player.transform.position.x > transform.position.x)) 
+        {
+            Flip();
+        }
+
     }
 
     private void FixedUpdate()
@@ -44,6 +64,8 @@ public class Slime : EnemyController
         onWall = onRightWall || onLeftWall;   
         facingRight = player.transform.position.x > transform.position.x;
         cantMove = (facingRight && onRightWall) || (!facingRight && onLeftWall);
+
+        vectorEnemyPlayer = player.transform.position - transform.position;
 
 
         if (onWall && !onGround)
@@ -56,29 +78,36 @@ public class Slime : EnemyController
         if (onGround)
         {
             rb2.gravityScale = 0;
-            if (!cantMove)
-                move();
+            if (!cantMove && vectorEnemyPlayer.magnitude > 3f)
+                Move();
+            else if (!canAttack && vectorEnemyPlayer.magnitude < 3f && !attacking)
+            {
+                Attack();
+            }
 
         }
         else
         {
             rb2.gravityScale = 1;
         }
+
+        //if (!canAttack && onGround && vectorEnemyPlayer.magnitude < 4f)
+        //{
+        //    Attack();
+        //}
     }
 
 
-    private void move()
+    private void Move()
     {
-        Vector2 vectorEnemyPlayer = player.transform.position - transform.position;
         // Move if player is within range of sightDistance
         if (Mathf.Abs(vectorEnemyPlayer.magnitude) < sightDistance)
         {
-            animator.SetBool("IsJumping", false);
             // Slime moves (jumps) once every moveCooldown (1.5 seconds)
             moveTimer += Time.deltaTime;
             if (moveTimer >= moveCooldown && onGround)
             {
-                animator.SetBool("IsJumping", true);
+                audio.PlayOneShot(slimeJumps);
                 // Move to the right if player is located to the right of the Slmie
                 if (vectorEnemyPlayer.x > 0)
                 {
@@ -92,8 +121,45 @@ public class Slime : EnemyController
                     facingRight = false;
                 }
                 moveTimer = 0.0f;
+                animator.SetBool("isJumping", false);
+            }
+            else if (moveTimer >= moveCooldown - Time.deltaTime*10 && onGround)
+            {
+                animator.SetBool("isJumping", true);
+                canAttack = false;
             }
         }
     }
 
+    private void Attack()
+    {
+        attacking = true;
+        StartCoroutine(AttackAnimation());
+        animator.SetBool("isAttacking", true);
+    }
+
+    IEnumerator AttackAnimation()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.6f);
+        yield return new WaitForSeconds(0.3f);
+        audio.PlayOneShot(slimeSlashes, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<BoxCollider2D>().size = startCollSize;
+        animator.SetBool("isAttacking", false);
+        canAttack = false;
+        attacking = false;
+    }
+
+
+    public override void DeathSound()
+    {
+        audio.PlayOneShot(slimeDies, 0.4f);
+        // also set attacking to false if Slime was killed while attacking
+        if (attacking)
+        {
+            attacking = false;
+            canAttack = true;
+        }
+    }
 }

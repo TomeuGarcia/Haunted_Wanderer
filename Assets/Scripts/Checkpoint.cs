@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    [Header("Player Checkpoint respawn coords:")]
+    [SerializeField] public PlayerController player;
+    [SerializeField] public float playerX;
+    [SerializeField] public float playerY;
 
-    [Header("Checkpoint respawn coords:")]
-    [SerializeField] public float X;
-    [SerializeField] public float Y;
-    //[SerializeField] public float Z;
+    [Header("Camera Checkpoint respawn coords:")]
+    [SerializeField] public CameraController cam;
+    [SerializeField] public float camX;
+    [SerializeField] public float camY;
 
 
-
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            player.respawnPosition = new Vector2(playerX, playerY);
+            cam.respawnPosition = new Vector3(camX, camY, cam.transform.position.z);
+        }
+    }
 }

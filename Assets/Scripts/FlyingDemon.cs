@@ -10,7 +10,7 @@ public class FlyingDemon : EnemyController
     private Vector2 waypointB;
 
     private const float bulletSpeed = 5f;
-    private const float shootCooldown = 1.5f;
+    private const float shootCooldown = 2f;
     private float shootTimer;
 
     // Component variables
@@ -25,7 +25,7 @@ public class FlyingDemon : EnemyController
         healthPoints = 1;
         moveSpeed = 7.0f;
         sightDistance = 16.0f;
-        shootTimer = 0f;
+        shootTimer = shootCooldown;
 
         waypointA = new Vector2(spawnPosition.x - movementDistance, spawnPosition.y);
         waypointB = new Vector2(spawnPosition.x + movementDistance, spawnPosition.y);
@@ -35,12 +35,12 @@ public class FlyingDemon : EnemyController
 
     void FixedUpdate()
     {
-        move();
+        Move();
     }
 
-    public void move()
+    public void Move()
     {
-        // Act (move and shoot) if player is in sight distance
+        // Act (Move and shoot) if player is in sight distance
         Vector2 distanceEnemyPlayer = player.transform.position - transform.position;
         if (Mathf.Abs(distanceEnemyPlayer.x) < sightDistance)
         {
@@ -49,7 +49,7 @@ public class FlyingDemon : EnemyController
             // Calculate and Normalize distance from currentPosition to playerPosition
             //Vector2 distanceEnemyPlayer = new Vector2(player.transform.position.x - currentPosition.x, 0f);
             distanceEnemyPlayer.Normalize();
-            // Calculate distance to move each frame
+            // Calculate distance to Move each frame
             Vector2 distanceToMove = distanceEnemyPlayer * Vector2.right * moveSpeed * Time.deltaTime;
 
             // Move self if in movement range 
@@ -62,13 +62,13 @@ public class FlyingDemon : EnemyController
             shootTimer += Time.deltaTime;
             if (shootTimer >= shootCooldown)
             {
-                shoot();
+                Shoot();
                 shootTimer = 0f;
             }
         }
     }
 
-    public void shoot()
+    public void Shoot()
     {
         // Instantiate Bullet projectile and set its position equal to Enemy
         GameObject b = Instantiate(bulletPrefab);

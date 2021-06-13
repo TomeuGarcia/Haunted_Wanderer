@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
 
     // Enemy boolean flags (tags)
     public bool canSpawn = true;
+    public bool isDead = false;
 
     [Header("Enemy Spawns When")]
     [SerializeField] public bool spawnsHighSanity;
@@ -31,6 +32,7 @@ public class EnemyController : MonoBehaviour
 
     // Other classes variables
     public GameObject player;
+    public Animator animator;
 
 
     void Awake()
@@ -40,51 +42,56 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Check if Collided with player
-        if (collision.collider.CompareTag("Player"))
-        {
-            // if player jumped on top "kill" enemy
-            if (collision.contacts[0].normal.y < -0.5)
-            {
-                setActiveState(false);
-                // add +1 to sanityLossLimiter
-                collision.collider.GetComponent<PlayerController>().addSanityLossLimiter();
-            }
-            // else damage player 
-            else
-            {
-                collision.collider.GetComponent<PlayerController>().loseSanity(damagePoints);
-                // reset player's sanityLossLimiter
-                collision.collider.GetComponent<PlayerController>().resetSanityLossLimiter();
-            }
-        }
-    }
-    */
-
-    // OTHER methods
+    // ACTIVATION METHODS
+    // Function that activates or deactivates the enemy based on isActive parameter
     public void setActiveState(bool isActive)
     {
         if (isActive)
         {
             transform.position = spawnPosition;
             canSpawn = false;
+            isDead = false;
             gameObject.SetActive(true);
         }
         else
         {
             // canSpawn should turn true after cooldown
             canSpawn = true;
-            gameObject.SetActive(false);
+            isDead = true;
+            animator.SetBool("isDead", true);
+            if (gameObject.active) // if not checking if active, coroutine can start when not active - resulting in error
+                StartCoroutine(Die());
         }
     }
 
-    public void hurt()
+    //Flip enemies sprites
+    public void Flip()
+    {
+        Vector3 Scaler = transform.localScale;
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
+    }
+
+    // DAMAGE METHODS
+    // Function that hurts the enemy, substracting 1 health point
+    public void Hurt()
     {
         healthPoints--;
         if (healthPoints < 1)
             setActiveState(false);
+    }
+
+    public virtual void DeathSound()
+    {
+        return;
+    }
+
+    //Coroutine
+    IEnumerator Die()
+    {
+        if ((player.transform.position - transform.position).magnitude < 20f) // play sound if enemy close enough to player
+            DeathSound(); 
+        yield return new WaitForSeconds(0.8f);
+        gameObject.SetActive(false);
     }
 }
