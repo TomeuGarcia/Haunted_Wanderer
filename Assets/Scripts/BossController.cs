@@ -15,7 +15,7 @@ public class BossController : MonoBehaviour
     public BoxCollider2D spawnTrigger;
 
     public GameObject spawnCamWall;
-    private Vector2 camWallEndPosition = new Vector2(300, 0);
+    private Vector2 camWallEndPosition = new Vector2(289, 0);
 
 
     // Movement
@@ -415,6 +415,13 @@ public class BossController : MonoBehaviour
     }
 
 
+    IEnumerator Die()
+    {
+        animator.SetBool("Die", true);
+        yield return new WaitForSeconds(0.32f);
+        gameObject.SetActive(false);
+    }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -437,7 +444,6 @@ public class BossController : MonoBehaviour
                 waitStill = true;
                 canMove = false;
                 player.LoseSanity(meleeDamage);
-                Debug.Log("hit player");
             }
         }
 
@@ -447,7 +453,6 @@ public class BossController : MonoBehaviour
             if (other.IsTouching(bossCollider))
             {
                 SpitSlime();
-                Debug.Log("spit");
             }
         }
 
@@ -458,7 +463,6 @@ public class BossController : MonoBehaviour
             {
                 charging = true;
                 chargeTimer = restingTimer = 0f; //
-                Debug.Log("charge");
             }
         }
 
@@ -473,6 +477,14 @@ public class BossController : MonoBehaviour
                 followPosition = new Vector2(transform.position.x + 2, transform.position.y);
 
                 audio.PlayOneShot(whoosh, 0.5f);
+            }
+        }
+
+        else if (other.CompareTag("KillBossTrigger"))
+        {
+            if (other.IsTouching(bossCollider))
+            {
+                StartCoroutine(Die());
             }
         }
     }

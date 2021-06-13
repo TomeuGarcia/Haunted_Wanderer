@@ -20,6 +20,8 @@ TagManager:
   - ChargeAttackTrigger
   - Boss
   - ShootBulletTrigger
+  - CameraFloor
+  - KillBossTrigger
   layers:
   - Default
   - TransparentFX
