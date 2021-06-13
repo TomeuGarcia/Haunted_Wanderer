@@ -143,9 +143,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
             IncrementSanityLimiter();
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-            IncrementSanityLimiter();
-
 
         // check if player hit the ceiling
         if (!hitCeiling && jumping)
@@ -596,28 +593,6 @@ public class PlayerController : MonoBehaviour
         c.a = 1.0f;
         r.material.color = c;
     }
-
-
-    // Cheat function -> end level
-    IEnumerator EndLvl()
-    {
-        for (float f = 0.0f; f <= 1.05f; f += 0.05f)
-        {
-            Color c = myImage.color;
-            c.a = f;
-            myImage.color = c;
-            yield return new WaitForSeconds(0.05f);
-        }
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        // go to main menu
-        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings - 1)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        else
-            SceneManager.LoadScene(0);
-    }
-
-
-
 
     // GIZMOS METHODS
     // Function that draws lines repressenting onGround and onCeiling
