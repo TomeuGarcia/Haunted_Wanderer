@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
 
     public Animator animator;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb2 = GetComponent<Rigidbody2D>();
         //rb2.velocity = new Vector2(0, speed);
@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Enemy"))
+        if (!other.CompareTag("Enemy") && !other.CompareTag("Boss"))
         {
             rb2.bodyType = RigidbodyType2D.Static;
             StartCoroutine(Explode());

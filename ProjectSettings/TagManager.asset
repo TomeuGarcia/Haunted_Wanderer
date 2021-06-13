@@ -19,6 +19,7 @@ TagManager:
   - SlimeSpitTrigger
   - ChargeAttackTrigger
   - Boss
+  - ShootBulletTrigger
   layers:
   - Default
   - TransparentFX

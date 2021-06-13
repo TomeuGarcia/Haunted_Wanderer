@@ -35,10 +35,10 @@ public class FlyingDemon : EnemyController
 
     void FixedUpdate()
     {
-        move();
+        Move();
     }
 
-    public void move()
+    public void Move()
     {
         // Act (Move and shoot) if player is in sight distance
         Vector2 distanceEnemyPlayer = player.transform.position - transform.position;
@@ -62,13 +62,13 @@ public class FlyingDemon : EnemyController
             shootTimer += Time.deltaTime;
             if (shootTimer >= shootCooldown)
             {
-                shoot();
+                Shoot();
                 shootTimer = 0f;
             }
         }
     }
 
-    public void shoot()
+    public void Shoot()
     {
         // Instantiate Bullet projectile and set its position equal to Enemy
         GameObject b = Instantiate(bulletPrefab);

@@ -45,6 +45,20 @@ public class BossController : MonoBehaviour
     private float chargeSpeed = 17f;
 
 
+    // Bullet Attack
+    public GameObject bulletPrefab;
+    private bool bulletAttack = false;
+    private Vector2 bulletAttackPosition;
+    private Vector2 followPosition;
+    private bool flewUp = false;
+    private const float flyUpTime = 0.5f;
+    private float flyUpTimer = 0f;
+    private bool flewDown;
+    private const float flyDownTime = 0.5f;
+    private float flyDownTimer = 0f;
+    private const float flySpeed = 15f;
+
+
     // Other GameObjects
     public PlayerController player;
     private float distanceToPlayer;
@@ -66,7 +80,9 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
-        //spitTimer = spitTime;
+        //bulletAttackPosition = new Vector2(player.transform.position.x + 12, transform.position.y);
+        //followPosition = new Vector2(player.transform.position.x - 12, transform.position.y);
+
 
         rb2 = GetComponent<Rigidbody2D>();
     }
@@ -125,6 +141,9 @@ public class BossController : MonoBehaviour
         if (canMove)
             Move();
 
+
+        if (bulletAttack)
+            ShootBulletAttack();
 
 
         // Move boss with player if teleported to checkpoint 
@@ -296,6 +315,99 @@ public class BossController : MonoBehaviour
     }
 
 
+    // ShootBulletAttack logic
+    private void ShootBulletAttack()
+    {
+        if (!flewUp)
+        {
+            FlyUp();
+        }
+        else if (flewUp && !flewDown)
+        {
+            FlyDown();
+        }
+        else if (flewUp && flewDown)
+        {
+            FlyUp2();
+        }
+    }
+
+    private void FlyUp()
+    {
+        if (flyUpTimer < flyUpTime)
+        {
+            if (flyUpTimer < Time.deltaTime)
+            {
+                bulletAttackPosition = new Vector2(player.transform.position.x + 16, transform.position.y);
+            }
+            flyUpTimer += Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y + 10), flySpeed * Time.deltaTime);
+        }
+        else
+        {
+            flyUpTimer = 0f;
+            flewUp = true;
+
+            transform.position = new Vector2(bulletAttackPosition.x, bulletAttackPosition.y + 10);
+            transform.Rotate(0, 0, 180);
+        }
+    }
+
+
+    private void FlyDown()
+    {
+        if (flyDownTimer < flyDownTime)
+        {
+            flyDownTimer += Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, bulletAttackPosition, flySpeed * Time.deltaTime);
+        }
+        else
+        {
+            flyDownTimer = 0f;
+            flewDown = true;
+            ShootBullet();
+        }
+    }
+
+
+    private void FlyUp2()
+    {
+        if (flyUpTimer < flyUpTime)
+        {
+            if (flyUpTimer < Time.deltaTime)
+            {
+                //followPosition = new Vector2(player.transform.position.x - 12, transform.position.y);
+            }
+            flyUpTimer += Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y + 10), flySpeed * Time.deltaTime);
+        }
+        else
+        {
+            flyUpTimer = 0f;
+            flewUp = true;
+
+            transform.position = followPosition;// new Vector2(bulletAttackPosition.x, bulletAttackPosition.y + 10);
+            transform.Rotate(0, 0, 180);
+            
+            bulletAttack = false;
+        }
+    }
+
+
+    private void ShootBullet()
+    {
+        // Instantiate Bullet projectile and set its position equal to Enemy
+        GameObject b = Instantiate(bulletPrefab);
+        b.transform.position = transform.position;
+
+        // Set bullet's destiny direction and speed
+        Vector2 distanceTarget = (player.transform.position - b.transform.position);
+        distanceTarget.Normalize();
+        b.GetComponent<Rigidbody2D>().velocity = distanceTarget * 10;
+    }
+
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         // When collides with player
@@ -342,7 +454,19 @@ public class BossController : MonoBehaviour
             }
         }
 
+        // ShootBullet (only SanityState = LOW)
+        else if (other.CompareTag("ShootBulletTrigger") && currentSanityState == PlayerController.SanityState.LOW)
+        {
+            if (other.IsTouching(bossCollider))
+            {
+                bulletAttack = true;
+                flewUp = flewDown = false;
+                flyUpTimer = flyDownTimer = 0f; //
+                followPosition = new Vector2(transform.position.x + 2, transform.position.y);
 
+                Debug.Log("shoot bullet");
+            }
+        }
     }
 
 
